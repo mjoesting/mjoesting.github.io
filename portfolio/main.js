@@ -80,7 +80,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<header>\n  <div class='branding' routerLink='/'>\n    <h1>mark joesting media</h1>\n    <h2>web development, music and art, in St Paul, MN</h2>\n  </div>\n  <div class='social'>\n    <a href='https://www.linkedin.com/in/mjoesting/' target='_blank'><img src='../assets/logo_linkedin.png'></a>\n  </div>\n  <div class='headerBg' routerLink='/'>\n    <video autoplay muted='true' loop poster='../assets/glitterWaves.jpg'>    \n      <source src='../assets/glitterWaves.mp4'\n              type='video/mp4'>\n      <source src='../assets/glitterWaves.ogv'\n              type='video/ogv'>\n      <source src='../assets/glitterWaves.webm'\n              type='video/webm'>\n    </video>\n  </div>\n</header>\n\n<div class='wrapper'>\n  <div class='main'>\n    <div class='mainContent'>\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>\n"
+module.exports = "\n<header>\n  <div class='branding' routerLink='/'>\n    <h1>mark joesting media</h1>\n    <h2>web development, music and art, in St Paul, MN</h2>\n  </div>\n  <div class='social'>\n    <a href='https://www.linkedin.com/in/mjoesting/' target='_blank'><img src='./assets/logo_linkedin.png'></a>\n  </div>\n  <div class='headerBg' routerLink='/'>\n    <video autoplay muted='true' loop poster='../assets/glitterWaves.jpg'>    \n      <source src='./assets/glitterWaves.mp4'\n              type='video/mp4'>\n      <source src='./assets/glitterWaves.ogv'\n              type='video/ogv'>\n      <source src='./assets/glitterWaves.webm'\n              type='video/webm'>\n    </video>\n  </div>\n</header>\n\n<div class='wrapper'>\n  <div class='main'>\n    <div class='mainContent'>\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -266,7 +266,7 @@ var GalleryComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n    <div class='tile' routerLink='/digital'>\n      <h3>digital design</h3>\n      <img class='bg' src='/assets/bg_digital.png'>\n    </div>\n    <div class='tile' routerLink='/music'>\n      <h3>music performance and production</h3>\n      <img class='bg' src='/assets/bg_music.jpg'>\n    </div>\n    <div class='tile' routerLink='/2d'>\n      <h3>2d traditional media</h3>\n      <img class='bg' src='/assets/bg_2d.jpg'>\n    </div>\n    <div class='tile' routerLink='/3d'>\n      <h3>3d traditional media</h3>\n      <img class='bg' src='/assets/bg_3d.jpg'>\n    </div>\n"
+module.exports = "\n    <div class='tile' routerLink='/digital'>\n      <h3>digital design</h3>\n      <img class='bg' src='./assets/bg_digital.png'>\n    </div>\n    <div class='tile' routerLink='/music'>\n      <h3>music performance and production</h3>\n      <img class='bg' src='./assets/bg_music.jpg'>\n    </div>\n    <div class='tile' routerLink='/2d'>\n      <h3>2d traditional media</h3>\n      <img class='bg' src='./assets/bg_2d.jpg'>\n    </div>\n    <div class='tile' routerLink='/3d'>\n      <h3>3d traditional media</h3>\n      <img class='bg' src='./assets/bg_3d.jpg'>\n    </div>\n"
 
 /***/ }),
 
@@ -462,21 +462,21 @@ var PortfolioDigitalComponent = /** @class */ (function () {
     }
     PortfolioDigitalComponent.prototype.ngOnInit = function () {
         this.digitalItems = [
-            { label: 'Web Design', images: ['/assets/digital_jfwSoftware.png'], modalId: 'digital_jfwSoftware' },
-            { label: 'Web Design', images: ['/assets/digital_spectrum.png'], modalId: 'digital_spectrum' },
-            { label: 'Illustration', images: ['/assets/digital_sinestro.jpg'], modalId: 'digital_sinestro' },
-            { label: 'Illustration', images: ['/assets/digital_starSapphire.png'], modalId: 'digital_starSapphire' },
-            { label: 'Illustration', images: ['/assets/digital_yoda.png'], modalId: 'digital_yoda' },
-            { label: 'Design and Illustration', images: ['/assets/digital_nintendoJusticeLeague.png'], modalId: 'digital_nintendoJusticeLeague' },
-            { label: 'Design and Illustration', images: ['/assets/digital_danceDanceMeg.gif'], modalId: 'digital_danceDanceMeg' },
-            { label: 'Design and Illustration', images: ['/assets/digital_danceDanceKaeti.png'], modalId: 'digital_danceDanceKaeti' },
-            { label: 'Design and Illustration', images: ['/assets/digital_LionsPause-4.jpg'], modalId: 'digital_LionsPause-4' },
-            { label: 'Graphic Design', images: ['/assets/digital_LionsPause-1.jpg'], modalId: 'digital_LionsPause-1' },
-            { label: 'Graphic Design', images: ['/assets/digital_LionsPause-3.jpg'], modalId: 'digital_LionsPause-3' },
-            { label: 'Graphic Design', images: ['/assets/digital_LionsPause-5.jpg'], modalId: 'digital_LionsPause-5' },
-            { label: 'Graphic Design', images: ['/assets/digital_LionsPause-8.jpg'], modalId: 'digital_LionsPause-8' },
-            { label: 'Graphic Design', images: ['/assets/digital_LionsPause-10.jpg'], modalId: 'digital_LionsPause-10' },
-            { label: 'Photo Manipulation', images: ['/assets/digital_photoManipulationFindlaw.jpg'], modalId: 'digital_photoManipulationFindlaw' }
+            { label: 'Web Design', images: ['./assets/digital_jfwSoftware.png'], modalId: 'digital_jfwSoftware' },
+            { label: 'Web Design', images: ['./assets/digital_spectrum.png'], modalId: 'digital_spectrum' },
+            { label: 'Illustration', images: ['./assets/digital_sinestro.jpg'], modalId: 'digital_sinestro' },
+            { label: 'Illustration', images: ['./assets/digital_starSapphire.png'], modalId: 'digital_starSapphire' },
+            { label: 'Illustration', images: ['./assets/digital_yoda.png'], modalId: 'digital_yoda' },
+            { label: 'Design and Illustration', images: ['./assets/digital_nintendoJusticeLeague.png'], modalId: 'digital_nintendoJusticeLeague' },
+            { label: 'Design and Illustration', images: ['./assets/digital_danceDanceMeg.gif'], modalId: 'digital_danceDanceMeg' },
+            { label: 'Design and Illustration', images: ['./assets/digital_danceDanceKaeti.png'], modalId: 'digital_danceDanceKaeti' },
+            { label: 'Design and Illustration', images: ['./assets/digital_LionsPause-4.jpg'], modalId: 'digital_LionsPause-4' },
+            { label: 'Graphic Design', images: ['./assets/digital_LionsPause-1.jpg'], modalId: 'digital_LionsPause-1' },
+            { label: 'Graphic Design', images: ['./assets/digital_LionsPause-3.jpg'], modalId: 'digital_LionsPause-3' },
+            { label: 'Graphic Design', images: ['./assets/digital_LionsPause-5.jpg'], modalId: 'digital_LionsPause-5' },
+            { label: 'Graphic Design', images: ['./assets/digital_LionsPause-8.jpg'], modalId: 'digital_LionsPause-8' },
+            { label: 'Graphic Design', images: ['./assets/digital_LionsPause-10.jpg'], modalId: 'digital_LionsPause-10' },
+            { label: 'Photo Manipulation', images: ['./assets/digital_photoManipulationFindlaw.jpg'], modalId: 'digital_photoManipulationFindlaw' }
         ];
     };
     PortfolioDigitalComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -601,15 +601,15 @@ var Portfolio2dComponent = /** @class */ (function () {
     }
     Portfolio2dComponent.prototype.ngOnInit = function () {
         this.twoDItems = [
-            { label: 'Graphite Drawing', images: ['/assets/drawing_mollyTheCat.JPG'], modalId: 'drawing_mollyTheCat' },
-            { label: 'Graphite Drawing', images: ['/assets/drawing_portraitMorgan.JPG'], modalId: 'drawing_portraitMorgan' },
-            { label: 'Pastel Drawing', images: ['/assets/drawing_portraitEmily.jpg'], modalId: 'drawing_portraitEmily' },
-            { label: 'Pastel Drawing', images: ['/assets/drawing_portraitNicole.jpg'], modalId: 'drawing_portraitNicole' },
-            { label: 'Pastel Drawing', images: ['/assets/drawing_portraitPeter.jpg'], modalId: 'drawing_portraitPeter' },
-            { label: 'Pastel Drawing', images: ['/assets/drawing_portraitRheanna.jpg'], modalId: 'drawing_portraitRheanna' },
-            { label: 'Graphite Drawing', images: ['/assets/drawing_redPanda.JPG'], modalId: 'drawing_redPanda' },
-            { label: 'Watercolor Painting', images: ['/assets/painting_apple.JPG'], modalId: 'painting_apple' },
-            { label: 'Block Printing', images: ['/assets/painting_axolotlPrint.JPG'], modalId: 'painting_axolotlPrint' },
+            { label: 'Graphite Drawing', images: ['./assets/drawing_mollyTheCat.JPG'], modalId: 'drawing_mollyTheCat' },
+            { label: 'Graphite Drawing', images: ['./assets/drawing_portraitMorgan.JPG'], modalId: 'drawing_portraitMorgan' },
+            { label: 'Pastel Drawing', images: ['./assets/drawing_portraitEmily.jpg'], modalId: 'drawing_portraitEmily' },
+            { label: 'Pastel Drawing', images: ['./assets/drawing_portraitNicole.jpg'], modalId: 'drawing_portraitNicole' },
+            { label: 'Pastel Drawing', images: ['./assets/drawing_portraitPeter.jpg'], modalId: 'drawing_portraitPeter' },
+            { label: 'Pastel Drawing', images: ['./assets/drawing_portraitRheanna.jpg'], modalId: 'drawing_portraitRheanna' },
+            { label: 'Graphite Drawing', images: ['./assets/drawing_redPanda.JPG'], modalId: 'drawing_redPanda' },
+            { label: 'Watercolor Painting', images: ['./assets/painting_apple.JPG'], modalId: 'painting_apple' },
+            { label: 'Block Printing', images: ['./assets/painting_axolotlPrint.JPG'], modalId: 'painting_axolotlPrint' },
         ];
     };
     Portfolio2dComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -668,13 +668,13 @@ var Portfolio3dComponent = /** @class */ (function () {
     }
     Portfolio3dComponent.prototype.ngOnInit = function () {
         this.threeDItems = [
-            { label: 'Stoneware Sculptural Vase', images: ['/assets/ceramics_hand1.jpg', './assets/ceramics_hand2.jpg'], modalId: 'ceramics_hand' },
-            { label: 'Stoneware Mug', images: ['/assets/ceramics_mug.jpg'], modalId: 'ceramics_mug' },
-            { label: 'Earthenware Platter', images: ['/assets/ceramics_platter.JPG'], modalId: 'ceramics_platter' },
-            { label: 'Raku Jar', images: ['/assets/ceramics_rakuJar.JPG'], modalId: 'ceramics_rakuJar' },
-            { label: 'Raku Bowl', images: ['/assets/ceramics_twistBowl.jpg'], modalId: 'ceramics_twistBowl' },
-            { label: 'Porcelain Vase', images: ['/assets/ceramics_vase.JPG'], modalId: 'ceramics_vase' },
-            { label: 'Clay Sculpture', images: ['/assets/sculpture_bust1.jpg', './assets/sculpture_bust2.jpg'], modalId: 'sculpture_bust1' },
+            { label: 'Stoneware Sculptural Vase', images: ['./assets/ceramics_hand1.jpg', './assets/ceramics_hand2.jpg'], modalId: 'ceramics_hand' },
+            { label: 'Stoneware Mug', images: ['./assets/ceramics_mug.jpg'], modalId: 'ceramics_mug' },
+            { label: 'Earthenware Platter', images: ['./assets/ceramics_platter.JPG'], modalId: 'ceramics_platter' },
+            { label: 'Raku Jar', images: ['./assets/ceramics_rakuJar.JPG'], modalId: 'ceramics_rakuJar' },
+            { label: 'Raku Bowl', images: ['./assets/ceramics_twistBowl.jpg'], modalId: 'ceramics_twistBowl' },
+            { label: 'Porcelain Vase', images: ['./assets/ceramics_vase.JPG'], modalId: 'ceramics_vase' },
+            { label: 'Clay Sculpture', images: ['./assets/sculpture_bust1.jpg', './assets/sculpture_bust2.jpg'], modalId: 'sculpture_bust1' },
         ];
     };
     Portfolio3dComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
