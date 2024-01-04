@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple Sheet 5e</title>
+        <link rel="stylesheet" href="./styles.css" />
+    </head>
+    <body>
+        <div id="wrapper">
+            <header>
+                <h1>Simple Sheet 5e</h1>
+            </header>
+            <main>
+                <section id="section-general" class="section-wrapper">
+                    <div class="section-title">
+                        <h2>General Info</h2>
+                    </div>
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="field-wrapper column">
+                                <h3>Name</h3>
+                                <div class="input-wrapper">
+                                    <input type="text" id="general-name">
+                                </div>
+                            </div>
+                            <div class="field-wrapper column">
+                                <h3>Player</h3>
+                                <div class="input-wrapper">
+                                    <input type="text" id="general-player">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="field-wrapper column">
+                                <h3>Race</h3>
+                                <div class="input-wrapper">
+                                    <input type="text" id="general-race">
+                                </div>
+                            </div>
+                            <div class="field-wrapper column">
+                                <h3>Background</h3>
+                                <div class="input-wrapper">
+                                    <input type="text" id="general-background">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="field-wrapper column">
+                                <h3>Classes</h3>
+                                <div class="input-wrapper">
+                                    <input type="text" id="general-class">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-health" class="section-wrapper">
+                    <div class="section-title">
+                        <h2>Health</h2>
+                    </div>
+                    <div class="section-content">
+                        <div class="column">
+                            <h3>Rests</h3>
+                            <div class="row">
+                                <div class="field-wrapper column">
+                                    <div class="input-wrapper">
+                                        <button type="button" id="health-rest-long">Long Rest</button>
+                                    </div>
+                                </div>
+                                <div class="field-wrapper column">
+                                    <div class="input-wrapper">
+                                        <button type="button" id="health-rest-short">Short Rest</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <h3>Hit Points</h3>
+                            <div class="row">
+                                <div class="field-wrapper column">
+                                    <h4>Max</h4>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="health-hp-max">
+                                    </div>
+                                </div>
+                                <div class="field-wrapper column">
+                                    <h4>Current</h4>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="health-hp-current">
+                                    </div>
+                                </div>
+                                <div class="field-wrapper column">
+                                    <h4>Temp</h4>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="health-hp-temp">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field-wrapper column">
+                                <h4>Conditions</h4>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-defenses" class="section-wrapper">
+                    <div class="section-title">
+                        <h2>Defenses</h2>
+                    </div>
+                    <div class="section-content">
+                        <div class="column">
+                            <div class="field-wrapper column">
+                                <h4>Armor Class</h4>
+                                <div class="input-wrapper">
+                                    <input type="text" id="health-ac">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field-wrapper column">
+                                <h4>Immunities</h4>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="field-wrapper column">
+                                <h4>Resistances</h4>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-abilities" class="section-wrapper">
+                    <div class="section-title">
+                        <h2>Abilities</h2>
+                    </div>
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="row">
+                                <div class="field-wrapper column">
+                                    <h4>Str</h4>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="abilities-str">
+                                    </div>
+                                </div>
+                                <div class="field-wrapper column small">
+                                    <h5>modifier</h5>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="abilities-str-mod">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row">
+                                <div class="field-wrapper column">
+                                    <h4>Int</h4>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="abilities-int">
+                                    </div>
+                                </div>
+                                <div class="field-wrapper column small">
+                                    <h5>modifier</h5>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="abilities-con-mod">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-saves" class="section-wrapper">
+                    <div class="section-title">
+                        <h2>Saving Throws</h2>
+                    </div>
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="row">
+                                <div class="field-wrapper column">
+                                    <h4>Str</h4>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="saves-str">
+                                    </div>
+                                </div>
+                                <div class="field-wrapper column small">
+                                    <h5>modifier</h5>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="saves-str-mod">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row">
+                                <div class="field-wrapper column">
+                                    <h4>Str</h4>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="saves-str">
+                                    </div>
+                                </div>
+                                <div class="field-wrapper column small">
+                                    <h5>modifier</h5>
+                                    <div class="input-wrapper">
+                                        <input type="text" id="saves-str-mod">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-proficiencies" class="section-wrapper">
+                    <div class="section-title">
+                        <h2>Proficiencies</h2>
+                    </div>
+                    <div class="section-content">
+                        <div class="field-wrapper column">
+                            <h4>Weapons</h4>
+                        </div>
+                        <div class="field-wrapper column">
+                            <h4>Armor</h4>
+                        </div>
+                        <div class="field-wrapper column">
+                            <h4>Tools</h4>
+                        </div>
+                        <div class="field-wrapper column">
+                            <h4>Languages</h4>
+                        </div>
+                    </div>
+                </section>
+                <section id="section-skills" class="section-wrapper">
+                    <div class="section-title">
+                        <h2>Skills</h2>
+                    </div>
+                    <div class="section-content add-gap">
+                        <div class="row border-bottom padding-bottom">
+                            <h5>Skill</h5>
+                            <h5>Proficient</h5>
+                            <h5>Ability</h5>
+                            <h5>Modifier</h5>
+                        </div>
+                        <div class="row center add-gap">
+                            <h5>Acrobatics</h5>
+                            <div class="input-wrapper">
+                                <select id="skills-acrobatics-prof"></select>
+                            </div>
+                            <h6>Dex</h6>
+                            <div class="input-wrapper">
+                                <input type="text" id="skills-acrobatics-mod">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div id="section-main" class="section-wrapper">
+                    <nav role="tablist">
+                        <ul>
+                            <li class="">Actions</li>
+                            <li>Spells</li>
+                            <li>Inventory</li>
+                            <li class="active">Features</li>
+                            <li>Description</li>
+                            <li>Notes</li>
+                        </ul>
+                    </nav>
+                    <section>
+                        <div class="section-title">
+                            <h3>Actions</h3>
+                        </div>
+                        <div class="section-content"></div>
+                    </section>
+                    <section>
+                        <div class="section-title">
+                            <h3>Spells</h3>
+                        </div>
+                        <div class="section-content"></div>
+                    </section>
+                    <section>
+                        <div class="section-title">
+                            <h3>Inventory</h3>
+                        </div>
+                        <div class="section-content"></div>
+                    </section>
+                    <section>
+                        <div class="section-title">
+                            <h3>Features</h3>
+                        </div>
+                        <div class="section-content"></div>
+                    </section>
+                    <section>
+                        <div class="section-title">
+                            <h3>Description</h3>
+                        </div>
+                        <div class="section-content"></div>
+                    </section>
+                    <section>
+                        <div class="section-title">
+                            <h3>Notes</h3>
+                        </div>
+                        <div class="section-content"></div>
+                    </section>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>
