@@ -1,0 +1,117 @@
+
+.section-wrapper {
+  padding: 15px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.section-title {
+  flex: 0 1 auto;
+}
+
+.section-content {
+  flex: 1;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  overflow-y: auto;
+}
+
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.row.no-stretch {
+  justify-content: flex-start;
+}
+
+.column {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.row > *, .column > * {
+  flex: 1;
+}
+
+.shrink {
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.field-wrapper {
+  flex: 1;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 5px;
+}
+
+.input-wrapper {
+  flex: 1;
+  padding: 3px;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+.input-wrapper input, .input-wrapper text-area, .input-wrapper select, .input-wrapper button {
+  flex: 1;
+  width: 100%;
+}
+
+.width-150 {
+  flex: 0 0 150px;
+}
+
+.width-50 {
+  flex: 0 0 50px;
+}
+
+.small {
+  flex: 0;
+}
+
+.center {
+  align-items: center;
+}
+
+.add-margin-bottom {
+  margin-bottom: 5px;
+}
+
+.add-margin-right {
+  margin-right: 5px;
+}
+
+[role="tablist"] ul {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+[role="tablist"] li {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul, li {
+  padding: 0;
+  margin: 0;
+}
+
+h2 {
+  padding-bottom: 5px;
+}
