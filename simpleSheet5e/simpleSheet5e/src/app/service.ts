@@ -1,11 +1,21 @@
-
 import * as Constants from './constants';
-import { sheetData } from './models';
+import { Ability, SavingThrow, sheetData, storeData } from './models';
 
 export class Service {
+    initData(): storeData {
+        if (!localStorage.getItem('data')) {
+            // console.log('No data in storage, initializing new data');
+            const newData = this.initNewData();
+            localStorage.setItem('data', JSON.stringify(newData));
+            return newData;
+        } else {
+            // console.log('Data found in storage, loading data');
+            return this.dataFromStorage();
+        }
+    }
 
-    initNewData(): any {
-        const newData: sheetData = {
+    initNewData(): storeData {
+        const newData: storeData = {
             state: {
                 isUpdated: false,
                 abilities: {}
@@ -17,66 +27,94 @@ export class Service {
                 SectionHealth: null,
                 SectionMain: null,
                 SectionProficiencies: null,
-                SectionSavingThrows: null,
-                SectionSkills: null
+                SectionSavingThrows: {
+                    savingThrows: []
+                },
+                SectionSkills: {
+                    skills: []
+                }
             }
         };
-        Object.keys(Constants.Abilities).map(ability => newData.state.abilities[ability] = null);
-        
-        newData.sheet[Constants.Sections['SectionGeneral']] = new Constructors['SectionGeneral'](
-            null, null, null, null, null, null, this.getDefaultProficiencyBonus(0)
-        )
-        newData.sheet[Constants.Sections['SectionAbilities']] = new Constructors['SectionAbilities'](
-            Object.keys(Constants.Abilities).map(ability => new Constructors['Ability'](
-                ability, newData.state[ability], this.getDefaultAbilityModifier(10), null
-            ))
-        )
-        newData.sheet[Constants.Sections['SectionDefenses']] = new Constructors['SectionDefenses'](
-            null, null, null
-        )
-        newData.sheet[Constants.Sections['SectionHealth']] = new Constructors['SectionHealth'](
-            null, null, null, null, null
-        )
-        newData.sheet[Constants.Sections['SectionMain']] = new Constructors['SectionMain'](
-            null, null, null, null, null, null, null, null
-        )
-        newData.sheet[Constants.Sections['SectionProficiencies']] = new Constructors['SectionProficiencies'](
-            null, null, null, null
-        )
-        newData.sheet[Constants.Sections['SectionSavingThrows']] = new Constructors['SectionSavingThrows'](
-            Object.keys(Constants.Abilities).map(ability => new Constructors['SavingThrow'](
-                ability, newData.state[ability], newData.sheet[Constants.Sections['SectionAbilities']].bonus, null
-            ))
-        )
-        newData.sheet[Constants.Sections['SectionSkills']] = new Constructors['SectionSkills'](
-            Constants.Skills.map(skill => new Constructors['Skill'](
-                skill['name'], skill['ability'], newData.state[skill['ability']], newData.sheet[Constants.Sections['SectionAbilities']].bonus, null
-            ))
-        )
+        // init abilities in state
+        Object.keys(Constants.Abilities).map((ability: string) => newData.state.abilities[ability] = null);
+        // init General section
+        newData.sheet.SectionGeneral = {
+            name: null,
+            player: null,
+            species: null,
+            background: null,
+            classes: [],
+            characterLevel: null,
+            proficiencyBonus: this.getDefaultProficiencyBonus(0)
+        }
+        // init Abilities section
+        Object.keys(Constants.Abilities).map((ability: string) => newData.sheet.SectionAbilities![ability] = {
+            ability: ability,
+            score: null,
+            bonus: this.getDefaultAbilityModifier(10),
+            customBonusModifiedBy: null
+        } as Ability)
+        // init Defenses section
+        newData.sheet.SectionDefenses = {
+            ac: null,
+            immunities: null,
+            resistances: null
+        }
+        // init Health section
+        newData.sheet.SectionHealth = {
+            hpCurrent: null,
+            hpMax: null,
+            hpTemp: null,
+            hitDice: null,
+            conditions: null
+        }
+        // init Main section
+        newData.sheet.SectionMain = {
+            resources: null,
+            actions: null,
+            spellModifiers: null,
+            spells: null,
+            inventory: null,
+            features: null,
+            description: null,
+            notes: null
+        }
+        // init Proficiencies section
+        newData.sheet.SectionProficiencies = {
+            weapons: null,
+            armor: null,
+            tools: null,
+            languages: null
+        }
+        // init SavingThrows section
+        Object.keys(Constants.Abilities).map((ability: string) => newData.sheet.SectionSavingThrows?.savingThrows?.push({
+            ability: ability,
+            proficient: null,
+            bonus: this.getDefaultAbilityModifier(10),
+            customBonusModifiedBy: null
+        } as SavingThrow))
+        // init Skills section
+        Constants.Skills.map(skill => newData.sheet.SectionSkills?.skills?.push(skill);
 
         // console.log('initNewData(): ', newData);
         return newData;
     }
 
-    saveToStorage() {
-        // console.log('saveToStorage() SAVING: ', Store);
-
-        if (Store) {
+    saveToStorage(dataToSave: storeData) {
+        if (dataToSave) {
             // console.log('store data type: ', typeof Store)
-            localStorage.setItem('data', JSON.stringify(Store));
+            localStorage.setItem('data', JSON.stringify(dataToSave));
             // console.log('saveToStorage() SAVED: ', this.loadFromStorage());
         }
-        Store.state.isUpdated = false;
     }
 
-    loadFromStorage(): any {
+    dataFromStorage(): storeData {
         // console.log('loadFromStorage(): ', JSON.parse(localStorage.getItem('data')!));
         return JSON.parse(localStorage.getItem('data')!);
     }
 
-    get(section?: string): any {
-        const data = toRaw(Store.sheet);
-        return section ? data[section] : data;
+    mapFormDataToStoreData(form) {
+        // TODO: implement mapping form data to store data
     }
 
     updateStore(objectToUpdate?: any) {

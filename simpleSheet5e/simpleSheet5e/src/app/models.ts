@@ -1,20 +1,44 @@
+import { FormControl, FormGroup } from "@angular/forms";
+
+export interface storeData {
+    state: stateData,
+    sheet: sheetData
+}
+
 export interface sheetData {
-    state: state,
-    sheet: sheet
+    SectionGeneral: SectionGeneral | null,
+    SectionAbilities: SectionAbilities | null,
+    SectionDefenses: SectionDefenses | null,
+    SectionHealth: SectionHealth | null,
+    SectionMain: SectionMain | null,
+    SectionProficiencies: SectionProficiencies | null,
+    SectionSavingThrows: SectionSavingThrows | null,
+    SectionSkills: SectionSkills | null
 }
 
-export interface sheet {
-    SectionGeneral: null,
-    SectionAbilities: null,
-    SectionDefenses: null,
-    SectionHealth: null,
-    SectionMain: null,
-    SectionProficiencies: null,
-    SectionSavingThrows: null,
-    SectionSkills: null
+export interface sheetForm {
+    SectionGeneral: FormGroup<{
+        name: FormControl<string | null>;
+        player: FormControl<string | null>;
+        species: FormControl<string | null>;
+        background: FormControl<string | null>;
+        classes: FormGroup<{
+            name: FormControl<string | null>;
+            level: FormControl<number | null>;
+        }>;
+        characterLevel: FormControl<number | null>;
+        proficiencyBonus: FormControl<number | null>;
+    }>;
+    SectionAbilities: SectionAbilities | null;
+    SectionDefenses: SectionDefenses | null;
+    SectionHealth: SectionHealth | null;
+    SectionMain: SectionMain | null;
+    SectionProficiencies: SectionProficiencies | null;
+    SectionSavingThrows: SectionSavingThrows | null;
+    SectionSkills: SectionSkills | null;
 }
 
-export interface state {
+export interface stateData {
     isUpdated: false,
     abilities: {[key: string]: number | null}
 }
@@ -22,21 +46,16 @@ export interface state {
 export interface SectionGeneral {
     name: string | null;
     player: string | null;
-    race: string | null;
+    species: string | null;
     background: string | null;
     classes: Class[] | null;
     characterLevel: number | null;
     proficiencyBonus: number | null;
 }
 
-export interface SectionAbilities {
-    STR: Ability;
-    DEX: Ability;
-    CON: Ability;
-    INT: Ability;
-    WIS: Ability;
-    CHA: Ability;
-}
+export type SectionAbilities = {
+    [key: string]: Ability | null;
+};
 
 export interface SectionDefenses {
     ac: number | null;
