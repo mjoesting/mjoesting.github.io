@@ -4,13 +4,13 @@
 <div class="section-content">
     <div class="row add-gap add-margin-bottom">
         <div class="field-wrapper column">
-            <h3>Name</h3>
+            <h4>Name</h4>
             <div class="input-wrapper">
                 <input type="text" id="general-name" [value]="data.name" />
             </div>
         </div>
         <div class="field-wrapper column">
-            <h3>Player</h3>
+            <h4>Player</h4>
             <div class="input-wrapper">
                 <input type="text" id="general-player" [value]="data.player" />
             </div>
@@ -18,20 +18,20 @@
     </div>
     <div class="row add-gap add-margin-bottom">
         <div class="field-wrapper column">
-            <h3>Race</h3>
+            <h4>Race</h4>
             <div class="input-wrapper">
                 <input type="text" id="general-species" [value]="data.species" />
             </div>
         </div>
         <div class="field-wrapper column">
-            <h3>Background</h3>
+            <h4>Background</h4>
             <div class="input-wrapper">
                 <input type="text" id="general-background" [value]="data.background" />
             </div>
         </div>
     </div>
         <div class="field-wrapper column" id="general-class">
-            <h3>Classes</h3>
+            <h3 class="add-margin-bottom">Classes</h3>
             @for (class of data.classes; track class.name) {
                 <div class="row">
                     <div class="row add-margin-bottom no-stretch">
@@ -40,6 +40,22 @@
                         </div>
                         <div class="input-wrapper width-50">
                             <input type="text" [value]="class.level" />
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (!data.classes || data.classes.length == 0) {
+                <div class="row">
+                    <h5>Name</h5>
+                    <h5>Level</h5>
+                </div>
+                <div class="row">
+                    <div class="row add-margin-bottom no-stretch">
+                        <div class="input-wrapper width-150 add-margin-right">
+                            <input type="text" />
+                        </div>
+                        <div class="input-wrapper width-50">
+                            <input type="text" />
                         </div>
                     </div>
                 </div>
