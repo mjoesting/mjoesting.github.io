@@ -2,24 +2,31 @@
     <h2>Saving Throws</h2>
 </div>
 <div class="section-content">
-    <!-- <div class="row" v-for="(s, index) in data.savingThrows">
-        <div class="row center add-gap">
-            <h4>{{ s.ability }}</h4>
-            <div class="field-wrapper column">
-                <h5>Proficiency</h5>
-                <div class="input-wrapper">
-                    <select id="skills-acrobatics-prof" v-model="data[index]" @change="service.updateStore(s)">
-                        <option value="" :selected="!s.proficient"></option>
-                        <option v-for="prof in Constants.Proficiencies" value="{{ prof }}" :selected="prof == s.proficient">{{ prof }}</option>
-                    </select>
+    <div class="row border-bottom add-margin-bottom">
+        <h5>Ability</h5>
+        <h5>Proficient</h5>
+        <h5>Bonus</h5>
+    </div>
+    @for (save of savingThrows; track save.ability) {
+        <div class="row">
+            <div class="row center add-gap add-margin-bottom">
+                <h4>{{ save.ability }}</h4>
+                <div class="field-wrapper column">
+                    <div class="input-wrapper">
+                        <select id="skills-acrobatics-prof" [value]="save.proficiency">
+                            <option value="" [selected]="!save.proficiency"></option>
+                                @for (prof of proficiencies; track prof) {
+                                    <option [value]="prof" [selected]="prof == save.proficiency">{{ prof }}</option>
+                                }
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="field-wrapper column">
-                <h5>Bonus</h5>
-                <div class="input-wrapper">
-                    <input type="text" id="saves-{{s.ability}}-mod" v-model="s.bonus" @change="service.updateStore()" />
+                <div>
+                    <div class="input-wrapper">
+                        <input type="text" id="saves-{{save.ability}}-mod" [value]="save.bonus" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div> -->
+    }
 </div>

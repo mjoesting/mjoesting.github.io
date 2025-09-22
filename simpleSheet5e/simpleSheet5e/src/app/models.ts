@@ -1,46 +1,13 @@
 import { FormControl, FormGroup } from "@angular/forms";
 
-export interface storeData {
-    state: stateData,
-    sheet: sheetData
+export interface StoreData {
+    state: StateData,
+    sheet: SheetData
 }
 
-export interface sheetData {
-    SectionGeneral: SectionGeneral | null,
-    SectionAbilities: SectionAbilities | null,
-    SectionDefenses: SectionDefenses | null,
-    SectionHealth: SectionHealth | null,
-    SectionMain: SectionMain | null,
-    SectionProficiencies: SectionProficiencies | null,
-    SectionSavingThrows: SectionSavingThrows | null,
-    SectionSkills: SectionSkills | null
-}
-
-export interface sheetForm {
-    SectionGeneral: FormGroup<{
-        name: FormControl<string | null>;
-        player: FormControl<string | null>;
-        species: FormControl<string | null>;
-        background: FormControl<string | null>;
-        classes: FormGroup<{
-            name: FormControl<string | null>;
-            level: FormControl<number | null>;
-        }>;
-        characterLevel: FormControl<number | null>;
-        proficiencyBonus: FormControl<number | null>;
-    }>;
-    SectionAbilities: SectionAbilities | null;
-    SectionDefenses: SectionDefenses | null;
-    SectionHealth: SectionHealth | null;
-    SectionMain: SectionMain | null;
-    SectionProficiencies: SectionProficiencies | null;
-    SectionSavingThrows: SectionSavingThrows | null;
-    SectionSkills: SectionSkills | null;
-}
-
-export interface stateData {
+export interface StateData {
     isUpdated: false,
-    abilities: {[key: string]: number | null}
+    abilities: {[key: string]: number}
 }
 
 export interface SectionGeneral {
@@ -83,18 +50,105 @@ export interface SectionMain {
 }
     
 export interface SectionProficiencies {
-    weapons: string | null;
-    armor: string | null;
-    tools: string | null;
-    languages: string | null;
+    weapons: string[] | null;
+    armor: string[] | null;
+    tools: string[] | null;
+    languages: string[] | null;
 }
     
 export interface SectionSavingThrows {
-    savingThrows: SavingThrow[] | null;
+    [key: string]: SavingThrow | null;
 }
     
 export interface SectionSkills {
     skills: Skill[] | null;
+}
+
+export interface SheetData {
+    SectionGeneral: SectionGeneral,
+    SectionAbilities: SectionAbilities,
+    SectionDefenses: SectionDefenses,
+    SectionHealth: SectionHealth,
+    SectionMain: SectionMain,
+    SectionProficiencies: SectionProficiencies,
+    SectionSavingThrows: SectionSavingThrows,
+    SectionSkills: SectionSkills
+}
+
+export type SheetForm = {
+    SectionGeneral: DynamicFormGroup<SectionGeneralFormFields>;
+    SectionAbilities: DynamicFormGroup<SectionAbilitiesFormFields>;
+    SectionDefenses: DynamicFormGroup<SectionDefensesFormFields>;
+    SectionHealth: DynamicFormGroup<SectionHealthFormFields>;
+    SectionMain: DynamicFormGroup<SectionMainFormFields>;
+    SectionProficiencies: DynamicFormGroup<SectionProficienciesFormFields>;
+    SectionSavingThrows: DynamicFormGroup<SectionSavingThrowsFormFields>;
+    SectionSkills: DynamicFormGroup<SectionSkillsFormFields>;
+}
+
+export type DynamicFormGroup<T> = {
+    [K in keyof T]: FormGroup<DynamicFormControl<T[K]>>;
+}
+
+export type DynamicFormControl<T> = {
+    [K in keyof T]: FormControl<T[K]>
+}
+
+export type SectionGeneralFormFields = {
+    name: FormControl<string | null>;
+    player: FormControl<string | null>;
+    species: FormControl<string | null>;
+    background: FormControl<string | null>;
+    classes: DynamicFormGroup<Class>;
+    characterLevel: FormControl<number | null>;
+    proficiencyBonus: FormControl<number | null>;
+}
+
+export type SectionAbilitiesFormFields = {
+    [key: string]: DynamicFormGroup<Ability>;
+}
+
+export type SectionDefensesFormFields = {
+    ac: FormControl<number>;
+    immunities?: DynamicFormControl<string>;
+    resistances?: DynamicFormControl<string>;
+}
+
+export type SectionHealthFormFields = {
+    hpCurrent: FormControl<number>;
+    hpMax: FormControl<number>;
+    hpTemp: FormControl<number>;
+    condition?: DynamicFormControl<string>;
+}
+
+export type SectionMainFormFields = {
+    resources: DynamicFormGroup<Resource>;
+    actions: DynamicFormGroup<Action>;
+    spellModifiers: FormGroup<{
+        ability: FormControl<string>;
+        attack: FormControl<number>;
+        saveDC: FormControl<number>;
+    }>;
+    spells: DynamicFormGroup<Spell>;
+    inventory: DynamicFormGroup<Item>;
+    features: DynamicFormGroup<Feature>;
+    description: FormControl<string>;
+    notes: FormControl<string>;
+}
+    
+export type SectionProficienciesFormFields = {
+    weapons: FormControl<string>;
+    armor: FormControl<string>;
+    tools: FormControl<string>;
+    languages: FormControl<string>;
+}
+    
+export type SectionSavingThrowsFormFields = {
+    savingThrows: DynamicFormGroup<SavingThrow>;
+}
+    
+export type SectionSkillsFormFields = {
+    skills: DynamicFormGroup<Skill>;
 }
     
 export interface Class {
@@ -111,7 +165,7 @@ export interface Ability {
     
 export interface SavingThrow {
     ability: string | null;
-    proficient: string | null;
+    proficiency: string | null;
     bonus: number | null;
     customBonusModifiedBy: string | null;
 }
@@ -119,7 +173,7 @@ export interface SavingThrow {
 export interface Skill {
     name: string | null;
     ability: string | null;
-    proficient?: string | null;
+    proficiency?: string | null;
     bonus?: number | null;
     customBonusModifiedBy?: string | null;
 }
@@ -133,15 +187,18 @@ export interface Action {
     
 export interface Item {
     name: string | null;
+    description: string | null;
+    quantity: number | null;
     cost: number | null;
     weight: number | null;
     damageType: string | null;
     damage: string | null;
     attackAbility: string | null;
     attackBonus: number | null;
-    isMagic: boolean;
+    isMagic: boolean | null;
     magicBonus: number | null;
-    customBonusModifiedBy: string | null
+    customBonusModifiedBy: string | null,
+    notes: string | null;
 }
     
 export interface Spell {

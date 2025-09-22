@@ -2,47 +2,47 @@
     <h2>General Info</h2>
 </div>
 <div class="section-content">
-    <!-- <div class="row">
+    <div class="row add-gap add-margin-bottom">
         <div class="field-wrapper column">
             <h3>Name</h3>
             <div class="input-wrapper">
-                <input type="text" id="general-name" v-model="data.name" @change="service.updateStore()" />
+                <input type="text" id="general-name" [value]="data.name" />
             </div>
         </div>
         <div class="field-wrapper column">
             <h3>Player</h3>
             <div class="input-wrapper">
-                <input type="text" id="general-player" v-model="data.player" @change="service.updateStore()" />
+                <input type="text" id="general-player" [value]="data.player" />
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row add-gap add-margin-bottom">
         <div class="field-wrapper column">
             <h3>Race</h3>
             <div class="input-wrapper">
-                <input type="text" id="general-race" v-model="data.race" @change="service.updateStore()" />
+                <input type="text" id="general-species" [value]="data.species" />
             </div>
         </div>
         <div class="field-wrapper column">
             <h3>Background</h3>
             <div class="input-wrapper">
-                <input type="text" id="general-background" v-model="data.background" @change="service.updateStore()" />
+                <input type="text" id="general-background" [value]="data.background" />
             </div>
         </div>
     </div>
-    <div class="row">
         <div class="field-wrapper column" id="general-class">
             <h3>Classes</h3>
-            <template v-for="c in data?.classes">
-                <div class="row add-margin-bottom no-stretch">
-                    <div class="input-wrapper width-150 add-margin-right">
-                        <input type="text" v-model="c.name" @change="service.updateStore()" />
-                    </div>
-                    <div class="input-wrapper width-50">
-                        <input type="text" v-model="c.level" @change="service.updateStore()" />
+            @for (class of data.classes; track class.name) {
+                <div class="row">
+                    <div class="row add-margin-bottom no-stretch">
+                        <div class="input-wrapper width-150 add-margin-right">
+                            <input type="text" [value]="class.name" />
+                        </div>
+                        <div class="input-wrapper width-50">
+                            <input type="text" [value]="class.level" />
+                        </div>
                     </div>
                 </div>
-            </template>
+            }
         </div>
-    </div> -->
 </div>

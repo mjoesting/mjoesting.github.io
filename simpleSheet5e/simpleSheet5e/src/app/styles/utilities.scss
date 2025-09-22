@@ -1,21 +1,28 @@
 
 .section-wrapper {
-  padding: 15px;
+  padding: 10px;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: stretch;
+
+  & > * {
+    display: flex;
+    flex-flow: column nowrap;
+  }
 }
 
 .section-title {
   flex: 0 1 auto;
+  margin-bottom: 10px;
 }
 
 .section-content {
-  flex: 1;
+  flex: 1 1 100%;
+  width: 100%;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: stretch;
   overflow-y: auto;
 }
@@ -55,7 +62,6 @@
   flex: 1;
   justify-content: space-between;
   align-items: stretch;
-  padding: 5px;
 }
 
 .input-wrapper {
@@ -87,12 +93,36 @@
   align-items: center;
 }
 
+.flex-end {
+  justify-content: flex-end;
+}
+
 .add-margin-bottom {
   margin-bottom: 5px;
 }
 
 .add-margin-right {
   margin-right: 5px;
+}
+
+.border-bottom {
+    border-bottom: solid 1px #eee;
+}
+
+.section-title h2 {
+    border-color: #ccc;
+}
+
+.padding-bottom {
+    padding-bottom: 5px;
+}
+
+.padding-top {
+    padding-top: 5px;
+}
+
+.add-gap {
+    gap: 5px;
 }
 
 [role="tablist"] ul {
@@ -110,8 +140,4 @@
 h1, h2, h3, h4, h5, h6, p, ul, li {
   padding: 0;
   margin: 0;
-}
-
-h2 {
-  padding-bottom: 5px;
 }

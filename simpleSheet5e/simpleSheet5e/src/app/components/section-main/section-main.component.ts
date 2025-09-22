@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { DynamicFormGroup, SectionMain, SectionMainFormFields } from '../../models';
 
 @Component({
   selector: 'section-main',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './section-main.component.scss'
 })
 export class SectionMainComponent {
-
+  @Input() data!: SectionMain;
+  @Input() form!: DynamicFormGroup<SectionMainFormFields>;
 }

@@ -3,28 +3,28 @@
     <app-header></app-header>
     <main>
         <section id="section-general" class="section-wrapper">
-          <section-general (data)="data.sheet.SectionGeneral"></section-general>
+          <section-general [data]="data.sheet.SectionGeneral" [form]="form.SectionGeneral"></section-general>
         </section>
         <section id="section-health" class="section-wrapper">
-          <section-health (data)="data.sheet.SectionHealth"></section-health>
+          <section-health [data]="data.sheet.SectionHealth" [form]="form.SectionHealth"></section-health>
         </section>
         <section id="section-defenses" class="section-wrapper">
-          <section-defenses (data)="data.sheet.SectionDefenses"></section-defenses>
+          <section-defenses [data]="data.sheet.SectionDefenses" [form]="form.SectionDefenses"></section-defenses>
         </section>
         <section id="section-abilities" class="section-wrapper">
-          <section-abilities (data)="data.sheet.SectionAbilities"></section-abilities>
+          <section-abilities [data]="data.sheet.SectionAbilities" [form]="form.SectionAbilities"></section-abilities>
         </section>
         <section id="section-saves" class="section-wrapper">
-          <section-saving-throws (data)="data.sheet.SectionSavingThrows"></section-saving-throws>
+          <section-saving-throws [data]="data.sheet.SectionSavingThrows" [form]="form.SectionSavingThrows"></section-saving-throws>
         </section>
         <section id="section-proficiencies" class="section-wrapper">
-          <section-proficiencies (data)="data.sheet.SectionProficiencies"></section-proficiencies>
+          <section-proficiencies [data]="data.sheet.SectionProficiencies" [form]="form.SectionProficiencies"></section-proficiencies>
         </section>
         <section id="section-skills" class="section-wrapper">
-          <section-skills (data)="data.sheet.SectionSkills"></section-skills>
+          <section-skills [data]="data.sheet.SectionSkills" [form]="form.SectionSkills"></section-skills>
         </section>
-        <div id="section-main" class="section-wrapper">
-          <section-main (data)="data.sheet.SectionMain"></section-main>
-        </div>
+        <section id="section-main" class="section-wrapper">
+          <section-main [data]="data.sheet.SectionMain" [form]="form.SectionMain"></section-main>
+        </section>
     </main>
   </div>

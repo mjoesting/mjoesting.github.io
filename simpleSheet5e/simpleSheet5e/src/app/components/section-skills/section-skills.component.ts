@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Skill, DynamicFormGroup, SectionSkills, SectionSkillsFormFields } from '../../models';
+import * as Constants from '../../constants';
 
 @Component({
   selector: 'section-skills',
@@ -7,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './section-skills.component.scss'
 })
 export class SectionSkillsComponent {
-
+  @Input() data!: SectionSkills;
+  @Input() form!: DynamicFormGroup<SectionSkillsFormFields>;
+  proficiencies: string[] = Object.keys(Constants.Proficiencies);
 }

@@ -2,28 +2,24 @@
     <h2>Proficiencies</h2>
 </div>
 <div class="section-content">
-    <!-- <div class="field-wrapper column">
-        <h4>Weapons</h4>
+    <div class="row border-bottom add-margin-bottom">
+        <h5>Weapons</h5>
+        <h5>Armor</h5>
+        <h5>Tools</h5>
+        <h5>Languages</h5>
+    </div>
+    <div class="proficiencies-wrapper row add-gap">
         <div class="input-wrapper">
-            <textarea v-model="data.weapons" @change="service.updateStore()"></textarea>
+            <textarea id="proficiencies-weapons" [value]="data.weapons"></textarea>
+        </div>
+        <div class="input-wrapper">
+            <textarea id="proficiencies-armor" [value]="data.armor"></textarea>
+        </div>
+        <div class="input-wrapper">
+            <textarea id="proficiencies-tools" [value]="data.tools"></textarea>
+        </div>
+        <div class="input-wrapper">
+            <textarea id="proficiencies-languages" [value]="data.languages"></textarea>
         </div>
     </div>
-    <div class="field-wrapper column">
-        <h4>Armor</h4>
-        <div class="input-wrapper">
-            <textarea v-model="data.armor" @change="service.updateStore()"></textarea>
-        </div>
-    </div>
-    <div class="field-wrapper column">
-        <h4>Tools</h4>
-        <div class="input-wrapper">
-            <textarea v-model="data.tools" @change="service.updateStore()"></textarea>
-        </div>
-    </div>
-    <div class="field-wrapper column">
-        <h4>Languages</h4>
-        <div class="input-wrapper">
-            <textarea v-model="data.languages" @change="service.updateStore()"></textarea>
-        </div>
-    </div> -->
 </div>

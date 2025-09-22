@@ -1,4 +1,23 @@
+@import './utilities.scss';
+@import './typography.scss';
 
+/* Structure */
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+/* Design */
 html, body {
     background-color: #efefef;
 }
@@ -42,22 +61,8 @@ main {
     border-bottom: none;
 }
 
-.border-bottom {
-    border-bottom: solid 1px #eee;
-}
-
-.section-title h2 {
-    border-color: #ccc;
-}
-
-.padding-bottom {
-    padding-bottom: 5px;
-}
-
-.padding-top {
-    padding-top: 5px;
-}
-
-.add-gap {
-    gap: 5px;
+textarea {
+    flex: 1 1 100%;
+    width: 100%;
+    resize: none;
 }

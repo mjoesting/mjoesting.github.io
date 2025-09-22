@@ -3,21 +3,32 @@
     <h2>Abilities</h2>
 </div>
 <div class="section-content">
-    <div class="row" v-for="a in Store.sheet.SectionAbilities">
-        <div class="row center add-gap">
-            <h4>{{ a.ability }}</h4>
-            <div class="field-wrapper column">
-                <h5>Score</h5>
-                <div class="input-wrapper">
-                    <input type="text" id="abilities-{{ a.name }}" v-model="a.score" />
+    <div class="row center add-gap border-bottom add-margin-bottom">
+        <h5>Name</h5>
+        <h5>Score</h5>
+        <h5>Bonus</h5>
+        <h5>Custom Bonus</h5>
+    </div>
+    @for (a of abilitiesData; track a.ability) {
+        <div class="row">
+            <div class="row center add-gap add-margin-bottom">
+                <h4>{{ a.ability }}</h4>
+                <div class="field-wrapper">
+                    <div class="input-wrapper">
+                        <input type="text" id="abilities-{{ a.ability }}" value="{{ a.score }}" />
+                    </div>
                 </div>
-            </div>
-            <div class="field-wrapper column">
-                <h5>Bonus</h5>
-                <div class="input-wrapper">
-                    <input type="text" id="abilities-{{ a.name }}-mod" v-model="a.bonus" />
+                <div class="field-wrapper">
+                    <div class="input-wrapper">
+                        <input type="text" id="abilities-{{ a.ability }}-mod" value="{{ a.bonus }}" />
+                    </div>
+                </div>
+                <div class="field-wrapper">
+                    <div class="input-wrapper">
+                        <input type="text" id="abilities-{{ a.ability }}-custom" value="{{ a.customBonusModifiedBy }}" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
 </div>
