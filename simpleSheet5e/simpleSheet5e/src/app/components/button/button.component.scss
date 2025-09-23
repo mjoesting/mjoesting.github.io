@@ -1,0 +1,12 @@
+@import '../../styles/styles.scss';
+
+:host {
+    display: flex;
+    flex-basis: 100%;
+
+    button {
+        flex: 1;
+        display: block;
+        margin: 0;
+    }
+}

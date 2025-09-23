@@ -1,17 +1,18 @@
 <div class="section-title add-margin-bottom">
     <h2>Skills</h2>
 </div>
-<div class="section-content add-gap">
+<div class="section-content add-gap flex-space-between">
     <div class="row border-bottom add-margin-bottom">
-        <h5>Skill</h5>
-        <h5>Proficient</h5>
+        <h5 class="width-grow-2">Skill</h5>
+        <h5 class="width-grow-2">Proficient</h5>
         <h5>Ability</h5>
         <h5>Bonus</h5>
+        <h6 class="width-grow-2">Custom Bonus Modified By</h6>
     </div>
     @for (skill of data.skills; track skill.name) {
-        <div class="row center add-gap flex-end">
-            <h5>{{ skill.name }}</h5>
-            <div class="input-wrapper">
+        <div class="row add-gap flex-end center">
+            <h5 class="width-grow-2">{{ skill.name }}</h5>
+            <div class="input-wrapper width-grow-2">
                 <select id="skills-{{skill.name}}-prof">
                     <option value="" [selected]="!skill.proficiency"></option>
                     @for (prof of proficiencies; track prof) {
@@ -20,9 +21,13 @@
                 </select>
             </div>
             <h6>{{ skill.ability }}</h6>
-            <div class="input-wrapper">
-                <input type="text" id="skills-{{ skill.name }}-mod" [value]="skill.bonus" /> 
-                <span>{{ skill.customBonusModifiedBy }}</span>
+            <div class="field-wrapper add-margin-right">
+                <div class="input-wrapper">
+                    <input type="text" id="skills-{{ skill.name }}-mod" [value]="skill.bonus ? skill.bonus : 0" />
+                </div>
+            </div>
+            <div class="input-wrapper width-grow-2">
+                <input type="text" id="skills-{{ skill.name }}-custom" [value]="skill.customBonusModifiedBy ? skill.customBonusModifiedBy : ''" />
             </div>
         </div>
     }

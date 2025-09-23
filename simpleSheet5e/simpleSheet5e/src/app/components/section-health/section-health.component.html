@@ -6,12 +6,12 @@
         <div class="row add-margin-bottom add-gap">
             <div class="field-wrapper column">
                 <div class="input-wrapper">
-                    <button type="button" id="health-rest-long">Long Rest</button>
+                    <app-button id="health-rest-long" [label]="'Long Rest'" [onClick]="handleLongRest"></app-button>
                 </div>
             </div>
             <div class="field-wrapper column">
                 <div class="input-wrapper">
-                    <button type="button" id="health-rest-short">Short Rest</button>
+                    <app-button id="health-rest-short" [label]="'Short Rest'" [onClick]="handleShortRest"></app-button>
                 </div>
             </div>
         </div>

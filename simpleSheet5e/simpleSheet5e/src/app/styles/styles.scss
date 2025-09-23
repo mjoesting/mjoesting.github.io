@@ -29,6 +29,7 @@ main {
 }
 
 .section-wrapper {
+    padding: 10px;
     border: solid 1px #333;
     border-radius: 10px;
     background-color: #fff;
@@ -59,6 +60,14 @@ main {
 
 [role="tablist"] li.active {
     border-bottom: none;
+}
+
+[role="tabpanel"] {
+    display: none;
+}
+
+[role="tabpanel"].active {
+    display: flex;
 }
 
 textarea {

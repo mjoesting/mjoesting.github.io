@@ -8,6 +8,7 @@ export interface StoreData {
 export interface StateData {
     isUpdated: false,
     abilities: {[key: string]: number}
+    form: SheetForm
 }
 
 export interface SectionGeneral {

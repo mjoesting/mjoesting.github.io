@@ -23,7 +23,17 @@ export class Service {
         const newData: StoreData = {
             state: {
                 isUpdated: false,
-                abilities: {}
+                abilities: {},
+                form: {
+                    SectionGeneral: new FormGroup({}) as unknown as DynamicFormGroup<SectionGeneralFormFields>,
+                    SectionAbilities: new FormGroup({}) as unknown as DynamicFormGroup<SectionAbilitiesFormFields>,
+                    SectionDefenses: new FormGroup({}) as unknown as DynamicFormGroup<SectionDefensesFormFields>,
+                    SectionHealth: new FormGroup({}) as unknown as DynamicFormGroup<SectionHealthFormFields>,
+                    SectionMain: new FormGroup({}) as unknown as DynamicFormGroup<SectionMainFormFields>,
+                    SectionProficiencies: new FormGroup({}) as unknown as DynamicFormGroup<SectionProficienciesFormFields>,
+                    SectionSavingThrows: new FormGroup({}) as unknown as DynamicFormGroup<SectionSavingThrowsFormFields>,
+                    SectionSkills: new FormGroup({}) as unknown as DynamicFormGroup<SectionSkillsFormFields>
+                } as SheetForm
             },
             sheet: {
                 SectionGeneral: {
@@ -160,7 +170,8 @@ export class Service {
                         abilities[abilityKey] = formData.SectionAbilities![abilityKey]!.score !== null ? Number(formData.SectionAbilities![abilityKey]!.score) : 0;
                     });
                     return abilities;
-                }) as unknown as {[key: string]: number}
+                }) as unknown as {[key: string]: number},
+                form: formData as unknown as SheetForm
             },
             sheet: {
                 SectionGeneral: {

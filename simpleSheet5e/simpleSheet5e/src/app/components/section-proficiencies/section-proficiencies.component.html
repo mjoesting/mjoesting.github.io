@@ -2,19 +2,23 @@
     <h2>Proficiencies</h2>
 </div>
 <div class="section-content">
-    <div class="row border-bottom add-margin-bottom">
+    <div class="row border-bottom add-margin-bottom shrink">
         <h5>Weapons</h5>
         <h5>Armor</h5>
-        <h5>Tools</h5>
-        <h5>Languages</h5>
     </div>
-    <div class="proficiencies-wrapper row add-gap">
+    <div class="proficiencies-wrapper row grow add-gap add-margin-bottom">
         <div class="input-wrapper">
             <textarea id="proficiencies-weapons" [value]="data.weapons"></textarea>
         </div>
         <div class="input-wrapper">
             <textarea id="proficiencies-armor" [value]="data.armor"></textarea>
         </div>
+    </div>
+    <div class="row border-bottom add-margin-bottom shrink">
+        <h5>Tools</h5>
+        <h5>Languages</h5>
+    </div>
+    <div class="proficiencies-wrapper row grow add-gap add-margin-bottom">
         <div class="input-wrapper">
             <textarea id="proficiencies-tools" [value]="data.tools"></textarea>
         </div>
