@@ -1,14 +1,14 @@
 <nav role="tablist">
     <ul>
-        <li class="active">Actions</li>
-        <li>Spells</li>
-        <li>Inventory</li>
-        <li>Features</li>
-        <li>Description</li>
-        <li>Notes</li>
+        <li id="tab-actions" (click)="handleTabClick($event)" class="active">Actions</li>
+        <li id="tab-spells" (click)="handleTabClick($event)">Spells</li>
+        <li id="tab-inventory" (click)="handleTabClick($event)">Inventory</li>
+        <li id="tab-features" (click)="handleTabClick($event)">Features</li>
+        <li id="tab-description" (click)="handleTabClick($event)">Description</li>
+        <li id="tab-notes" (click)="handleTabClick($event)">Notes</li>
     </ul>
 </nav>
-<section role="tabpanel" class="grow active flex-parent">
+<section id="tab-actions" role="tabpanel" class="grow active flex-parent">
     <div class="section-content add-padding flex-parent">
         <div class="column grow add-margin-bottom">
             <div class="row add-gap shrink flex-start center">
@@ -84,33 +84,37 @@
         </div>
     </div>
 </section>
-<section role="tabpanel" class="grow add-padding flex-parent">
+<section id="tab-spells" role="tabpanel" class="grow add-padding flex-parent">
     <div class="section-title">
         <h4>Spells</h4>
     </div>
     <div class="section-content"></div>
 </section>
-<section role="tabpanel" class="grow add-padding flex-parent">
+<section id="tab-inventory" role="tabpanel" class="grow add-padding flex-parent">
     <div class="section-title">
         <h4>Inventory</h4>
     </div>
     <div class="section-content"></div>
 </section>
-<section role="tabpanel" class="grow add-padding flex-parent">
+<section id="tab-features" role="tabpanel" class="grow add-padding flex-parent">
     <div class="section-title">
         <h4>Features</h4>
     </div>
     <div class="section-content"></div>
 </section>
-<section role="tabpanel" class="grow add-padding flex-parent">
+<section id="tab-description" role="tabpanel" class="grow add-padding flex-parent">
     <div class="section-title">
         <h4>Description</h4>
     </div>
     <div class="section-content"></div>
 </section>
-<section role="tabpanel" class="grow add-padding flex-parent">
+<section id="tab-notes" role="tabpanel" class="grow add-padding flex-parent">
     <div class="section-title">
         <h4>Notes</h4>
     </div>
-    <div class="section-content"></div>
+    <div class="section-content">
+        <div class="input-wrapper grow">
+            <textarea></textarea>
+        </div>
+    </div>
 </section>
