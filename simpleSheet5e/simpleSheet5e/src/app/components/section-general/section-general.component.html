@@ -30,42 +30,45 @@
             </div>
         </div>
     </div>
-        <div class="field-wrapper column" id="general-class">
-            <div class="row center flex-start add-gap add-margin-bottom">
-                <h3 class="shrink">Classes</h3>
-                <div class="input-wrapper shrink">
-                    <app-button id="add-class" [label]="'+'" [onClick]="handleAddClass"></app-button>
-                </div>
+    <div class="field-wrapper column grow" id="general-class">
+        <div class="column flex-start add-gap add-margin-bottom">
+            <h3 class="shrink">Classes</h3>
+            <div class="input-wrapper">
+                <textarea></textarea>
             </div>
-            <div class="row">
-                <h5>Name</h5>
-                <h5>Level</h5>
-            </div>
-            <div class="add-border add-padding">
-                @for (class of data.classes; track class.name) {
-                    <div class="row">
-                        <div class="row add-margin-bottom">
-                            <div class="input-wrapper width-150 add-margin-right">
-                                <input type="text" [value]="class.name" />
-                            </div>
-                            <div class="input-wrapper shrink">
-                                <input type="text" [value]="class.level" />
-                            </div>
-                        </div>
-                    </div>
-                }
-                @if (!data.classes || data.classes.length == 0) {
-                    <div class="row">
-                        <div class="row add-margin-bottom grow">
-                            <div class="input-wrapper width-150 add-margin-right">
-                                <input type="text" />
-                            </div>
-                            <div class="input-wrapper">
-                                <input type="text" />
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
+            <!-- <div class="input-wrapper shrink">
+                <app-button id="add-class" [label]="'+'" [onClick]="handleAddClass"></app-button>
+            </div> -->
         </div>
+        <!-- <div class="row">
+            <h5>Name</h5>
+            <h5>Level</h5>
+        </div>
+        <div class="add-border add-padding">
+            @for (class of data.classes; track class.name) {
+                <div class="row">
+                    <div class="row add-margin-bottom">
+                        <div class="input-wrapper width-150 add-margin-right">
+                            <input type="text" [value]="class.name" />
+                        </div>
+                        <div class="input-wrapper shrink">
+                            <input type="text" [value]="class.level" />
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (!data.classes || data.classes.length == 0) {
+                <div class="row">
+                    <div class="row add-margin-bottom grow">
+                        <div class="input-wrapper width-150 add-margin-right">
+                            <input type="text" />
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="text" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div> -->
+    </div>
 </div>

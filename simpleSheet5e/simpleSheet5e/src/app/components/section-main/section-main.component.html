@@ -1,4 +1,4 @@
-<nav role="tablist">
+<nav role="tablist" class="add-padding-bottom">
     <ul>
         <li id="tab-actions" (click)="handleTabClick($event)" class="active">Actions</li>
         <li id="tab-spells" (click)="handleTabClick($event)">Spells</li>
@@ -11,9 +11,9 @@
 <section id="tab-actions" role="tabpanel" class="grow active flex-parent">
     <div class="section-content add-padding flex-parent">
         <div class="column grow add-margin-bottom">
-            <div class="row add-gap shrink flex-start center">
+            <div class="column add-gap flex-start">
                 <h4 class="shrink">Actions</h4>
-                <div class="input-wrapper shrink">
+                <!-- <div class="input-wrapper shrink">
                     <app-button id="add-action" [label]="'+'" [onClick]="handleAddAction"></app-button>
                 </div>
             </div>
@@ -26,16 +26,23 @@
                         <input type="text" [value]="action.description" />
                     </div>
                 </div>
-            }
+            } -->
+                <div class="input-wrapper">
+                    <textarea></textarea>
+                </div>
+            </div>
         </div>
         <div class="column grow add-margin-bottom">
-            <div class="row add-gap shrink flex-start center">
+            <div class="column add-gap flex-start">
                 <h4 class="shrink">Bonus Actions</h4>
-                <div class="input-wrapper shrink">
+                <div class="input-wrapper">
+                    <textarea></textarea>
+                </div>
+                <!-- <div class="input-wrapper shrink">
                     <app-button id="add-bonus-action" [label]="'+'" [onClick]="handleAddBonusAction"></app-button>
-                </div>
+                </div> -->
             </div>
-            @for (action of data.actions; track action.name) {
+            <!-- @for (action of data.actions; track action.name) {
                 <div class="row add-margin-bottom">
                     <div class="add-margin-right">
                         <input type="text" [value]="action.name" />
@@ -44,16 +51,19 @@
                         <input type="text" [value]="action.description" />
                     </div>
                 </div>
-            }
+            } -->
         </div>
         <div class="column grow add-margin-bottom">
-            <div class="row add-gap shrink flex-start center">
+            <div class="column add-gap flex-start">
                 <h4 class="shrink">Rections</h4>
-                <div class="input-wrapper shrink">
-                    <app-button id="add-reaction" [label]="'+'" [onClick]="handleAddReaction"></app-button>
+                <div class="input-wrapper">
+                    <textarea></textarea>
                 </div>
+                <!-- <div class="input-wrapper shrink">
+                    <app-button id="add-reaction" [label]="'+'" [onClick]="handleAddReaction"></app-button>
+                </div> -->
             </div>
-            @for (action of data.actions; track action.name) {
+            <!-- @for (action of data.actions; track action.name) {
                 <div class="row add-margin-bottom">
                     <div class="add-margin-right">
                         <input type="text" [value]="action.name" />
@@ -62,16 +72,19 @@
                         <input type="text" [value]="action.description" />
                     </div>
                 </div>
-            }
+            } -->
         </div>
         <div class="column grow add-margin-bottom">
-            <div class="row add-gap shrink flex-start center">
+            <div class="column add-gap flex-start">
                 <h4 class="shrink">Special Actions</h4>
-                <div class="input-wrapper shrink">
-                    <app-button id="add-action" [label]="'+'" [onClick]="handleAddSpecialAction"></app-button>
+                <div class="input-wrapper">
+                    <textarea></textarea>
                 </div>
+                <!-- <div class="input-wrapper shrink">
+                    <app-button id="add-action" [label]="'+'" [onClick]="handleAddSpecialAction"></app-button>
+                </div> -->
             </div>
-            @for (action of data.actions; track action.name) {
+            <!-- @for (action of data.actions; track action.name) {
                 <div class="row add-margin-bottom">
                     <div class="add-margin-right">
                         <input type="text" [value]="action.name" />
@@ -80,7 +93,7 @@
                         <input type="text" [value]="action.description" />
                     </div>
                 </div>
-            }
+            } -->
         </div>
     </div>
 </section>
