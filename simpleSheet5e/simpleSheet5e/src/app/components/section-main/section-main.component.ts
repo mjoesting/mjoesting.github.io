@@ -1,6 +1,7 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { DynamicFormGroup, SectionMain, SectionMainFormFields } from '../../models';
+import { Component, Input } from '@angular/core';
+import { SectionMain, SectionMainFormFields } from '../../models';
 import { ButtonComponent } from '../button/button.component';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'section-main',
@@ -10,11 +11,12 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class SectionMainComponent {
   @Input() data!: SectionMain;
-  @Input() form!: DynamicFormGroup<SectionMainFormFields>;
+  @Input() form!: FormGroup<SectionMainFormFields>;
 
   handleTabClick(event: Event) {
     const target: HTMLElement | null = event.target as HTMLElement;
-    const tabId: string = target.id ? (target as HTMLElement).id : '';
+    const tabId = target.attributes.getNamedItem('data-target')?.value;
+    const targetTab: HTMLElement | null = tabId ? document.getElementById(tabId) : null;
 
     document.querySelectorAll('[role="tablist"] li').forEach((tab) => {
       tab.classList.remove('active');
@@ -24,7 +26,7 @@ export class SectionMainComponent {
     });
 
     target.classList.add('active');
-    document.getElementById(tabId)?.classList.add('active');
+    targetTab?.classList.add('active');
   }
 
   handleAddAction() {}

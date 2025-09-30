@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DynamicFormGroup, SectionDefenses, SectionDefensesFormFields } from '../../models';
+import { SectionDefenses, SectionDefensesFormFields } from '../../models';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'section-defenses',
@@ -9,5 +10,5 @@ import { DynamicFormGroup, SectionDefenses, SectionDefensesFormFields } from '..
 })
 export class SectionDefensesComponent {
   @Input() data!: SectionDefenses;
-  @Input() form!: DynamicFormGroup<SectionDefensesFormFields>;
+  @Input() form!: FormGroup<SectionDefensesFormFields>;
 }

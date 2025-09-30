@@ -1,32 +1,32 @@
 <div class="section-title">
     <h2>General Info</h2>
 </div>
-<div class="section-content">
+<div formGroupName="SectionGeneral" class="section-content">
     <div class="row add-gap add-margin-bottom">
         <div class="field-wrapper column">
             <h4>Name</h4>
             <div class="input-wrapper">
-                <input type="text" id="general-name" [value]="data.name" />
+                <input type="text" id="general-name" formControlName="form.name" [value]="data.name" />
             </div>
         </div>
         <div class="field-wrapper column">
             <h4>Player</h4>
             <div class="input-wrapper">
-                <input type="text" id="general-player" [value]="data.player" />
+                <input type="text" id="general-player" formControlName="form.player" [value]="data.player" />
             </div>
         </div>
     </div>
     <div class="row add-gap add-margin-bottom">
         <div class="field-wrapper column">
-            <h4>Race</h4>
+            <h4>Species</h4>
             <div class="input-wrapper">
-                <input type="text" id="general-species" [value]="data.species" />
+                <input type="text" id="general-species" formControlName="form.species" [value]="data.species" />
             </div>
         </div>
         <div class="field-wrapper column">
             <h4>Background</h4>
             <div class="input-wrapper">
-                <input type="text" id="general-background" [value]="data.background" />
+                <input type="text" id="general-background" formControlName="form.background" [value]="data.background" />
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
         <div class="column flex-start add-gap add-margin-bottom">
             <h3 class="shrink">Classes</h3>
             <div class="input-wrapper">
-                <textarea></textarea>
+                <textarea id="general-classes" formControlName="form.classes">{{ data.classes }}</textarea>
             </div>
             <!-- <div class="input-wrapper shrink">
                 <app-button id="add-class" [label]="'+'" [onClick]="handleAddClass"></app-button>

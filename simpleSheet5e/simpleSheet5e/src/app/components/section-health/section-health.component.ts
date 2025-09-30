@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DynamicFormGroup, SectionHealth, SectionHealthFormFields } from '../../models';
+import { FormGroup } from '@angular/forms';
+import { SectionHealth, SectionHealthFormFields } from '../../models';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -10,7 +11,7 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class SectionHealthComponent {
   @Input() data!: SectionHealth;
-  @Input() form!: DynamicFormGroup<SectionHealthFormFields>;
+  @Input() form!: FormGroup<SectionHealthFormFields>;
 
   handleLongRest() {
     // logic for long rest

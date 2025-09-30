@@ -1,133 +1,88 @@
 <nav role="tablist" class="add-padding-bottom">
     <ul>
-        <li id="tab-actions" (click)="handleTabClick($event)" class="active">Actions</li>
-        <li id="tab-spells" (click)="handleTabClick($event)">Spells</li>
-        <li id="tab-inventory" (click)="handleTabClick($event)">Inventory</li>
-        <li id="tab-features" (click)="handleTabClick($event)">Features</li>
-        <li id="tab-description" (click)="handleTabClick($event)">Description</li>
-        <li id="tab-notes" (click)="handleTabClick($event)">Notes</li>
+        <li data-target="tab-actions" (click)="handleTabClick($event)" class="active">Actions</li>
+        <li data-target="tab-spells" (click)="handleTabClick($event)">Spells</li>
+        <li data-target="tab-inventory" (click)="handleTabClick($event)">Inventory</li>
+        <li data-target="tab-features" (click)="handleTabClick($event)">Features</li>
+        <li data-target="tab-description" (click)="handleTabClick($event)">Description</li>
+        <li data-target="tab-notes" (click)="handleTabClick($event)">Notes</li>
     </ul>
 </nav>
-<section id="tab-actions" role="tabpanel" class="grow active flex-parent">
-    <div class="section-content add-padding flex-parent">
-        <div class="column grow add-margin-bottom">
-            <div class="column add-gap flex-start">
-                <h4 class="shrink">Actions</h4>
-                <!-- <div class="input-wrapper shrink">
-                    <app-button id="add-action" [label]="'+'" [onClick]="handleAddAction"></app-button>
+<div formGroupName="SectionMain">
+    <section id="tab-actions" role="tabpanel" class="grow active flex-parent">
+        <div class="section-content add-padding flex-parent">
+            <div class="column grow add-margin-bottom">
+                <div class="column add-gap flex-start">
+                    <h4 class="shrink">Actions</h4>
+                    <!-- <div class="input-wrapper shrink">
+                        <app-button id="add-action" [label]="'+'" [onClick]="handleAddAction"></app-button>
+                    </div>
+                </div>
+                @for (action of data.actions; track action.name) {
+                    <div class="row add-margin-bottom">
+                        <div class="add-margin-right">
+                            <input type="text" [value]="action.name" />
+                        </div>
+                        <div class="grow">
+                            <input type="text" [value]="action.description" />
+                        </div>
+                    </div>
+                } -->
+                    <div class="input-wrapper">
+                        <textarea id="main-actions" formControlName="form.actions"></textarea>
+                    </div>
                 </div>
             </div>
-            @for (action of data.actions; track action.name) {
-                <div class="row add-margin-bottom">
-                    <div class="add-margin-right">
-                        <input type="text" [value]="action.name" />
-                    </div>
-                    <div class="grow">
-                        <input type="text" [value]="action.description" />
-                    </div>
-                </div>
-            } -->
+        </div>
+    </section>
+    <section id="tab-spells" role="tabpanel" class="grow flex-parent">
+        <div class="section-content add-padding flex-parent">
+            <div class="column grow add-margin-bottom">
+                <h4 class="shrink add-margin-bottom">Spells</h4>
                 <div class="input-wrapper">
-                    <textarea></textarea>
+                    <textarea id="general-spells" formControlName="form.spells"></textarea>
                 </div>
             </div>
         </div>
-        <div class="column grow add-margin-bottom">
-            <div class="column add-gap flex-start">
-                <h4 class="shrink">Bonus Actions</h4>
+    </section>
+    <section id="tab-inventory" role="tabpanel" class="grow flex-parent">
+        <div class="section-content add-padding flex-parent">
+            <div class="column grow add-margin-bottom">
+                <h4 class="shrink add-margin-bottom">Inventory</h4>
                 <div class="input-wrapper">
-                    <textarea></textarea>
+                    <textarea id="general-inventory" formControlName="form.inventory"></textarea>
                 </div>
-                <!-- <div class="input-wrapper shrink">
-                    <app-button id="add-bonus-action" [label]="'+'" [onClick]="handleAddBonusAction"></app-button>
-                </div> -->
             </div>
-            <!-- @for (action of data.actions; track action.name) {
-                <div class="row add-margin-bottom">
-                    <div class="add-margin-right">
-                        <input type="text" [value]="action.name" />
-                    </div>
-                    <div class="grow">
-                        <input type="text" [value]="action.description" />
-                    </div>
-                </div>
-            } -->
         </div>
-        <div class="column grow add-margin-bottom">
-            <div class="column add-gap flex-start">
-                <h4 class="shrink">Rections</h4>
+    </section>
+    <section id="tab-features" role="tabpanel" class="grow flex-parent">
+        <div class="section-content add-padding flex-parent">
+            <div class="column grow add-margin-bottom">
+                <h4 class="shrink add-margin-bottom">Features</h4>
                 <div class="input-wrapper">
-                    <textarea></textarea>
+                    <textarea id="general-features" formControlName="form.features"></textarea>
                 </div>
-                <!-- <div class="input-wrapper shrink">
-                    <app-button id="add-reaction" [label]="'+'" [onClick]="handleAddReaction"></app-button>
-                </div> -->
             </div>
-            <!-- @for (action of data.actions; track action.name) {
-                <div class="row add-margin-bottom">
-                    <div class="add-margin-right">
-                        <input type="text" [value]="action.name" />
-                    </div>
-                    <div class="grow">
-                        <input type="text" [value]="action.description" />
-                    </div>
-                </div>
-            } -->
         </div>
-        <div class="column grow add-margin-bottom">
-            <div class="column add-gap flex-start">
-                <h4 class="shrink">Special Actions</h4>
+    </section>
+    <section id="tab-description" role="tabpanel" class="grow flex-parent">
+        <div class="section-content add-padding flex-parent">
+            <div class="column grow add-margin-bottom">
+                <h4 class="shrink add-margin-bottom">Description</h4>
                 <div class="input-wrapper">
-                    <textarea></textarea>
+                    <textarea id="general-description" formControlName="form.description"></textarea>
                 </div>
-                <!-- <div class="input-wrapper shrink">
-                    <app-button id="add-action" [label]="'+'" [onClick]="handleAddSpecialAction"></app-button>
-                </div> -->
             </div>
-            <!-- @for (action of data.actions; track action.name) {
-                <div class="row add-margin-bottom">
-                    <div class="add-margin-right">
-                        <input type="text" [value]="action.name" />
-                    </div>
-                    <div class="grow">
-                        <input type="text" [value]="action.description" />
-                    </div>
+        </div>
+    </section>
+    <section id="tab-notes" role="tabpanel" class="grow flex-parent">
+        <div class="section-content add-padding flex-parent">
+            <div class="column grow add-margin-bottom">
+                <h4 class="shrink add-margin-bottom">Notes</h4>
+                <div class="input-wrapper">
+                    <textarea id="general-notes" formControlName="form.notes"></textarea>
                 </div>
-            } -->
+            </div>
         </div>
-    </div>
-</section>
-<section id="tab-spells" role="tabpanel" class="grow add-padding flex-parent">
-    <div class="section-title">
-        <h4>Spells</h4>
-    </div>
-    <div class="section-content"></div>
-</section>
-<section id="tab-inventory" role="tabpanel" class="grow add-padding flex-parent">
-    <div class="section-title">
-        <h4>Inventory</h4>
-    </div>
-    <div class="section-content"></div>
-</section>
-<section id="tab-features" role="tabpanel" class="grow add-padding flex-parent">
-    <div class="section-title">
-        <h4>Features</h4>
-    </div>
-    <div class="section-content"></div>
-</section>
-<section id="tab-description" role="tabpanel" class="grow add-padding flex-parent">
-    <div class="section-title">
-        <h4>Description</h4>
-    </div>
-    <div class="section-content"></div>
-</section>
-<section id="tab-notes" role="tabpanel" class="grow add-padding flex-parent">
-    <div class="section-title">
-        <h4>Notes</h4>
-    </div>
-    <div class="section-content">
-        <div class="input-wrapper grow">
-            <textarea></textarea>
-        </div>
-    </div>
-</section>
+    </section>
+</div>

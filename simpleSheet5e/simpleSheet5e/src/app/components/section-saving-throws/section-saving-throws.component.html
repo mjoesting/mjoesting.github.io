@@ -1,20 +1,20 @@
 <div class="section-title">
     <h2>Saving Throws</h2>
 </div>
-<div class="section-content flex-space-between">
+<div formGroupName="SectionSavingThrows" class="section-content flex-space-between">
     <div class="row border-bottom add-margin-bottom">
         <h5>Ability</h5>
         <h5>Proficient</h5>
         <h5>Bonus</h5>
     </div>
     @for (save of savingThrows; track save.ability) {
-        <div class="row">
+        <div formGroupName="save" class="row">
             <div class="row center add-gap add-margin-bottom">
                 <h4>{{ save.ability }}</h4>
                 <div class="field-wrapper column">
                     <div class="input-wrapper">
-                        <select id="skills-acrobatics-prof" [value]="save.proficiency">
-                            <option value="" [selected]="!save.proficiency"></option>
+                        <select id="savingThrows-{{save.ability}}-prof" formControlName="form.savingThrows[save.ability]">
+                            <option value="" [selected]="save.proficiency"></option>
                                 @for (prof of proficiencies; track prof) {
                                     <option [value]="prof" [selected]="prof == save.proficiency">{{ prof }}</option>
                                 }

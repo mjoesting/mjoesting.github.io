@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DynamicFormGroup, SectionProficiencies, SectionProficienciesFormFields } from '../../models';
+import { SectionProficiencies, SectionProficienciesFormFields } from '../../models';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'section-proficiencies',
@@ -9,5 +10,5 @@ import { DynamicFormGroup, SectionProficiencies, SectionProficienciesFormFields 
 })
 export class SectionProficienciesComponent {
   @Input() data!: SectionProficiencies;
-  @Input() form!: DynamicFormGroup<SectionProficienciesFormFields>;
+  @Input() form!: FormGroup<SectionProficienciesFormFields>;
 }

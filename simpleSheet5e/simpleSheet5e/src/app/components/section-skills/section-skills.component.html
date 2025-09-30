@@ -9,25 +9,27 @@
         <h5>Bonus</h5>
         <h6 class="width-grow-2">Custom Bonus Modified By</h6>
     </div>
-    @for (skill of data.skills; track skill.name) {
-        <div class="row add-gap flex-end center">
-            <h5 class="width-grow-2">{{ skill.name }}</h5>
+    @for (skill of form.controls; track skill.controls.name.value) {
+        @let skillName = skill.controls.name.value;
+        
+        <div id="{{skillName}}-group" [formGroup]="skill" class="row add-gap flex-end center">
+            <h5 id="skills-{{skillName}}-name" class="width-grow-2">{{ skillName }}</h5>
             <div class="input-wrapper width-grow-2">
-                <select id="skills-{{skill.name}}-prof">
-                    <option value="" [selected]="!skill.proficiency"></option>
+                <select id="skills-{{skillName}}-prof" formControlName="proficiency">
+                    <option value="" [selected]="!skill.controls.proficiency.value"></option>
                     @for (prof of proficiencies; track prof) {
-                        <option value="{{ prof }}" [selected]="prof == skill.proficiency">{{ prof }}</option>
+                        <option value="{{ prof }}" [selected]="prof == skill.controls.proficiency.value">{{ prof }}</option>
                     }
                 </select>
             </div>
-            <h6>{{ skill.ability }}</h6>
+            <h6>{{ skill.controls.ability.value }}</h6>
             <div class="field-wrapper add-margin-right">
                 <div class="input-wrapper">
-                    <input type="text" id="skills-{{ skill.name }}-mod" [value]="skill.bonus ? skill.bonus : 0" />
+                    <input id="skills-{{skillName}}-mod" type="text" id="skills-{{ skillName }}-mod" formControlName="bonus" [value]="skill.controls.bonus.value ? skill.controls.bonus.value : 0" />
                 </div>
             </div>
             <div class="input-wrapper width-grow-2">
-                <input type="text" id="skills-{{ skill.name }}-custom" [value]="skill.customBonusModifiedBy ? skill.customBonusModifiedBy : ''" />
+                <input id="skills-{{skillName}}-custom" type="text" id="skills-{{ skillName }}-custom" formControlName="customBonusModifiedBy" [value]="skill.controls.customBonusModifiedBy.value ? skill.controls.customBonusModifiedBy.value : ''" />
             </div>
         </div>
     }

@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { Ability, DynamicFormGroup, SectionAbilities, SectionAbilitiesFormFields } from '../../models';
+import { Ability, SectionAbilities, SectionAbilitiesFormFields } from '../../models';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'section-abilities',
@@ -9,7 +10,7 @@ import { Ability, DynamicFormGroup, SectionAbilities, SectionAbilitiesFormFields
 })
 export class SectionAbilitiesComponent implements OnInit {
   @Input() data!: SectionAbilities;
-  @Input() form!: DynamicFormGroup<SectionAbilitiesFormFields>;
+  @Input() form!: FormGroup<SectionAbilitiesFormFields>;
   abilitiesData: Ability[] = [];
 
   constructor(private changeDetectorRef: ChangeDetectorRef) {}

@@ -1,7 +1,7 @@
 <div class="section-title add-margin-bottom">
     <h2>Health</h2>
 </div>
-<div class="section-content">
+<div formGroupName="SectionHealth" class="section-content">
     <div class="column">
         <div class="row add-margin-bottom add-gap">
             <div class="field-wrapper column">
@@ -22,19 +22,19 @@
             <div class="field-wrapper column">
                 <h5>Max</h5>
                 <div class="input-wrapper">
-                    <input type="text" id="health-hp-max" [value]="data.hpMax" />
+                    <input type="text" id="health-hp-max" formControlName="form.hpMax" [value]="data.hpMax" />
                 </div>
             </div>
             <div class="field-wrapper column">
                 <h5>Current</h5>
                 <div class="input-wrapper">
-                    <input type="text" id="health-hp-current" [value]="data.hpCurrent" />
+                    <input type="text" id="health-hp-current" formControlName="form.hpCurrent" [value]="data.hpCurrent" />
                 </div>
             </div>
             <div class="field-wrapper column">
                 <h5>Temp</h5>
                 <div class="input-wrapper">
-                    <input type="text" id="health-hp-temp" [value]="data.hpTemp" />
+                    <input type="text" id="health-hp-temp" formControlName="form.hpTemp" [value]="data.hpTemp" />
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
         <div class="field-wrapper column">
             <h3>Conditions</h3>
             <div class="input-wrapper">
-                <textarea id="health-conditions" [value]="data.conditions"></textarea>
+                <textarea id="health-conditions" formControlName="form.conditions" [value]="data.conditions"></textarea>
             </div>
         </div>
     </div>

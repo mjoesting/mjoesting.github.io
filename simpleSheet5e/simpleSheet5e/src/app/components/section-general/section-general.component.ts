@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { DynamicFormGroup, SectionGeneral, SectionGeneralFormFields } from '../../models';
+import { FormGroup } from '@angular/forms';
+import { SectionGeneral, SectionGeneralFormFields } from '../../models';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
@@ -10,7 +11,7 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class SectionGeneralComponent {
   @Input() data!: SectionGeneral;
-  @Input() form!: DynamicFormGroup<SectionGeneralFormFields>;
+  @Input() form!: FormGroup<SectionGeneralFormFields>;
 
   handleAddClass() {
     // logic to add a new class
