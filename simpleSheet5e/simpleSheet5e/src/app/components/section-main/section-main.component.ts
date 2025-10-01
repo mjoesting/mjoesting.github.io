@@ -1,17 +1,17 @@
 import { Component, Input } from '@angular/core';
 import { SectionMain, SectionMainFormFields } from '../../models';
 import { ButtonComponent } from '../button/button.component';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'section-main',
-  imports: [ButtonComponent],
+  imports: [ButtonComponent, ReactiveFormsModule],
   templateUrl: './section-main.component.html',
   styleUrl: './section-main.component.scss'
 })
 export class SectionMainComponent {
   @Input() data!: SectionMain;
-  @Input() form!: FormGroup<SectionMainFormFields>;
+  @Input() mainForm!: FormGroup<SectionMainFormFields>;
 
   handleTabClick(event: Event) {
     const target: HTMLElement | null = event.target as HTMLElement;

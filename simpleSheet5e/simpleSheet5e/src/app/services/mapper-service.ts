@@ -1,5 +1,5 @@
 import { FormArray, FormControl, FormGroup } from "@angular/forms";
-import { Ability, AbilityFormGroup, SavingThrow, SavingThrowFormGroup, SectionAbilities, SectionAbilitiesFormFields, SectionDefenses, SectionDefensesFormFields, SectionGeneral, SectionGeneralFormFields, SectionHealth, SectionHealthFormFields, SectionMain, SectionMainFormFields, SectionProficiencies, SectionProficienciesFormFields, SectionSavingThrows, SectionSavingThrowsFormFields, SectionSkills, SheetData, SheetFormFields, Skill, SkillFormGroup } from "../models";
+import { Ability, AbilityFormGroup, SavingThrow, SavingThrowFormGroup, SectionAbilities, SectionDefenses, SectionDefensesFormFields, SectionGeneral, SectionGeneralFormFields, SectionHealth, SectionHealthFormFields, SectionMain, SectionMainFormFields, SectionProficiencies, SectionProficienciesFormFields, SectionSavingThrows, SectionSavingThrowsFormFields, SectionSkills, SheetData, SheetFormFields, Skill, SkillFormGroup } from "../models";
 import { Injectable } from "@angular/core";
 import * as Constants from "../constants";
 
@@ -9,12 +9,12 @@ export class MapperService {
     mapSheetToForm(sheetData: SheetData): FormGroup<SheetFormFields> {
         return new FormGroup({
             SectionGeneral: this.mapSheetSectionGeneralToForm(sheetData.SectionGeneral) as FormGroup<SectionGeneralFormFields>,
-            SectionAbilities: this.mapSheetSectionAbilitiesToForm(sheetData.SectionAbilities) as FormGroup<SectionAbilitiesFormFields>,
-            SectionSavingThrows: this.mapSheetSectionSavingThrowsToForm(sheetData.SectionSavingThrows) as FormGroup<SectionSavingThrowsFormFields>,
+            SectionAbilities: this.mapSheetSectionAbilitiesToForm(sheetData.SectionAbilities) as FormArray<FormGroup<AbilityFormGroup>>,
+            SectionSavingThrows: this.mapSheetSectionSavingThrowsToForm(sheetData.SectionSavingThrows) as FormArray<FormGroup<SavingThrowFormGroup>>,
             SectionDefenses: this.mapSheetSectionDefensesToForm(sheetData.SectionDefenses) as FormGroup<SectionDefensesFormFields>,
             SectionHealth: this.mapSheetSectionHealthToForm(sheetData.SectionHealth) as FormGroup<SectionHealthFormFields>,
             SectionProficiencies: this.mapSheetSectionProficienciesToForm(sheetData.SectionProficiencies) as FormGroup<SectionProficienciesFormFields>,
-            SectionSkills: this.mapSheetSectionSkillsToForm(sheetData.SectionSkills) as FormArray,
+            SectionSkills: this.mapSheetSectionSkillsToForm(sheetData.SectionSkills) as FormArray<FormGroup<SkillFormGroup>>,
             SectionMain: this.mapSheetSectionMainToForm(sheetData.SectionMain) as FormGroup<SectionMainFormFields>
         }) as unknown as FormGroup<SheetFormFields>;
     }
@@ -39,7 +39,7 @@ export class MapperService {
         return generalForm.value as unknown as SectionGeneral;
     }
 
-    mapSheetSectionAbilitiesToForm(abilitiesData: SectionAbilities): FormGroup<SectionAbilitiesFormFields> {
+    mapSheetSectionAbilitiesToForm(abilitiesData: SectionAbilities): FormArray<FormGroup<AbilityFormGroup>> {
         const defaultAbility: Ability = {
             ability: "",
             score: 0,
@@ -47,26 +47,26 @@ export class MapperService {
             customBonusModifiedBy: ""
         };
 
-        return new FormGroup<SectionAbilitiesFormFields>({
-            STR: this.mapAbilityDataToFormGroup(abilitiesData["STR"] ?? defaultAbility),
-            DEX: this.mapAbilityDataToFormGroup(abilitiesData["DEX"] ?? defaultAbility),
-            CON: this.mapAbilityDataToFormGroup(abilitiesData["CON"] ?? defaultAbility),
-            INT: this.mapAbilityDataToFormGroup(abilitiesData["INT"] ?? defaultAbility),
-            WIS: this.mapAbilityDataToFormGroup(abilitiesData["WIS"] ?? defaultAbility),
-            CHA: this.mapAbilityDataToFormGroup(abilitiesData["CHA"] ?? defaultAbility)
-        }) as unknown as FormGroup<SectionAbilitiesFormFields>;
+        return new FormArray<FormGroup<AbilityFormGroup>>([
+            this.mapAbilityDataToFormGroup(abilitiesData["STR"] ?? defaultAbility),
+            this.mapAbilityDataToFormGroup(abilitiesData["DEX"] ?? defaultAbility),
+            this.mapAbilityDataToFormGroup(abilitiesData["CON"] ?? defaultAbility),
+            this.mapAbilityDataToFormGroup(abilitiesData["INT"] ?? defaultAbility),
+            this.mapAbilityDataToFormGroup(abilitiesData["WIS"] ?? defaultAbility),
+            this.mapAbilityDataToFormGroup(abilitiesData["CHA"] ?? defaultAbility)
+       ]) as unknown as FormArray<FormGroup<AbilityFormGroup>>;
     }
 
     mapAbilityDataToFormGroup(abilityData: Ability): FormGroup<AbilityFormGroup> {
         return new FormGroup<AbilityFormGroup>({
-            ability: new FormControl(abilityData.ability),
+            name: new FormControl(abilityData.ability),
             score: new FormControl(abilityData.score),
             bonus: new FormControl(abilityData.bonus),
             customBonusModifiedBy: new FormControl(abilityData.customBonusModifiedBy)
         });
     }
 
-    mapFormSectionAbilitiesToSheet(abilitiesForm: FormGroup<SectionAbilitiesFormFields>): SectionAbilities {
+    mapFormSectionAbilitiesToSheet(abilitiesForm: FormArray<FormGroup<AbilityFormGroup>>): SectionAbilities {
         return abilitiesForm.value as unknown as SectionAbilities;
     }
 
@@ -129,15 +129,15 @@ export class MapperService {
         return proficienciesForm.value as unknown as SectionProficiencies;
     }
 
-    mapSheetSectionSavingThrowsToForm(savingThrowsData: SectionSavingThrows): FormGroup<SectionSavingThrowsFormFields> {
-        return new FormGroup<SectionSavingThrowsFormFields>({
-            STR:this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["STR"]]!),
-            DEX:this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["DEX"]]!),
-            CON:this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["CON"]]!),
-            INT:this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["INT"]]!),
-            WIS:this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["WIS"]]!),
-            CHA: this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["CHA"]]!)
-        }) as unknown as FormGroup<SectionSavingThrowsFormFields>
+    mapSheetSectionSavingThrowsToForm(savingThrowsData: SectionSavingThrows): FormArray<FormGroup<SavingThrowFormGroup>> {
+        return new FormArray<FormGroup<SavingThrowFormGroup>>([
+            this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["STR"]]!),
+            this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["DEX"]]!),
+            this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["CON"]]!),
+            this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["INT"]]!),
+            this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["WIS"]]!),
+            this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["CHA"]]!)
+        ]) as unknown as FormArray<FormGroup<SavingThrowFormGroup>>
     }
 
     mapSavingThrowDataToFormGroup(savingThrowData: SavingThrow): FormGroup<SavingThrowFormGroup> {

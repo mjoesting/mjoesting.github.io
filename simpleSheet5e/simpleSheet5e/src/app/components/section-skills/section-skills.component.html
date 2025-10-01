@@ -9,7 +9,7 @@
         <h5>Bonus</h5>
         <h6 class="width-grow-2">Custom Bonus Modified By</h6>
     </div>
-    @for (skill of form.controls; track skill.controls.name.value) {
+    @for (skill of skillsForm.controls; track skill.controls.name.value) {
         @let skillName = skill.controls.name.value;
         
         <div id="{{skillName}}-group" [formGroup]="skill" class="row add-gap flex-end center">

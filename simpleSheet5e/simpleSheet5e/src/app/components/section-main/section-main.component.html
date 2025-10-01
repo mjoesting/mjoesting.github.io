@@ -8,7 +8,7 @@
         <li data-target="tab-notes" (click)="handleTabClick($event)">Notes</li>
     </ul>
 </nav>
-<div formGroupName="SectionMain">
+<div [formGroup]="mainForm">
     <section id="tab-actions" role="tabpanel" class="grow active flex-parent">
         <div class="section-content add-padding flex-parent">
             <div class="column grow add-margin-bottom">
@@ -29,7 +29,7 @@
                     </div>
                 } -->
                     <div class="input-wrapper">
-                        <textarea id="main-actions" formControlName="form.actions"></textarea>
+                        <textarea id="main-actions" formControlName="actions">{{ mainForm.controls.actions!.value }}</textarea>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
             <div class="column grow add-margin-bottom">
                 <h4 class="shrink add-margin-bottom">Spells</h4>
                 <div class="input-wrapper">
-                    <textarea id="general-spells" formControlName="form.spells"></textarea>
+                    <textarea id="general-spells" formControlName="spells">{{ mainForm.controls.spells!.value}}</textarea>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
             <div class="column grow add-margin-bottom">
                 <h4 class="shrink add-margin-bottom">Inventory</h4>
                 <div class="input-wrapper">
-                    <textarea id="general-inventory" formControlName="form.inventory"></textarea>
+                    <textarea id="general-inventory" formControlName="inventory">{{ mainForm.controls.inventory!.value}}</textarea>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
             <div class="column grow add-margin-bottom">
                 <h4 class="shrink add-margin-bottom">Features</h4>
                 <div class="input-wrapper">
-                    <textarea id="general-features" formControlName="form.features"></textarea>
+                    <textarea id="general-features" formControlName="features">{{ mainForm.controls.features!.value }}</textarea>
                 </div>
             </div>
         </div>
@@ -70,7 +70,7 @@
             <div class="column grow add-margin-bottom">
                 <h4 class="shrink add-margin-bottom">Description</h4>
                 <div class="input-wrapper">
-                    <textarea id="general-description" formControlName="form.description"></textarea>
+                    <textarea id="general-description" formControlName="description">{{ mainForm.controls.description!.value }}</textarea>
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@
             <div class="column grow add-margin-bottom">
                 <h4 class="shrink add-margin-bottom">Notes</h4>
                 <div class="input-wrapper">
-                    <textarea id="general-notes" formControlName="form.notes"></textarea>
+                    <textarea id="general-notes" formControlName="notes">{{ mainForm.controls.notes!.value }}</textarea>
                 </div>
             </div>
         </div>

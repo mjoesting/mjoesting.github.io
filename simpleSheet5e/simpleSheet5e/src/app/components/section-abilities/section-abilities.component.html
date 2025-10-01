@@ -2,30 +2,31 @@
 <div class="section-title">
     <h2>Abilities</h2>
 </div>
-<div formGroupName="SectionAbilities" class="section-content flex-space-between">
+<div class="section-content flex-space-between">
     <div class="row center add-gap border-bottom add-margin-bottom">
         <h5>Name</h5>
         <h5>Score</h5>
         <h5>Bonus</h5>
         <h5>Custom Bonus</h5>
     </div>
-    @for (a of abilitiesData; track a.ability) {
-        <div formGroupName="a" class="row">
+    @for (ability of abilitiesForm.controls; track ability.controls.name.value) {
+        @let abilityName = ability.controls.name.value;
+        <div [formGroup]="ability" class="row">
             <div class="row center add-gap add-margin-bottom">
-                <h4>{{ a.ability }}</h4>
+                <h4>{{ abilityName }}</h4>
                 <div class="field-wrapper">
                     <div class="input-wrapper">
-                        <input type="text" id="abilities-{{ a.ability }}" formControlName="form[a.ability].score" [value]="a.score" />
+                        <input type="text" id="abilities-{{ abilityName }}" formControlName="score" [value]="ability.controls.score.value" />
                     </div>
                 </div>
                 <div class="field-wrapper">
                     <div class="input-wrapper">
-                        <input type="text" id="abilities-{{ a.ability }}-mod" formControlName="form[a.ability.bonus]" [value]="a.bonus" />
+                        <input type="text" id="abilities-{{ abilityName }}-mod" formControlName="bonus" [value]="ability.controls.bonus.value" />
                     </div>
                 </div>
                 <div class="field-wrapper">
                     <div class="input-wrapper">
-                        <input type="text" id="abilities-{{ a.ability }}-custom" formControlName="form[a.ability].customBonusModifiedBy" [value]="a.customBonusModifiedBy" />
+                        <input type="text" id="abilities-{{ abilityName }}-custom" formControlName="customBonusModifiedBy" [value]="ability.controls.customBonusModifiedBy.value" />
                     </div>
                 </div>
             </div>

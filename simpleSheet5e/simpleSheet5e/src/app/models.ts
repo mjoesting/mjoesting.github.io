@@ -107,12 +107,12 @@ export interface SheetData {
 
 export type SheetFormFields = {
     SectionGeneral: FormGroup<SectionGeneralFormFields>;
-    SectionAbilities: FormGroup<SectionAbilitiesFormFields>;
+    SectionAbilities: FormArray<FormGroup<AbilityFormGroup>>;
     SectionDefenses: FormGroup<SectionDefensesFormFields>;
     SectionHealth: FormGroup<SectionHealthFormFields>;
     SectionMain: FormGroup<SectionMainFormFields>;
     SectionProficiencies: FormGroup<SectionProficienciesFormFields>;
-    SectionSavingThrows: FormGroup<SectionSavingThrowsFormFields>;
+    SectionSavingThrows: FormArray<FormGroup<SavingThrowFormGroup>>;
     SectionSkills: FormArray<FormGroup<SkillFormGroup>>;
 }
 
@@ -129,15 +129,6 @@ export type SectionGeneralFormFields = {
 export type ClassFormGroup = {
     name: FormControl<string | null>;
     level: FormControl<number | null>;
-}
-
-export type SectionAbilitiesFormFields = {
-    STR: FormGroup<AbilityFormGroup>;
-    DEX: FormGroup<AbilityFormGroup>;
-    CON: FormGroup<AbilityFormGroup>;
-    INT: FormGroup<AbilityFormGroup>;
-    WIS: FormGroup<AbilityFormGroup>;
-    CHA: FormGroup<AbilityFormGroup>;
 }
 
 export type SectionDefensesFormFields = {
@@ -169,7 +160,7 @@ export type SectionMainFormFields = {
 }
 
 export type AbilityFormGroup = {
-    ability: FormControl<string | null>;
+    name: FormControl<string | null>;
     score: FormControl<number | null>;
     bonus: FormControl<number | null>;
     customBonusModifiedBy: FormControl<string | null>;

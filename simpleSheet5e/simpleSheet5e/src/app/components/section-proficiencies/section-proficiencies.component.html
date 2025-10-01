@@ -1,17 +1,17 @@
 <div class="section-title">
     <h2>Proficiencies</h2>
 </div>
-<div formGroupName="SectionProficiencies" class="section-content">
+<div [formGroup]="proficienciesForm" class="section-content">
     <div class="row border-bottom add-margin-bottom shrink">
         <h5>Weapons</h5>
         <h5>Armor</h5>
     </div>
     <div class="proficiencies-wrapper row grow add-gap add-margin-bottom">
         <div class="input-wrapper">
-            <textarea id="proficiencies-weapons" formControlName="form.weapons" [value]="data.weapons"></textarea>
+            <textarea id="proficiencies-weapons" formControlName="weapons" [value]="proficienciesForm.controls.weapons!.value"></textarea>
         </div>
         <div class="input-wrapper">
-            <textarea id="proficiencies-armor" formControlName="form.armor" [value]="data.armor"></textarea>
+            <textarea id="proficiencies-armor" formControlName="armor" [value]="proficienciesForm.controls.armor!.value"></textarea>
         </div>
     </div>
     <div class="row border-bottom add-margin-bottom shrink">
@@ -20,10 +20,10 @@
     </div>
     <div class="proficiencies-wrapper row grow add-gap add-margin-bottom">
         <div class="input-wrapper">
-            <textarea id="proficiencies-tools" formControlName="form.tools" [value]="data.tools"></textarea>
+            <textarea id="proficiencies-tools" formControlName="tools" [value]="proficienciesForm.controls.tools!.value"></textarea>
         </div>
         <div class="input-wrapper">
-            <textarea id="proficiencies-languages" formControlName="form.languages" [value]="data.languages"></textarea>
+            <textarea id="proficiencies-languages" formControlName="languages" [value]="proficienciesForm.controls.languages!.value"></textarea>
         </div>
     </div>
 </div>

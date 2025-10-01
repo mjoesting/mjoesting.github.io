@@ -1,22 +1,14 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { Ability, SectionAbilities, SectionAbilitiesFormFields } from '../../models';
-import { FormGroup } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { AbilityFormGroup, SectionAbilities } from '../../models';
+import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'section-abilities',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './section-abilities.component.html',
   styleUrl: './section-abilities.component.scss'
 })
-export class SectionAbilitiesComponent implements OnInit {
+export class SectionAbilitiesComponent {
   @Input() data!: SectionAbilities;
-  @Input() form!: FormGroup<SectionAbilitiesFormFields>;
-  abilitiesData: Ability[] = [];
-
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
-
-  ngOnInit() {
-    Object.keys(this.data).map((key: string) => this.abilitiesData.push(this.data[key] as Ability));
-    this.changeDetectorRef.detectChanges();
-  }
+  @Input() abilitiesForm!: FormArray<FormGroup<AbilityFormGroup>>;
 }
