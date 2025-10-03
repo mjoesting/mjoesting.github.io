@@ -1,7 +1,7 @@
 <div class="section-title add-margin-bottom">
     <h2>Skills</h2>
 </div>
-<div class="section-content add-gap flex-space-between">
+<div [formGroup]="skillsForm" class="section-content add-gap flex-space-between">
     <div class="row border-bottom add-margin-bottom">
         <h5 class="width-grow-2">Skill</h5>
         <h5 class="width-grow-2">Proficient</h5>
@@ -9,7 +9,7 @@
         <h5>Bonus</h5>
         <h6 class="width-grow-2">Custom Bonus Modified By</h6>
     </div>
-    @for (skill of skillsForm.controls; track skill.controls.name.value) {
+    @for (skill of skillsGroupsArray; track skill.controls.name.value) {
         @let skillName = skill.controls.name.value;
         
         <div id="{{skillName}}-group" [formGroup]="skill" class="row add-gap flex-end center">
@@ -25,11 +25,11 @@
             <h6>{{ skill.controls.ability.value }}</h6>
             <div class="field-wrapper add-margin-right">
                 <div class="input-wrapper">
-                    <input id="skills-{{skillName}}-mod" type="text" id="skills-{{ skillName }}-mod" formControlName="bonus" [value]="skill.controls.bonus.value ? skill.controls.bonus.value : 0" />
+                    <input id="skills-{{skillName}}-mod" type="text" formControlName="bonus" />
                 </div>
             </div>
             <div class="input-wrapper width-grow-2">
-                <input id="skills-{{skillName}}-custom" type="text" id="skills-{{ skillName }}-custom" formControlName="customBonusModifiedBy" [value]="skill.controls.customBonusModifiedBy.value ? skill.controls.customBonusModifiedBy.value : ''" />
+                <input id="skills-{{skillName}}-custom" type="text" formControlName="customBonusModifiedBy" />
             </div>
         </div>
     }

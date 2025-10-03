@@ -1,4 +1,4 @@
-import { FormArray, FormControl, FormGroup } from "@angular/forms";
+import { FormControl, FormGroup } from "@angular/forms";
 
 export interface StoreData {
     state: StateData,
@@ -107,13 +107,13 @@ export interface SheetData {
 
 export type SheetFormFields = {
     SectionGeneral: FormGroup<SectionGeneralFormFields>;
-    SectionAbilities: FormArray<FormGroup<AbilityFormGroup>>;
+    SectionAbilities: FormGroup<SectionAbilitiesFormFields>;
     SectionDefenses: FormGroup<SectionDefensesFormFields>;
     SectionHealth: FormGroup<SectionHealthFormFields>;
     SectionMain: FormGroup<SectionMainFormFields>;
     SectionProficiencies: FormGroup<SectionProficienciesFormFields>;
-    SectionSavingThrows: FormArray<FormGroup<SavingThrowFormGroup>>;
-    SectionSkills: FormArray<FormGroup<SkillFormGroup>>;
+    SectionSavingThrows: FormGroup<SectionSavingThrowsFormFields>;
+    SectionSkills: FormGroup<SectionSkillsFormFields>;
 }
 
 export type SectionGeneralFormFields = {
@@ -129,6 +129,22 @@ export type SectionGeneralFormFields = {
 export type ClassFormGroup = {
     name: FormControl<string | null>;
     level: FormControl<number | null>;
+}
+
+export type SectionAbilitiesFormFields = {
+    STR: FormGroup<AbilityFormGroup>,
+    DEX: FormGroup<AbilityFormGroup>,
+    CON: FormGroup<AbilityFormGroup>,
+    INT: FormGroup<AbilityFormGroup>,
+    WIS: FormGroup<AbilityFormGroup>,
+    CHA: FormGroup<AbilityFormGroup>
+}
+
+export type AbilityFormGroup = {
+    name: FormControl<string | null>;
+    score: FormControl<number | null>;
+    bonus: FormControl<number | null>;
+    customBonusModifiedBy: FormControl<string | null>;
 }
 
 export type SectionDefensesFormFields = {
@@ -147,23 +163,16 @@ export type SectionHealthFormFields = {
 export type SectionMainFormFields = {
     resources: FormControl<string | null>;
     actions: FormControl<string | null>;
-    spellModifiers: FormGroup<{
-        ability: FormControl<string>;
-        attack: FormControl<number>;
-        saveDC: FormControl<number>;
-    }>;
+    // spellModifiers: FormGroup<{
+    //     ability: FormControl<string>;
+    //     attack: FormControl<number>;
+    //     saveDC: FormControl<number>;
+    // }>;
     spells: FormControl<string | null>;
     inventory: FormControl<string | null>;
     features: FormControl<string | null>;
     description: FormControl<string>;
     notes: FormControl<string>;
-}
-
-export type AbilityFormGroup = {
-    name: FormControl<string | null>;
-    score: FormControl<number | null>;
-    bonus: FormControl<number | null>;
-    customBonusModifiedBy: FormControl<string | null>;
 }
 
 export type ActionFormGroup = {
@@ -233,6 +242,27 @@ export type SavingThrowFormGroup = {
     bonus: FormControl<number | null>;
     customBonusModifiedBy: FormControl<string | null>;
 }
+    
+export type SectionSkillsFormFields = {
+    acrobatics: FormGroup<SkillFormGroup>,
+    animalHandling: FormGroup<SkillFormGroup>,
+    arcana: FormGroup<SkillFormGroup>,
+    athletics: FormGroup<SkillFormGroup>,
+    deception: FormGroup<SkillFormGroup>,
+    history: FormGroup<SkillFormGroup>,
+    insight: FormGroup<SkillFormGroup>,
+    intimidation: FormGroup<SkillFormGroup>,
+    investigation: FormGroup<SkillFormGroup>,
+    medicine: FormGroup<SkillFormGroup>,
+    nature: FormGroup<SkillFormGroup>,
+    perception: FormGroup<SkillFormGroup>,
+    performance: FormGroup<SkillFormGroup>,
+    persuasion: FormGroup<SkillFormGroup>,
+    religion: FormGroup<SkillFormGroup>,
+    sleightOfHand: FormGroup<SkillFormGroup>,
+    stealth: FormGroup<SkillFormGroup>,
+    survival: FormGroup<SkillFormGroup>
+}
 
 export type SkillFormGroup = {
     name: FormControl<string>;
@@ -248,7 +278,7 @@ export interface Class {
 }
     
 export interface Ability {
-    ability: string;
+    name: string;
     score: number | null;
     bonus: number | null;
     customBonusModifiedBy: string | null;

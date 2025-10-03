@@ -29,19 +29,17 @@ export class AppComponent implements OnInit {
   isUpdated: boolean = false;
   private formValueSubscription!: Subscription | undefined;
 
-  constructor(private service: SimpleSheetService, private mapperService: MapperService) {};
+  constructor(private service: SimpleSheetService) {
+    this.service.initData();
+  };
 
   ngOnInit(): void {
-    this.data = this.service.initData() as StoreData;
-    this.form = this.mapperService.mapSheetToForm(this.data.sheet) as FormGroup<SheetFormFields>;
+    this.data = this.service.store as StoreData;
+    this.form = this.data.state.form as FormGroup<SheetFormFields>;
 
-    console.log('app component - service.initData(): ', this.service.initData())
-    console.log('app component - data: ', this.data)
-    console.log('app component - form: ', this.form)
+    console.log('app component this.data: ', this.data)
     
-    this.formValueSubscription = this.form.valueChanges.subscribe(update => {
-      console.log('form update: ', update)
-
+    this.formValueSubscription = this.form.valueChanges.subscribe(() => {
       this.isUpdated = true;
       this.service.handleFormUpdates(this.form);
     });

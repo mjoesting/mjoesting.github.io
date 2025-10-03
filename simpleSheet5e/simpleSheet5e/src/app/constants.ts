@@ -92,12 +92,12 @@ const testSheetData: Models.SheetData = {
         proficiencyBonus: 3
     },
     SectionAbilities: {
-        STR: { ability: Abilities['STR'], score: 10, bonus: 0, customBonusModifiedBy: null },
-        DEX: { ability: Abilities['DEX'], score: 14, bonus: 2, customBonusModifiedBy: null },
-        CON: { ability: Abilities['CON'], score: 12, bonus: 1, customBonusModifiedBy: null },
-        INT: { ability: Abilities['INT'], score: 16, bonus: 3, customBonusModifiedBy: null },
-        WIS: { ability: Abilities['WIS'], score: 13, bonus: 1, customBonusModifiedBy: null },
-        CHA: { ability: Abilities['CHA'], score: 11, bonus: 0, customBonusModifiedBy: null }
+        STR: { name: Abilities['STR'], score: 10, bonus: 0, customBonusModifiedBy: null },
+        DEX: { name: Abilities['DEX'], score: 14, bonus: 2, customBonusModifiedBy: null },
+        CON: { name: Abilities['CON'], score: 12, bonus: 1, customBonusModifiedBy: null },
+        INT: { name: Abilities['INT'], score: 16, bonus: 3, customBonusModifiedBy: null },
+        WIS: { name: Abilities['WIS'], score: 13, bonus: 1, customBonusModifiedBy: null },
+        CHA: { name: Abilities['CHA'], score: 11, bonus: 0, customBonusModifiedBy: null }
     },
     SectionDefenses: {
         ac: 15,

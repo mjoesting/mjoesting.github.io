@@ -1,13 +1,13 @@
 <div class="section-title">
     <h2>Saving Throws</h2>
 </div>
-<div class="section-content flex-space-between">
+<div [formGroup]="savingThrowsForm" class="section-content flex-space-between">
     <div class="row border-bottom add-margin-bottom">
         <h5>Ability</h5>
         <h5>Proficient</h5>
         <h5>Bonus</h5>
     </div>
-    @for (save of savingThrowsForm.controls; track save.controls.ability.value) {
+    @for (save of savingThrowsGroupsArray; track save.controls.ability.value) {
         <div [formGroup]="save" class="row">
             <div class="row center add-gap add-margin-bottom">
                 <h4>{{ save.controls.ability.value }}</h4>
@@ -23,7 +23,7 @@
                 </div>
                 <div>
                     <div class="input-wrapper">
-                        <input type="text" id="saves-{{save.controls.ability.value}}-mod" formControlName="bonus" [value]="save.controls.bonus.value" />
+                        <input type="text" id="saves-{{save.controls.bonus.value}}-mod" formControlName="bonus" />
                     </div>
                 </div>
             </div>

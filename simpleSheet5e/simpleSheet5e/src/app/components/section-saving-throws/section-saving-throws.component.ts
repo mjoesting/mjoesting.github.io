@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as Constants from '../../constants';
-import { SavingThrowFormGroup, SectionSavingThrows } from '../../models';
+import { SavingThrowFormGroup, SectionSavingThrows, SectionSavingThrowsFormFields } from '../../models';
 
 @Component({
   selector: 'section-saving-throws',
@@ -11,6 +11,14 @@ import { SavingThrowFormGroup, SectionSavingThrows } from '../../models';
 })
 export class SectionSavingThrowsComponent {
   @Input() data!: SectionSavingThrows;
-  @Input() savingThrowsForm!: FormArray<FormGroup<SavingThrowFormGroup>>;
+  @Input() savingThrowsForm!: FormGroup<SectionSavingThrowsFormFields>;
   proficiencies = Object.keys(Constants.Proficiencies);
+  
+  get savingThrowsGroupsArray(): FormGroup<SavingThrowFormGroup>[] {
+    const formGroups: FormGroup<SavingThrowFormGroup>[] = [];
+    for (let save of Object.values(this.savingThrowsForm.controls)) {
+      formGroups.push(save as FormGroup<SavingThrowFormGroup>);
+    }
+    return formGroups;
+  }
 }

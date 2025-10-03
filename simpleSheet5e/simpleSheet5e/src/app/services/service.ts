@@ -1,6 +1,6 @@
 import { FormGroup } from '@angular/forms';
 import * as Constants from '../constants';
-import { Ability, SavingThrow, SheetData, SheetFormFields, StoreData } from '../models';
+import { Ability, SavingThrow, SectionAbilities, SectionSavingThrows, SheetData, SheetFormFields, StoreData } from '../models';
 import { MapperService } from './mapper-service';
 import { Injectable } from '@angular/core';
 
@@ -11,25 +11,22 @@ export class SimpleSheetService {
 
     store!: StoreData;
 
-    initData(): StoreData {
+    initData(): void {
         let newData: StoreData;
         if (!localStorage.getItem('simpleSheet')) {
             newData = this.initNewData();
         } else {
             const storeData: StoreData = this.dataFromStorage();
             newData = {
-                ...storeData,
                 state: {
-                    ...storeData.state,
-                    form: this.mapperService.mapSheetToForm(storeData.sheet)
-                }
+                    abilities: storeData.state.abilities,
+                    form: this.mapperService.mapSheetToForm(storeData.sheet),
+                    isUpdated: false
+                },
+                sheet: storeData.sheet
             };
         }
         this.store = newData;
-
-        console.log('initData(): ', newData)
-
-        return Constants.testData;
     }
 
     initNewData(): StoreData {
@@ -43,11 +40,22 @@ export class SimpleSheetService {
                 characterLevel: null,
                 proficiencyBonus: this.getDefaultProficiencyBonus(0)
             },
-            SectionAbilities: {},
+            SectionAbilities: (() => {
+                let initAbilitiesData: SectionAbilities = {};
+                for(let key of Object.keys(Constants.Abilities)) {
+                    initAbilitiesData[key] = {
+                        name: key,
+                        score: 10,
+                        bonus: this.getDefaultAbilityModifier(10),
+                        customBonusModifiedBy: null
+                    } as Ability;
+                }
+                return initAbilitiesData as SectionAbilities;
+            })(),
             SectionDefenses: {
                 ac: null,
                 immunities: null,
-                resistances: null
+                resistances: null 
             },
             SectionHealth: {
                 hpCurrent: null,
@@ -76,7 +84,18 @@ export class SimpleSheetService {
                 tools: null,
                 languages: null
             },
-            SectionSavingThrows: {},
+            SectionSavingThrows: (() => {
+                let initSavingThrowsData: SectionSavingThrows = {};
+                for(let key of Object.keys(Constants.Abilities)) {
+                    initSavingThrowsData[key] = {
+                        ability: key,
+                        proficiency: null,
+                        bonus: this.getDefaultAbilityModifier(10),
+                        customBonusModifiedBy: null
+                    }
+                }
+                return initSavingThrowsData as SectionSavingThrows;
+            })(),
             SectionSkills: {
                 acrobatics: { name: 'acrobatics', ability: 'DEX', proficiency: '', bonus: 0, customBonusModifiedBy: null },
                 animalHandling: { name: 'animal handling', ability: 'WIS', proficiency: '', bonus: 0, customBonusModifiedBy: null },
@@ -99,22 +118,6 @@ export class SimpleSheetService {
             }
         };
 
-        // init Abilities section
-        Object.keys(Constants.Abilities).map((ability: string) => newSheetData.SectionAbilities![ability] = {
-            ability: ability,
-            score: 10,
-            bonus: this.getDefaultAbilityModifier(10),
-            customBonusModifiedBy: null
-        } as Ability);
-        
-        // init SavingThrows section
-        Object.keys(Constants.Abilities).map((ability: string) => newSheetData.SectionSavingThrows![ability] = {
-            ability: ability,
-            proficient: null,
-            bonus: this.getDefaultAbilityModifier(10),
-            customBonusModifiedBy: null
-        } as unknown as SavingThrow);
-
         const newStoreData: StoreData = {
             state: {
                 isUpdated: false,
@@ -135,31 +138,30 @@ export class SimpleSheetService {
     }
 
     handleFormUpdates(newForm: FormGroup<SheetFormFields>): void {
-        this.store = {
-            ...this.store,
-            state: {
-                ...this.store.state,
-                isUpdated: true,
-                form: newForm
-            },
-            sheet: this.mapperService.mapFormToSheet(newForm)
-        };
+        let updatedStore: StoreData = this.store;
+
+        // updatedStore = {
+        //     state: {
+        //         abilities: this.store.state.abilities,
+        //         isUpdated: true,
+        //         form: newForm
+        //     },
+        //     sheet: this.mapperService.mapFormToSheet(newForm)
+        // };
+
+        console.log(updatedStore)
     }
 
     saveToStorage() {
-        localStorage.setItem('simpleSheet', JSON.stringify(this.store));
+        const dataToSave: StoreData = this.store;
+
+        // localStorage.setItem('simpleSheet', JSON.stringify(dataToSave));
+        console.log(JSON.stringify(dataToSave));
     }
 
     dataFromStorage(): StoreData {
-        return JSON.parse(localStorage.getItem('simpleSheet')!);
-    }
-
-    mapFormDataToSheetData(formData: FormGroup<SheetFormFields>): SheetData {
-        return this.mapperService.mapFormToSheet(formData);
-    }
-
-    mapSheetDataToFormData(sheetData: SheetData): FormGroup<SheetFormFields> {
-        return this.mapperService.mapSheetToForm(sheetData);
+        return Constants.testData;
+        // return JSON.parse(localStorage.getItem('simpleSheet')!);
     }
 
     isCustom(defaultValue: number | null, currentValue: number | null) {

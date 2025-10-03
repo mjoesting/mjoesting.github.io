@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SectionGeneral, SectionGeneralFormFields } from '../../models';
-import { ButtonComponent } from '../button/button.component';
+// import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'section-general',
-  imports: [ButtonComponent, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './section-general.component.html',
   styleUrl: './section-general.component.scss'
 })

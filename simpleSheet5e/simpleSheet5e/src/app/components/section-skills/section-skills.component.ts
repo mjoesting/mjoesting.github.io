@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { FormArray, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { SectionSkills, SkillFormGroup } from '../../models';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { SectionSkills, SectionSkillsFormFields, SkillFormGroup } from '../../models';
 import * as Constants from '../../constants';
 
 @Component({
@@ -11,6 +11,14 @@ import * as Constants from '../../constants';
 })
 export class SectionSkillsComponent {
   @Input() data!: SectionSkills;
-  @Input() skillsForm!: FormArray<FormGroup<SkillFormGroup>>;
+  @Input() skillsForm!: FormGroup<SectionSkillsFormFields>;
   proficiencies: string[] = Object.keys(Constants.Proficiencies);
+    
+    get skillsGroupsArray(): FormGroup<SkillFormGroup>[] {
+      const formGroups: FormGroup<SkillFormGroup>[] = [];
+      for (let skill of Object.values(this.skillsForm.controls)) {
+        formGroups.push(skill as FormGroup<SkillFormGroup>);
+      }
+      return formGroups;
+    }
 }

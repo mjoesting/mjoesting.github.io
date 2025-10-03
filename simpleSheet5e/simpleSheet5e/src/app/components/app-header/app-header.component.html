@@ -3,7 +3,7 @@
     <h1>Simple Sheet 5e</h1>
     <div class="header-buttons">
         <div class="input-wrapper">
-            <app-button id="save-button" [disabled]="!isUpdated" [label]="'Save'" [onClick]="handleSave"></app-button>
+            <app-button id="save-button" [disabled]="!isUpdated" [label]="'Save'" (click)="handleSave()"></app-button>
         </div>
     </div>
 </header>

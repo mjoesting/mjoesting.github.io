@@ -5,8 +5,13 @@
     flex-basis: 100%;
 
     button {
+        cursor: pointer;
         flex: 1;
         display: block;
         margin: 0;
+
+        &.disabled {
+            cursor: unset;
+        }
     }
 }
