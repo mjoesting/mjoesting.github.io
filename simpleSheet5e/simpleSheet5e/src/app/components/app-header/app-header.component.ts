@@ -10,9 +10,9 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class AppHeaderComponent {
   @Input() isUpdated!: boolean | null;
-  constructor(private service: SimpleSheetService) {}
+  constructor(private simpleSheetService: SimpleSheetService) {}
 
   handleSave() {
-    this.service.saveToStorage();
+    this.simpleSheetService.saveToStorage();
   }
 }

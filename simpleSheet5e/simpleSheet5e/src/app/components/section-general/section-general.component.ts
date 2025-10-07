@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SectionGeneral, SectionGeneralFormFields } from '../../models';
-// import { ButtonComponent } from '../button/button.component';
+import { Subscription } from 'rxjs';
+import { SimpleSheetService } from '../../services/service';
 
 @Component({
   selector: 'section-general',
@@ -9,11 +10,19 @@ import { SectionGeneral, SectionGeneralFormFields } from '../../models';
   templateUrl: './section-general.component.html',
   styleUrl: './section-general.component.scss'
 })
-export class SectionGeneralComponent {
+export class SectionGeneralComponent implements OnInit, OnDestroy {
   @Input() data!: SectionGeneral;
   @Input() generalForm!: FormGroup<SectionGeneralFormFields>;
+  formSectionSubscription!: Subscription;
 
-  handleAddClass() {
-    // logic to add a new class
+  constructor(private simpleSheetService: SimpleSheetService) {}
+
+  ngOnInit() {
+    this.formSectionSubscription = this.generalForm.valueChanges
+    .subscribe((value: any) => this.simpleSheetService.handleFormUpdates(value, 'SectionGeneral'));
+  }
+
+  ngOnDestroy(): void {
+    this.formSectionSubscription.unsubscribe();
   }
 }

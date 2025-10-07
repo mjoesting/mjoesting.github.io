@@ -1,8 +1,10 @@
 import { FormGroup } from '@angular/forms';
 import * as Constants from '../constants';
-import { Ability, SavingThrow, SectionAbilities, SectionSavingThrows, SheetData, SheetFormFields, StoreData } from '../models';
+import { Ability, SaveData, SectionAbilities, SectionSavingThrows, SheetData, SheetFormSections, StoreData } from '../models';
 import { MapperService } from './mapper-service';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class SimpleSheetService {
@@ -21,12 +23,13 @@ export class SimpleSheetService {
                 state: {
                     abilities: storeData.state.abilities,
                     form: this.mapperService.mapSheetToForm(storeData.sheet),
-                    isUpdated: false
+                    isUpdated: new BehaviorSubject<boolean>(false)
                 },
                 sheet: storeData.sheet
             };
         }
         this.store = newData;
+        this.store.state.isUpdated.next(false);
     }
 
     initNewData(): StoreData {
@@ -120,7 +123,7 @@ export class SimpleSheetService {
 
         const newStoreData: StoreData = {
             state: {
-                isUpdated: false,
+                isUpdated: new BehaviorSubject<boolean>(false),
                 abilities: {
                     STR: 10,
                     DEX: 10,
@@ -137,31 +140,32 @@ export class SimpleSheetService {
         return newStoreData;
     }
 
-    handleFormUpdates(newForm: FormGroup<SheetFormFields>): void {
-        let updatedStore: StoreData = this.store;
-
-        // updatedStore = {
-        //     state: {
-        //         abilities: this.store.state.abilities,
-        //         isUpdated: true,
-        //         form: newForm
-        //     },
-        //     sheet: this.mapperService.mapFormToSheet(newForm)
-        // };
-
-        console.log(updatedStore)
+    handleFormUpdates<K extends keyof SheetData>(newFormValues: SheetData[K], sectionName: K): void {
+        this.store.state.isUpdated.next(true);
+        this.store.sheet[sectionName] = newFormValues;
+        if (sectionName === 'SectionAbilities') {
+            this.updateBonuses();
+        }
     }
 
-    saveToStorage() {
-        const dataToSave: StoreData = this.store;
-
-        // localStorage.setItem('simpleSheet', JSON.stringify(dataToSave));
-        console.log(JSON.stringify(dataToSave));
+    saveToStorage(): void {
+        const dataToSave: SaveData = {
+            ...this.store,
+            sheet: {
+                ...this.store.sheet
+            },
+            state: {
+                ...this.store.state,
+                isUpdated: this.store.state.isUpdated.getValue(),
+                form: null
+            }
+        }
+        localStorage.setItem('simpleSheet', JSON.stringify(dataToSave));
+        this.store.state.isUpdated.next(false);
     }
 
     dataFromStorage(): StoreData {
-        return Constants.testData;
-        // return JSON.parse(localStorage.getItem('simpleSheet')!);
+        return JSON.parse(localStorage.getItem('simpleSheet')!);
     }
 
     isCustom(defaultValue: number | null, currentValue: number | null) {
@@ -237,7 +241,7 @@ export class SimpleSheetService {
         }
     }
 
-    updateBonuses(abilityToUpdate: string) {
+    updateBonuses(): void {
         this.store;
     }
 

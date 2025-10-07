@@ -1,4 +1,5 @@
 import { FormControl, FormGroup } from "@angular/forms";
+import { BehaviorSubject } from "rxjs";
 
 export interface StoreData {
     state: StateData,
@@ -6,9 +7,18 @@ export interface StoreData {
 }
 
 export interface StateData {
-    isUpdated: boolean,
+    isUpdated: BehaviorSubject<boolean>,
     abilities: {[key: string]: number}
-    form: FormGroup<SheetFormFields>
+    form: SheetFormSections | null
+}
+
+export interface SaveData {
+    state: {
+        isUpdated: boolean,
+        abilities: {[key: string]: number},
+        form: SheetFormSections | null
+    },
+    sheet: SheetData
 }
 
 export interface SectionGeneral {
@@ -105,7 +115,7 @@ export interface SheetData {
     SectionSkills: SectionSkills
 }
 
-export type SheetFormFields = {
+export type SheetFormSections = {
     SectionGeneral: FormGroup<SectionGeneralFormFields>;
     SectionAbilities: FormGroup<SectionAbilitiesFormFields>;
     SectionDefenses: FormGroup<SectionDefensesFormFields>;

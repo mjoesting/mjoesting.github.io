@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { SectionProficiencies, SectionProficienciesFormFields } from '../../models';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { SimpleSheetService } from '../../services/service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'section-proficiencies',
@@ -8,7 +10,19 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './section-proficiencies.component.html',
   styleUrl: './section-proficiencies.component.scss'
 })
-export class SectionProficienciesComponent {
+export class SectionProficienciesComponent implements OnInit, OnDestroy {
   @Input() data!: SectionProficiencies;
   @Input() proficienciesForm!: FormGroup<SectionProficienciesFormFields>;
+  formSectionSubscription!: Subscription;
+
+  constructor(private simpleSheetService: SimpleSheetService) {}
+
+  ngOnInit() {
+    this.formSectionSubscription = this.proficienciesForm.valueChanges
+    .subscribe((value: any) => this.simpleSheetService.handleFormUpdates(value, 'SectionProficiencies'));
+  }
+
+  ngOnDestroy(): void {
+    this.formSectionSubscription.unsubscribe();
+  }
 }

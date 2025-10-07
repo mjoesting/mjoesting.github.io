@@ -1,5 +1,5 @@
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { Ability, AbilityFormGroup, SavingThrow, SavingThrowFormGroup, SectionAbilities, SectionAbilitiesFormFields, SectionDefenses, SectionDefensesFormFields, SectionGeneral, SectionGeneralFormFields, SectionHealth, SectionHealthFormFields, SectionMain, SectionMainFormFields, SectionProficiencies, SectionProficienciesFormFields, SectionSavingThrows, SectionSavingThrowsFormFields, SectionSkills, SectionSkillsFormFields, SheetData, SheetFormFields, Skill, SkillFormGroup } from "../models";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { Ability, AbilityFormGroup, SavingThrow, SavingThrowFormGroup, SectionAbilities, SectionAbilitiesFormFields, SectionDefenses, SectionDefensesFormFields, SectionGeneral, SectionGeneralFormFields, SectionHealth, SectionHealthFormFields, SectionMain, SectionMainFormFields, SectionProficiencies, SectionProficienciesFormFields, SectionSavingThrows, SectionSavingThrowsFormFields, SectionSkills, SectionSkillsFormFields, SheetData, SheetFormSections, Skill, SkillFormGroup } from "../models";
 import { Injectable } from "@angular/core";
 import * as Constants from "../constants";
 
@@ -7,8 +7,8 @@ import * as Constants from "../constants";
 export class MapperService {
     constructor(private formBuilder: FormBuilder) {}
 
-    mapSheetToForm(sheetData: SheetData): FormGroup<SheetFormFields> {
-        return this.formBuilder.group({
+    mapSheetToForm(sheetData: SheetData): SheetFormSections {
+        return {
             SectionGeneral: this.mapSheetSectionGeneralToForm(sheetData.SectionGeneral) as FormGroup<SectionGeneralFormFields>,
             SectionAbilities: this.mapSheetSectionAbilitiesToForm(sheetData.SectionAbilities) as FormGroup<SectionAbilitiesFormFields>,
             SectionSavingThrows: this.mapSheetSectionSavingThrowsToForm(sheetData.SectionSavingThrows) as FormGroup<SectionSavingThrowsFormFields>,
@@ -17,23 +17,24 @@ export class MapperService {
             SectionProficiencies: this.mapSheetSectionProficienciesToForm(sheetData.SectionProficiencies) as FormGroup<SectionProficienciesFormFields>,
             SectionSkills: this.mapSheetSectionSkillsToForm(sheetData.SectionSkills) as FormGroup<SectionSkillsFormFields>,
             SectionMain: this.mapSheetSectionMainToForm(sheetData.SectionMain) as FormGroup<SectionMainFormFields>
-        }) as unknown as FormGroup<SheetFormFields>;
+        };
     }
 
-    mapFormToSheet(form: FormGroup<SheetFormFields>): SheetData {
-        return form.value as unknown as SheetData;
+    mapFormToSheet(form: SheetFormSections): SheetData {
+        return {
+            SectionGeneral: form.SectionGeneral.value,
+            SectionAbilities: form.SectionAbilities.value,
+            SectionSavingThrows: form.SectionSavingThrows.value,
+            SectionDefenses: form.SectionDefenses.value,
+            SectionHealth: form.SectionHealth.value,
+            SectionProficiencies: form.SectionProficiencies.value,
+            SectionSkills: form.SectionSkills.value,
+            SectionMain: form.SectionMain.value
+        } as unknown as SheetData;
     }
 
     mapSheetSectionGeneralToForm(generalData: SectionGeneral): FormGroup<SectionGeneralFormFields> {
-        return this.formBuilder.group({
-            name: new FormControl(generalData.name),
-            player: new FormControl(generalData.player),
-            species: new FormControl(generalData.species),
-            background: new FormControl(generalData.background),
-            classes: new FormControl(generalData.classes),
-            characterLevel: new FormControl(generalData.characterLevel),
-            proficiencyBonus: new FormControl(generalData.proficiencyBonus)
-        }) as unknown as FormGroup<SectionGeneralFormFields>;
+        return this.formBuilder.group<SectionGeneral>(generalData) as unknown as FormGroup<SectionGeneralFormFields>;
     }
 
     mapFormSectionGeneralToSheet(generalForm: FormGroup<SectionGeneralFormFields>): SectionGeneral {
@@ -59,12 +60,7 @@ export class MapperService {
     }
 
     mapAbilityDataToFormGroup(abilityData: Ability): FormGroup<AbilityFormGroup> {
-        return this.formBuilder.group<AbilityFormGroup>({
-            name: new FormControl(abilityData.name),
-            score: new FormControl(abilityData.score),
-            bonus: new FormControl(abilityData.bonus),
-            customBonusModifiedBy: new FormControl(abilityData.customBonusModifiedBy)
-        });
+        return this.formBuilder.group<Ability>(abilityData);
     }
 
     mapFormSectionAbilitiesToSheet(abilitiesForm: FormGroup<SectionAbilitiesFormFields>): SectionAbilities {
@@ -72,11 +68,7 @@ export class MapperService {
     }
 
     mapSheetSectionDefensesToForm(defensesData: SectionDefenses): FormGroup<SectionDefensesFormFields> {
-        return this.formBuilder.group<SectionDefensesFormFields>({
-            ac: new FormControl(defensesData.ac),
-            immunities: new FormControl(defensesData.immunities),
-            resistances: new FormControl(defensesData.resistances)
-        }) as unknown as FormGroup<SectionDefensesFormFields>;
+        return this.formBuilder.group<SectionDefenses>(defensesData) as unknown as FormGroup<SectionDefensesFormFields>;
     }
 
     mapFormSectionDefensesToSheet(defensesForm: FormGroup<SectionDefensesFormFields>): SectionDefenses {
@@ -84,12 +76,7 @@ export class MapperService {
     }
 
     mapSheetSectionHealthToForm(healthData: SectionHealth): FormGroup<SectionHealthFormFields> {
-        return this.formBuilder.group<SectionHealthFormFields>({
-            hpCurrent: new FormControl(healthData.hpCurrent),
-            hpMax: new FormControl(healthData.hpMax),
-            hpTemp: new FormControl(healthData.hpTemp),
-            conditions: new FormControl(healthData.conditions)
-        }) as unknown as FormGroup<SectionHealthFormFields>;
+        return this.formBuilder.group<SectionHealth>(healthData) as unknown as FormGroup<SectionHealthFormFields>;
     }
 
     mapFormSectionHealthToSheet(healthForm: FormGroup<SectionHealthFormFields>): SectionHealth {
@@ -97,20 +84,7 @@ export class MapperService {
     }
 
     mapSheetSectionMainToForm(mainData: SectionMain): FormGroup<SectionMainFormFields> {
-        return this.formBuilder.group({
-            resources: new FormControl(mainData.resources),
-            actions: new FormControl(mainData.actions),
-            spells: new FormControl(mainData.spells),
-            inventory: new FormControl(mainData.inventory),
-            features: new FormControl(mainData.features),
-            // spellModifiers: new FormGroup({
-            //     ability: new FormControl(mainData.spellModifiers?.ability),
-            //     attack: new FormControl(mainData.spellModifiers?.attack),
-            //     saveDC: new FormControl(mainData.spellModifiers?.saveDC)
-            // }),
-            description: new FormControl(mainData.description),
-            notes: new FormControl(mainData.notes)
-        }) as unknown as FormGroup<SectionMainFormFields>;
+        return this.formBuilder.group<SectionMain>(mainData) as unknown as FormGroup<SectionMainFormFields>;
     }
 
     mapFormSectionMainToSheet(mainForm: FormGroup<SectionMainFormFields>): SectionMain {
@@ -118,12 +92,7 @@ export class MapperService {
     }
 
     mapSheetSectionProficienciesToForm(proficienciesData: SectionProficiencies): FormGroup<SectionProficienciesFormFields> {
-        return this.formBuilder.group<SectionProficienciesFormFields>({
-            weapons: new FormControl(proficienciesData.weapons),
-            armor: new FormControl(proficienciesData.armor),
-            tools: new FormControl(proficienciesData.tools),
-            languages: new FormControl(proficienciesData.languages),
-        }) as unknown as FormGroup<SectionProficienciesFormFields>
+        return this.formBuilder.group<SectionProficiencies>(proficienciesData) as unknown as FormGroup<SectionProficienciesFormFields>
     }
 
     mapFormSectionProficienciesToSheet(proficienciesForm: FormGroup<SectionProficienciesFormFields>) {
@@ -142,12 +111,7 @@ export class MapperService {
     }
 
     mapSavingThrowDataToFormGroup(savingThrowData: SavingThrow): FormGroup<SavingThrowFormGroup> {
-        return this.formBuilder.group<SavingThrowFormGroup>({
-            ability: new FormControl(savingThrowData.ability),
-            proficiency: new FormControl(savingThrowData.proficiency),
-            bonus: new FormControl(savingThrowData.bonus),
-            customBonusModifiedBy: new FormControl(savingThrowData.customBonusModifiedBy)
-        })
+        return this.formBuilder.group<SavingThrow>(savingThrowData)
     }
 
     mapFormSectionSavingThrowsToSheet(savingThrowsForm: FormGroup<SectionSavingThrowsFormFields>): SectionSavingThrows {
@@ -178,13 +142,7 @@ export class MapperService {
     }
 
     mapSkillDataToFormGroup(skillData: Skill): FormGroup<SkillFormGroup> {
-        return this.formBuilder.group<SkillFormGroup>({
-            name: new FormControl(skillData.name, {nonNullable: true}),
-            ability: new FormControl(skillData.ability, {nonNullable: true}),
-            proficiency: new FormControl(skillData.proficiency!),
-            bonus: new FormControl(skillData.bonus!),
-            customBonusModifiedBy: new FormControl(skillData.customBonusModifiedBy!)
-        }) as FormGroup<SkillFormGroup>;
+        return this.formBuilder.group<Skill>(skillData) as FormGroup<SkillFormGroup>;
     }
 
     mapFormSectionSkillsToSheet(skillsForm: FormGroup<SectionSkillsFormFields>): SectionSkills {

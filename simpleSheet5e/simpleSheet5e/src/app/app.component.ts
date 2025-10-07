@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
-import { SheetFormFields, StoreData } from './models';
+import { SheetFormSections, StoreData } from './models';
 import { SimpleSheetService } from './services/service';
 import { MapperService } from './services/mapper-service';
 import { SectionAbilitiesComponent } from './components/section-abilities/section-abilities.component';
@@ -25,27 +25,21 @@ import { Subscription } from 'rxjs';
 
 export class AppComponent implements OnInit {
   data!: StoreData;
-  form!: FormGroup<SheetFormFields>;
+  form!: SheetFormSections;
   isUpdated: boolean = false;
-  private formValueSubscription!: Subscription | undefined;
+  private isUpdatedSubscription!: Subscription;
 
   constructor(private service: SimpleSheetService) {
     this.service.initData();
+    this.isUpdatedSubscription = this.service.store.state.isUpdated.subscribe((value: boolean) => {
+      this.isUpdated = value;
+    });
   };
 
   ngOnInit(): void {
     this.data = this.service.store as StoreData;
-    this.form = this.data.state.form as FormGroup<SheetFormFields>;
+    this.form = this.data.state.form as SheetFormSections;
 
     console.log('app component this.data: ', this.data)
-    
-    this.formValueSubscription = this.form.valueChanges.subscribe(() => {
-      this.isUpdated = true;
-      this.service.handleFormUpdates(this.form);
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.formValueSubscription!.unsubscribe();
   }
 }

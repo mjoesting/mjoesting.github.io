@@ -1,5 +1,6 @@
+import { BehaviorSubject, Subject } from 'rxjs';
 import * as Models from './models';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 const formBuilder = new FormBuilder();
 
@@ -162,7 +163,7 @@ const testSheetData: Models.SheetData = {
 };
 
 const testStateData: Models.StateData = {
-    isUpdated: false,
+    isUpdated: new BehaviorSubject<boolean>(false),
     abilities: {
         STR: 10,
         DEX: 14,
@@ -170,7 +171,7 @@ const testStateData: Models.StateData = {
         INT: 16,
         WIS: 13
     },
-    form: formBuilder.group(testSheetData) as unknown as FormGroup<Models.SheetFormFields>
+    form: formBuilder.group(testSheetData) as unknown as Models.SheetFormSections
 };
 
 export const testData: Models.StoreData = {

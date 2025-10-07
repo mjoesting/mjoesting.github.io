@@ -1,7 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SectionMain, SectionMainFormFields } from '../../models';
 // import { ButtonComponent } from '../button/button.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { SimpleSheetService } from '../../services/service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'section-main',
@@ -9,9 +12,21 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './section-main.component.html',
   styleUrl: './section-main.component.scss'
 })
-export class SectionMainComponent {
+export class SectionMainComponent implements OnInit {
   @Input() data!: SectionMain;
   @Input() mainForm!: FormGroup<SectionMainFormFields>;
+  formSectionSubscription!: Subscription;
+
+  constructor(private simpleSheetService: SimpleSheetService) {}
+
+  ngOnInit() {
+    this.formSectionSubscription = this.mainForm.valueChanges
+    .subscribe((value: any) => this.simpleSheetService.handleFormUpdates(value, 'SectionMain'));
+  }
+
+  ngOnDestroy(): void {
+    this.formSectionSubscription.unsubscribe();
+  }
 
   handleTabClick(event: Event) {
     const target: HTMLElement | null = event.target as HTMLElement;

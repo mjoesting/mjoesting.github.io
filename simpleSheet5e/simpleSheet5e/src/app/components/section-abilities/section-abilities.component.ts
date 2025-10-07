@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { AbilityFormGroup, SectionAbilities, SectionAbilitiesFormFields } from '../../models';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { SimpleSheetService } from '../../services/service';
 
 @Component({
   selector: 'section-abilities',
@@ -8,9 +10,12 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './section-abilities.component.html',
   styleUrl: './section-abilities.component.scss'
 })
-export class SectionAbilitiesComponent implements OnInit {
+export class SectionAbilitiesComponent implements OnInit, OnDestroy {
   @Input() data!: SectionAbilities;
   @Input() abilitiesForm!: FormGroup<SectionAbilitiesFormFields>;
+  formSectionSubscription!: Subscription;
+
+  constructor(private simpleSheetService: SimpleSheetService) {};
 
   get abilitiesGroupsArray(): FormGroup<AbilityFormGroup>[] {
     const formGroups: FormGroup<AbilityFormGroup>[] = [];
@@ -22,7 +27,11 @@ export class SectionAbilitiesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('abilities component loaded')
-    console.log('abilitiesGroupsArray: ', this.abilitiesGroupsArray)
+    this.formSectionSubscription = this.abilitiesForm.valueChanges
+    .subscribe((value: any) => this.simpleSheetService.handleFormUpdates(value, 'SectionAbilities'));
+  }
+
+  ngOnDestroy(): void {
+    this.formSectionSubscription.unsubscribe();
   }
 }
