@@ -80,7 +80,7 @@ export interface SectionProficiencies {
 }
     
 export interface SectionSavingThrows {
-    [key: string]: SavingThrow | null;
+    [key: string]: SavingThrow;
 }
     
 export interface SectionSkills {
@@ -289,15 +289,15 @@ export interface Class {
     
 export interface Ability {
     name: string;
-    score: number | null;
-    bonus: number | null;
+    score: number;
+    bonus: number;
     customBonusModifiedBy: string | null;
 }
     
 export interface SavingThrow {
-    ability: string | null;
+    ability: string;
     proficiency: string | null;
-    bonus: number | null;
+    bonus: number;
     customBonusModifiedBy: string | null;
 }
     
@@ -305,7 +305,7 @@ export interface Skill {
     name: string;
     ability: string;
     proficiency?: string | null;
-    bonus?: number | null;
+    bonus: number;
     customBonusModifiedBy?: string | null;
 }
     

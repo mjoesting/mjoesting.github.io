@@ -4,82 +4,82 @@ import { FormBuilder } from '@angular/forms';
 
 const formBuilder = new FormBuilder();
 
-export const Sections: {[key: string]: string} = {
-    SectionGeneral: 'SectionGeneral',
-    SectionAbilities: 'SectionAbilities',
-    SectionDefenses: 'SectionDefenses',
-    SectionHealth: 'SectionHealth',
-    SectionMain: 'SectionMain',
-    SectionProficiencies: 'SectionProficiencies',
-    SectionSavingThrows: 'SectionSavingThrows',
-    SectionSkills: 'SectionSkills'
+export enum Sections {
+    SectionGeneral = 'SectionGeneral',
+    SectionAbilities = 'SectionAbilities',
+    SectionDefenses = 'SectionDefenses',
+    SectionHealth = 'SectionHealth',
+    SectionMain = 'SectionMain',
+    SectionProficiencies = 'SectionProficiencies',
+    SectionSavingThrows = 'SectionSavingThrows',
+    SectionSkills = 'SectionSkills'
 }
 
-export const Abilities: {[key: string]: string} = {
-    STR: 'STR',
-    DEX: 'DEX',
-    CON: 'CON',
-    INT: 'INT',
-    WIS: 'WIS',
-    CHA: 'CHA'
+export enum Abilities {
+    STR = 'STR',
+    DEX = 'DEX',
+    CON = 'CON',
+    INT = 'INT',
+    WIS = 'WIS',
+    CHA = 'CHA'
 }
 
-export const Proficiencies: {[key: string]: string} = {
-    proficient: 'roficient',
-    expertise: 'expertise',
-    halfProficient: 'half-Proficient'
+export enum Proficiencies {
+    proficient = 'proficient',
+    expertise = 'expertise',
+    halfProficient = 'half-Proficient'
 }
 
-export const ActionTypes: {[key: string]: string} = {
-    action: 'action',
-    bonusAction: 'bonus action',
-    reaction: 'reaction'
+export enum ActionTypes {
+    action = 'action',
+    bonusAction = 'bonus action',
+    reaction = 'reaction'
 }
 
-export const ResetTypes: {[key: string]: string} = {
-    longRest: 'long rest',
-    shortRest: 'short rest'
+export enum ResetTypes {
+    longRest = 'long rest',
+    shortRest = 'short rest'
 }
 
-export const FeatureSources: {[key: string]: string} = {
-    race: 'race',
-    class: 'class',
-    background: 'background',
-    feat: 'feat',
-    other: 'other'
+export enum FeatureSources {
+    race = 'race',
+    class = 'class',
+    background = 'background',
+    feat = 'feat',
+    other = 'other'
 }
 
-export const CastingTimes: {[key: string]: string} = {
-    action: 'action',
-    bonusAction: 'bonus action',
-    reaction: 'reaction',
-    minute: '1 minute',
-    '10minute': '10 minutes',
-    '1hour': '1 hour',
-    '8hour': '8 hours',
-    '12hour': '12 hours',
-    '24hour': '24 hours'
+export enum CastingTimes {
+    action = 'action',
+    bonusAction = 'bonus action',
+    reaction = 'reaction',
+    minute = '1 minute',
+    '10minute' = '10 minutes',
+    '1hour' = '1 hour',
+    '8hour' = '8 hours',
+    '12hour' = '12 hours',
+    '24hour' = '24 hours'
 }
 
-export const Skills: {[key: string]: Models.Skill} = {
-    acrobatics: { name: 'acrobatics', ability: 'DEX' },
-    animalHandling: { name: 'animal Handling', ability: 'WIS' },
-    arcana: { name: 'arcana', ability: 'INT' },
-    athletics: { name: 'athletics', ability: 'STR' },
-    deception: { name: 'deception', ability: 'CHA' },
-    history: { name: 'history', ability: 'INT' },
-    insight: { name: 'insight', ability: 'WIS' },
-    intimidation: { name: 'intimidation', ability: 'CHA' },
-    investigation: { name: 'investigation', ability: 'INT' },
-    medicine: { name: 'medicine', ability: 'WIS' },
-    nature: { name: 'nature', ability: 'INT' },
-    perception: { name: 'perception', ability: 'WIS' },
-    performance: { name: 'performance', ability: 'CHA' },
-    persuasion: { name: 'persuasion', ability: 'CHA' },
-    religion: { name: 'religion', ability: 'INT' },
-    sleightOfHand: { name: 'sleight of Hand', ability: 'DEX' },
-    stealth: { name: 'stealth', ability: 'DEX' },
-    survival: { name: 'survival', ability: 'WIS' },
+export enum Skills {
+    acrobatics = 'acrobatics',
+    animalHandling = 'animalHandling',
+    arcana = 'arcana',
+    athletics = 'athletics',
+    deception = 'deception',
+    history = 'history',
+    insight = 'insight',
+    intimidation = 'intimidation',
+    investigation = 'investigation',
+    medicine = 'medicine',
+    nature = 'nature',
+    perception = 'perception',
+    performance = 'performance',
+    persuasion = 'persuasion',
+    religion = 'religion',
+    sleightOfHand = 'sleightOfHand',
+    stealth = 'stealth',
+    survival = 'survival',
 };
 
 const testSheetData: Models.SheetData = {
