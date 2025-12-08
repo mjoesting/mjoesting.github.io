@@ -163,7 +163,7 @@ const testSheetData: Models.SheetData = {
 };
 
 const testStateData: Models.StateData = {
-    isUpdated: new BehaviorSubject<boolean>(false),
+    isUpdated: false,
     abilities: {
         STR: 10,
         DEX: 14,

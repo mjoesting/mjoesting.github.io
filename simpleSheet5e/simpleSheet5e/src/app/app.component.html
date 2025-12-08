@@ -3,28 +3,28 @@
     <app-header [isUpdated]="isUpdated"></app-header>
     <main role="form">
         <section id="section-general" class="section-wrapper">
-          <section-general [data]="data.sheet.SectionGeneral" [generalForm]="form.SectionGeneral"></section-general>
+          <section-general [data]="sheet.SectionGeneral" [generalForm]="form.SectionGeneral"></section-general>
         </section>
         <section id="section-health" class="section-wrapper">
-          <section-health [data]="data.sheet.SectionHealth" [healthForm]="form.SectionHealth"></section-health>
+          <section-health [data]="sheet.SectionHealth" [healthForm]="form.SectionHealth"></section-health>
         </section>
         <section id="section-defenses" class="section-wrapper">
-          <section-defenses [data]="data.sheet.SectionDefenses" [defensesForm]="form.SectionDefenses"></section-defenses>
+          <section-defenses [data]="sheet.SectionDefenses" [defensesForm]="form.SectionDefenses"></section-defenses>
         </section>
         <section id="section-abilities" class="section-wrapper">
-          <section-abilities [data]="data.sheet.SectionAbilities" [abilitiesForm]="form.SectionAbilities"></section-abilities>
+          <section-abilities [data]="sheet.SectionAbilities" [abilitiesForm]="form.SectionAbilities" (abilitiesUpdated)="onAbilitiesUpdated('key')"></section-abilities>
         </section>
         <section id="section-saves" class="section-wrapper">
-          <section-saving-throws [data]="data.sheet.SectionSavingThrows" [savingThrowsForm]="form.SectionSavingThrows"></section-saving-throws>
+          <section-saving-throws [data]="sheet.SectionSavingThrows" [savingThrowsForm]="form.SectionSavingThrows"></section-saving-throws>
         </section>
         <section id="section-proficiencies" class="section-wrapper">
-          <section-proficiencies [data]="data.sheet.SectionProficiencies" [proficienciesForm]="form.SectionProficiencies"></section-proficiencies>
+          <section-proficiencies [data]="sheet.SectionProficiencies" [proficienciesForm]="form.SectionProficiencies"></section-proficiencies>
         </section>
         <section id="section-skills" class="section-wrapper">
-          <section-skills [data]="data.sheet.SectionSkills" [skillsForm]="form.SectionSkills"></section-skills>
+          <section-skills [data]="sheet.SectionSkills" [skillsForm]="form.SectionSkills"></section-skills>
         </section>
         <section id="section-main" class="section-wrapper">
-          <section-main [data]="data.sheet.SectionMain" [mainForm]="form.SectionMain"></section-main>
+          <section-main [data]="sheet.SectionMain" [mainForm]="form.SectionMain"></section-main>
         </section>
     </main>
   </div>

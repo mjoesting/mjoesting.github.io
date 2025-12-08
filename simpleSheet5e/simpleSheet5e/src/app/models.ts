@@ -1,5 +1,4 @@
 import { FormControl, FormGroup } from "@angular/forms";
-import { BehaviorSubject } from "rxjs";
 
 export interface StoreData {
     state: StateData,
@@ -7,7 +6,7 @@ export interface StoreData {
 }
 
 export interface StateData {
-    isUpdated: BehaviorSubject<boolean>,
+    isUpdated: boolean,
     abilities: {[key: string]: number}
     form: SheetFormSections | null
 }

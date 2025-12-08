@@ -41,6 +41,14 @@ export class MapperService {
         return generalForm.value as unknown as SectionGeneral;
     }
 
+    mapSheetSectionAbilitiesToState(abilitiesSection: SectionAbilities): {[key: string]: number} {
+        let abilitiesState: {[key: string]: number} = {};
+        for (let abilityKey of Object.keys(abilitiesSection)) {
+            abilitiesState[abilityKey] = abilitiesSection[abilityKey as keyof SectionAbilities]!.score;
+        }
+        return abilitiesState;
+    }
+
     mapSheetSectionAbilitiesToForm(abilitiesData: SectionAbilities): FormGroup<SectionAbilitiesFormFields> {
         const defaultAbility: Ability = {
             name: "",

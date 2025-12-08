@@ -1,7 +1,7 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
-import { SheetFormSections, StoreData } from './models';
+import { SheetData, SheetFormSections } from './models';
 import { SimpleSheetService } from './services/service';
 import { MapperService } from './services/mapper-service';
 import { SectionAbilitiesComponent } from './components/section-abilities/section-abilities.component';
@@ -12,7 +12,6 @@ import { SectionMainComponent } from './components/section-main/section-main.com
 import { SectionProficienciesComponent } from './components/section-proficiencies/section-proficiencies.component';
 import { SectionSavingThrowsComponent } from './components/section-saving-throws/section-saving-throws.component';
 import { SectionSkillsComponent } from './components/section-skills/section-skills.component';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -24,22 +23,22 @@ import { Subscription } from 'rxjs';
 })
 
 export class AppComponent implements OnInit {
-  data!: StoreData;
+  sheet!: SheetData;
   form!: SheetFormSections;
   isUpdated: boolean = false;
-  private isUpdatedSubscription!: Subscription;
 
   constructor(private service: SimpleSheetService) {
     this.service.initData();
-    this.isUpdatedSubscription = this.service.store.state.isUpdated.subscribe((value: boolean) => {
-      this.isUpdated = value;
-    });
+    this.isUpdated = this.service.getCurrentState().isUpdated;
   };
 
   ngOnInit(): void {
-    this.data = this.service.store as StoreData;
-    this.form = this.data.state.form as SheetFormSections;
+    this.sheet = this.service.getCurrentSheet() as SheetData;
+    this.form = this.service.getCurrentState().form as SheetFormSections;
+  }
 
-    console.log('app component this.data: ', this.data)
+  onAbilitiesUpdated(sectionName: string) {
+    console.log('AppComponent - onAbilitiesUpdated called for section: ', sectionName);
+    // this.service.updateBonuses();
   }
 }
