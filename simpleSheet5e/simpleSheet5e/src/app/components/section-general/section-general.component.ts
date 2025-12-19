@@ -2,10 +2,11 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SectionGeneral, SectionGeneralFormFields } from '../../models';
 import { Subscription } from 'rxjs';
-import { SimpleSheetService } from '../../services/service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'section-general',
+  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './section-general.component.html',
   styleUrl: './section-general.component.scss'
@@ -15,11 +16,11 @@ export class SectionGeneralComponent implements OnInit, OnDestroy {
   @Input() generalForm!: FormGroup<SectionGeneralFormFields>;
   formSectionSubscription!: Subscription;
 
-  constructor(private simpleSheetService: SimpleSheetService) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.formSectionSubscription = this.generalForm.valueChanges
-    .subscribe((value: any) => this.simpleSheetService.handleFormUpdates(value, 'SectionGeneral'));
+    // this.formSectionSubscription = this.generalForm.valueChanges
+    // .subscribe((value: any) => this.dataService.handleFormUpdates(value, 'SectionGeneral'));
   }
 
   ngOnDestroy(): void {

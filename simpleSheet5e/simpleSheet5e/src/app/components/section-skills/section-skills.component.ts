@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SectionSkills, SectionSkillsFormFields, SkillFormGroup } from '../../models';
 import * as Constants from '../../constants';
-import { SimpleSheetService } from '../../services/service';
+import { DataService } from '../../services/data.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'section-skills',
+  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './section-skills.component.html',
   styleUrl: './section-skills.component.scss'
@@ -17,11 +18,11 @@ export class SectionSkillsComponent {
   proficiencies: string[] = Object.keys(Constants.Proficiencies);
   formSectionSubscription!: Subscription;
 
-  constructor(private simpleSheetService: SimpleSheetService) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.formSectionSubscription = this.skillsForm.valueChanges
-    .subscribe((value: any) => this.simpleSheetService.handleFormUpdates(value, 'SectionSkills'));
+    // this.formSectionSubscription = this.skillsForm.valueChanges
+    // .subscribe((value: any) => this.simpleSheetService.handleFormUpdates(value, 'SectionSkills'));
   }
 
   ngOnDestroy(): void {

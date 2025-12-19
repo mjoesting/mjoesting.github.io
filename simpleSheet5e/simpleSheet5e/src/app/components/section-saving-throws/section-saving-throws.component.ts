@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import * as Constants from '../../constants';
 import { SavingThrowFormGroup, SectionSavingThrows, SectionSavingThrowsFormFields } from '../../models';
-import { SimpleSheetService } from '../../services/service';
+import { DataService } from '../../services/data.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'section-saving-throws',
+  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './section-saving-throws.component.html',
   styleUrl: './section-saving-throws.component.scss'
@@ -17,11 +18,11 @@ export class SectionSavingThrowsComponent {
   proficiencies = Object.keys(Constants.Proficiencies);
   formSectionSubscription!: Subscription;
 
-  constructor(private simpleSheetService: SimpleSheetService) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.formSectionSubscription = this.savingThrowsForm.valueChanges
-    .subscribe((value: any) => this.simpleSheetService.handleFormUpdates(value, 'SectionSavingThrows'));
+    // this.formSectionSubscription = this.savingThrowsForm.valueChanges
+    // .subscribe((value: any) => this.simpleSheetService.handleFormUpdates(value, 'SectionSavingThrows'));
   }
 
   ngOnDestroy(): void {

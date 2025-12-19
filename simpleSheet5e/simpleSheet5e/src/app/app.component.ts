@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, inject, Signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
-import { SheetData, SheetFormSections } from './models';
-import { SimpleSheetService } from './services/service';
-import { MapperService } from './services/mapper-service';
+import { SheetData, SheetFormSections, StoreData } from './models';
+import { DataService } from './services/data.service';
+import { MapperService } from './services/mapper.service';
 import { SectionAbilitiesComponent } from './components/section-abilities/section-abilities.component';
 import { SectionDefensesComponent } from './components/section-defenses/section-defenses.component';
 import { SectionHealthComponent } from './components/section-health/section-health.component';
@@ -12,33 +13,71 @@ import { SectionMainComponent } from './components/section-main/section-main.com
 import { SectionProficienciesComponent } from './components/section-proficiencies/section-proficiencies.component';
 import { SectionSavingThrowsComponent } from './components/section-saving-throws/section-saving-throws.component';
 import { SectionSkillsComponent } from './components/section-skills/section-skills.component';
+import { StoreService } from './state/store.service';
+import { patchState, signalState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [AppHeaderComponent, SectionAbilitiesComponent, SectionDefensesComponent, SectionGeneralComponent, SectionHealthComponent, SectionMainComponent, SectionProficienciesComponent, SectionSavingThrowsComponent, SectionSkillsComponent, ReactiveFormsModule],
-  providers: [SimpleSheetService, MapperService],
+  providers: [DataService, MapperService, StoreService],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   sheet!: SheetData;
   form!: SheetFormSections;
-  isUpdated: boolean = false;
+  sheetUpdated!: boolean;
 
-  constructor(private service: SimpleSheetService) {
-    this.service.initData();
-    this.isUpdated = this.service.getCurrentState().isUpdated;
-  };
+  private store: Signal<StoreData>;
 
-  ngOnInit(): void {
-    this.sheet = this.service.getCurrentSheet() as SheetData;
-    this.form = this.service.getCurrentState().form as SheetFormSections;
+  constructor(
+    private dataService: DataService,
+    private mapperService: MapperService,
+    private storeService: StoreService
+) {
+    this.store = this.storeService.store();
+    this.sheet = this.storeService.store.sheet() as SheetData;    
+    this.form = this.storeService.store.state.form() as SheetFormSections;
+    this.sheetUpdated = this.storeService.store.state.sheetUpdated();
   }
 
-  onAbilitiesUpdated(sectionName: string) {
-    console.log('AppComponent - onAbilitiesUpdated called for section: ', sectionName);
-    // this.service.updateBonuses();
+  onAbilitiesUpdated() {
+    console.log('onAbilitiesUpdated() in AppComponent; form is dirty: ', this.form.SectionAbilities.dirty);
+    if (this.isFormUpdated()) {
+      this.updateData(this.dataService.getDataWithUpdatedBonuses(this.mapperService.mapFormToSheet(this.form)));
+    }
+  }
+
+  updateData(sheetData: SheetData): void {
+    const currentStore = this.storeService.getCurrentStoreData();
+    this.form.SectionAbilities.markAsPristine();
+    const newState: StoreData = {
+      ...currentStore,
+      sheet: sheetData,
+      state: {
+        abilities: this.mapperService.mapSheetSectionAbilitiesToState(sheetData.SectionAbilities),
+        form: this.form,
+        sheetUpdated: true }
+    };
+    this.storeService.updateState(newState).subscribe((updatedData: StoreData) => {
+      console.log('Data updated from AppComponent: ', updatedData);
+      this.sheet = updatedData.sheet;
+      this.updateForm(this.mapperService.mapSheetToForm(updatedData.sheet));
+      this.sheetUpdated = updatedData.state.sheetUpdated;
+    });
+  }
+
+  updateForm(formData: SheetFormSections): void {
+    console.log('this.form before patch: ', this.form);
+    for (let sectionKey of Object.keys(formData)) {
+      (this.form as any)[sectionKey].patchValue((formData as any)[sectionKey].value);
+    }
+    console.log('this.form after patch: ', this.form);
+  }
+
+  isFormUpdated(): boolean {
+    return this.form.SectionAbilities.dirty && (this.mapperService.mapSheetSectionAbilitiesToState(this.mapperService.mapFormSectionAbilitiesToSheet(this.form.SectionAbilities)) !== this.storeService.store.state.abilities);
   }
 }

@@ -2,10 +2,11 @@ import { Component, DestroyRef, inject, Input, OnDestroy, OnInit } from '@angula
 import { SectionDefenses, SectionDefensesFormFields } from '../../models';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { SimpleSheetService } from '../../services/service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'section-defenses',
+  standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './section-defenses.component.html',
   styleUrl: './section-defenses.component.scss'
@@ -16,11 +17,11 @@ export class SectionDefensesComponent implements OnInit, OnDestroy {
   destroyRef = inject(DestroyRef);
   formSectionSubscription!: Subscription;
 
-  constructor(private simpleSheetService: SimpleSheetService) {}
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
-    this.formSectionSubscription = this.defensesForm.valueChanges
-    .subscribe((value: any) => this.simpleSheetService.handleFormUpdates(value, 'SectionDefenses'));
+    // this.formSectionSubscription = this.defensesForm.valueChanges
+    // .subscribe((value: any) => this.simpleSheetService.handleFormUpdates(value, 'SectionDefenses'));
   }
 
   ngOnDestroy(): void {

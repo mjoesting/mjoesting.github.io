@@ -163,7 +163,7 @@ const testSheetData: Models.SheetData = {
 };
 
 const testStateData: Models.StateData = {
-    isUpdated: false,
+    sheetUpdated: false,
     abilities: {
         STR: 10,
         DEX: 14,

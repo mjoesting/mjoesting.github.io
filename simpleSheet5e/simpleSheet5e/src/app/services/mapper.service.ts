@@ -1,5 +1,5 @@
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { Ability, AbilityFormGroup, SavingThrow, SavingThrowFormGroup, SectionAbilities, SectionAbilitiesFormFields, SectionDefenses, SectionDefensesFormFields, SectionGeneral, SectionGeneralFormFields, SectionHealth, SectionHealthFormFields, SectionMain, SectionMainFormFields, SectionProficiencies, SectionProficienciesFormFields, SectionSavingThrows, SectionSavingThrowsFormFields, SectionSkills, SectionSkillsFormFields, SheetData, SheetFormSections, Skill, SkillFormGroup } from "../models";
+import { Ability, AbilityFormGroup, SaveData, SavingThrow, SavingThrowFormGroup, SectionAbilities, SectionAbilitiesFormFields, SectionDefenses, SectionDefensesFormFields, SectionGeneral, SectionGeneralFormFields, SectionHealth, SectionHealthFormFields, SectionMain, SectionMainFormFields, SectionProficiencies, SectionProficienciesFormFields, SectionSavingThrows, SectionSavingThrowsFormFields, SectionSkills, SectionSkillsFormFields, SheetData, SheetFormSections, Skill, SkillFormGroup, StoreData } from "../models";
 import { Injectable } from "@angular/core";
 import * as Constants from "../constants";
 
@@ -155,5 +155,25 @@ export class MapperService {
 
     mapFormSectionSkillsToSheet(skillsForm: FormGroup<SectionSkillsFormFields>): SectionSkills {
         return skillsForm.value as unknown as SectionSkills;
+    }
+
+    mapDataForSave(storeData: StoreData): SaveData {
+        return {
+            sheet: {
+                ...storeData.sheet
+            },
+            state: {
+                abilities: {
+                    STR: storeData.sheet.SectionAbilities[Constants.Abilities.STR]!.score,
+                    DEX: storeData.sheet.SectionAbilities[Constants.Abilities.DEX]!.score,
+                    CON: storeData.sheet.SectionAbilities[Constants.Abilities.CON]!.score,
+                    INT: storeData.sheet.SectionAbilities[Constants.Abilities.INT]!.score,
+                    WIS: storeData.sheet.SectionAbilities[Constants.Abilities.WIS]!.score,
+                    CHA: storeData.sheet.SectionAbilities[Constants.Abilities.CHA]!.score,
+                },
+                sheetUpdated: storeData.state.sheetUpdated,
+                form: null
+            }
+        }
     }
 }

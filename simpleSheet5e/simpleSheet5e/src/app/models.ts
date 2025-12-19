@@ -6,14 +6,14 @@ export interface StoreData {
 }
 
 export interface StateData {
-    isUpdated: boolean,
+    sheetUpdated: boolean,
     abilities: {[key: string]: number}
     form: SheetFormSections | null
 }
 
 export interface SaveData {
     state: {
-        isUpdated: boolean,
+        sheetUpdated: boolean,
         abilities: {[key: string]: number},
         form: SheetFormSections | null
     },

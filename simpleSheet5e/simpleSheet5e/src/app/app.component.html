@@ -1,6 +1,6 @@
 
   <div id="wrapper">
-    <app-header [isUpdated]="isUpdated"></app-header>
+    <app-header [sheetUpdated]="sheetUpdated"></app-header>
     <main role="form">
         <section id="section-general" class="section-wrapper">
           <section-general [data]="sheet.SectionGeneral" [generalForm]="form.SectionGeneral"></section-general>
@@ -12,7 +12,7 @@
           <section-defenses [data]="sheet.SectionDefenses" [defensesForm]="form.SectionDefenses"></section-defenses>
         </section>
         <section id="section-abilities" class="section-wrapper">
-          <section-abilities [data]="sheet.SectionAbilities" [abilitiesForm]="form.SectionAbilities" (abilitiesUpdated)="onAbilitiesUpdated('key')"></section-abilities>
+          <section-abilities [data]="sheet.SectionAbilities" [abilitiesForm]="form.SectionAbilities" (abilitiesUpdated)="onAbilitiesUpdated()"></section-abilities>
         </section>
         <section id="section-saves" class="section-wrapper">
           <section-saving-throws [data]="sheet.SectionSavingThrows" [savingThrowsForm]="form.SectionSavingThrows"></section-saving-throws>

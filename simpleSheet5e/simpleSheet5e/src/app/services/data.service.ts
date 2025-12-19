@@ -1,26 +1,20 @@
 import * as Constants from '../constants';
 import { Ability, SaveData, SavingThrow, SectionAbilities, SectionSavingThrows, SectionSkills, SheetData, SheetFormSections, Skill, StateData, StoreData } from '../models';
-import { MapperService } from './mapper-service';
+import { MapperService } from './mapper.service';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { patchState, rxMethod, SignalState, signalState } from '@ngrx/signals';
 
 @Injectable()
-export class SimpleSheetService {
-
+export class DataService {
     constructor(private mapperService: MapperService) {}
 
-    #state!: SignalState<StateData>;
-    #sheet!: SignalState<SheetData>;
-
-    initData(): void {
+    initData(): StoreData {
         let newData: StoreData;
         if (!localStorage.getItem('simpleSheet')) {
             const sheet = this.initNewData();
             const state: StateData = {
                 abilities: this.mapperService.mapSheetSectionAbilitiesToState(sheet.SectionAbilities),
                 form: this.mapperService.mapSheetToForm(sheet),
-                isUpdated: false
+                sheetUpdated: false
             }
             newData = {
                 state: state,
@@ -32,13 +26,12 @@ export class SimpleSheetService {
                 state: {
                     abilities: storeData.state.abilities,
                     form: this.mapperService.mapSheetToForm(storeData.sheet),
-                    isUpdated: false
+                    sheetUpdated: false
                 },
                 sheet: storeData.sheet
             };
         }
-        this.#state = signalState(newData.state);
-        this.#sheet = signalState(newData.sheet);
+        return newData;
     };
 
     initNewData(): SheetData {
@@ -133,45 +126,9 @@ export class SimpleSheetService {
         return newSheetData;
     }
 
-    getCurrentState(): StateData {
-        console.log('Getting current state: ', this.#state);
-        return this.#state;
-    }
-
-    getCurrentSheet(): SheetData {
-        console.log('Getting current sheet: ', this.#sheet);
-        return this.#sheet;
-    }
-
-    handleFormUpdates<K extends keyof SheetData>(newFormValues: SheetData[K], sectionName: K): void {
-        const formMapper = `mapShee${sectionName}ToForm`;
-        this.#state.isUpdated.next(true);
-        this.#sheet[sectionName] = newFormValues;
-        if (sectionName === Constants.Sections.SectionAbilities) {
-            this.updateBonuses();
-        }
-    }
-
-    saveToStorage(): void {
-        const dataToSave: SaveData = {
-            sheet: {
-                ...this.#sheet
-            },
-            state: {
-                abilities: {
-                    STR: this.#sheet.SectionAbilities[Constants.Abilities.STR]!.score,
-                    DEX: this.#sheet.SectionAbilities[Constants.Abilities.DEX]!.score,
-                    CON: this.#sheet.SectionAbilities[Constants.Abilities.CON]!.score,
-                    INT: this.#sheet.SectionAbilities[Constants.Abilities.INT]!.score,
-                    WIS: this.#sheet.SectionAbilities[Constants.Abilities.WIS]!.score,
-                    CHA: this.#sheet.SectionAbilities[Constants.Abilities.CHA]!.score,
-                },
-                isUpdated: this.#state.isUpdated.getValue(),
-                form: null
-            }
-        }
+    saveToStorage(data: StoreData): void {
+        const dataToSave: SaveData = this.mapperService.mapDataForSave(data);
         localStorage.setItem('simpleSheet', JSON.stringify(dataToSave));
-        this.#state.isUpdated.next(false);
     }
 
     dataFromStorage(): StoreData {
@@ -179,37 +136,47 @@ export class SimpleSheetService {
     }
 
     isCustom(defaultValue: number | null, currentValue: number | null) {
-        console.log('isCustom? ', (defaultValue == currentValue));
+        //  TODO: this is getting called twice.
         return defaultValue == currentValue;
     }
 
-    getDefaultBonus(object: any) {
-        if (!object.ability) {
-            return null;
-        } else {
-            const abilityMod = this.getDefaultAbilityModifier(this.#state!.abilities[object.ability]);
-            const proficiencyBonus = this.getDefaultProficiencyBonus(Number(this.#sheet!.SectionGeneral!.characterLevel));
-            let proficiencyMod;
-            switch(object.proficiency) {
-                case Constants.Proficiencies['proficient']:
-                    proficiencyMod = proficiencyBonus;
-                    break;
-                case Constants.Proficiencies['expertise']:
-                    proficiencyMod = (proficiencyBonus * 2);
-                    break;
-                case Constants.Proficiencies['halfProficient']:
-                    proficiencyMod = (proficiencyBonus / 2);
-                    break;
-                default:
-                proficiencyMod = 0;
-            };
+    // getDefaultBonus(object: any) {
+    //     if (!object.ability) {
+    //         return null;
+    //     } else {
+    //         const abilityMod = this.getDefaultAbilityModifier(this.store.getCurrentSheet().abilities[object.ability]);
+    //         const proficiencyBonus = this.getDefaultProficiencyBonus(Number(this.store.sheet()!.SectionGeneral!.characterLevel));
+    //         let proficiencyMod;
+    //         switch(object.proficiency) {
+    //             case Constants.Proficiencies['proficient']:
+    //                 proficiencyMod = proficiencyBonus;
+    //                 break;
+    //             case Constants.Proficiencies['expertise']:
+    //                 proficiencyMod = (proficiencyBonus * 2);
+    //                 break;
+    //             case Constants.Proficiencies['halfProficient']:
+    //                 proficiencyMod = (proficiencyBonus / 2);
+    //                 break;
+    //             default:
+    //             proficiencyMod = 0;
+    //         };
     
-            return abilityMod! + proficiencyMod;
-        }
-    }
+    //         return abilityMod! + proficiencyMod;
+    //     }
+    // }
 
     getDefaultAbilityModifier(score: number) {
         switch(true) {
+            case (score! >= 30):
+                return 10;
+            case (score! >= 28):
+                return 9;
+            case (score! >= 26):
+                return 8;
+            case (score! >= 24):
+                return 7;
+            case (score! >= 22):
+                return 6;
             case (score! >= 20):
                 return 5;
             case (score! >= 18):
@@ -252,11 +219,10 @@ export class SimpleSheetService {
         }
     }
 
-    updateBonuses(): void {
-        let updatedSheetData: SheetData = this.#sheet;
+    getDataWithUpdatedBonuses(currentSheetData: SheetData): SheetData {
+        let updatedSheetData: SheetData = currentSheetData;
         let defaultBonuses: {[key: string]: number} = {};
-        const newAbilities: SectionAbilities = this.#sheet.SectionAbilities;
-        const storedAbilities: {[key: string]: number} = this.#state.abilities;
+        const newAbilities: SectionAbilities = currentSheetData.SectionAbilities;
 
         for (let a in Constants.Abilities) {
             defaultBonuses[a] = this.getDefaultAbilityModifier(newAbilities[a]!.score)
@@ -265,12 +231,15 @@ export class SimpleSheetService {
         for (let section of Object.keys(updatedSheetData)) {
             switch (section) {
                 case Constants.Sections.SectionAbilities:
+                    let updatedAbilitiesSection = updatedSheetData.SectionAbilities;
                     for (let ability in Constants.Abilities) {
-                        const abilityData = updatedSheetData.SectionAbilities[ability];
-                        if (abilityData && abilityData.customBonusModifiedBy === null) {
+                        let abilityData = updatedSheetData.SectionAbilities[ability];
+                        if (abilityData && this.isCustom(defaultBonuses[ability], abilityData.bonus)) {
                             abilityData.bonus = defaultBonuses[ability];
                         }
                     }
+                    console.log('Updated Abilities Section: ', updatedAbilitiesSection);
+                    updatedSheetData.SectionAbilities = updatedAbilitiesSection;
                     break;
                 case Constants.Sections.SectionDefenses:
                     break;
@@ -293,7 +262,6 @@ export class SimpleSheetService {
                     }
 
                     updatedSheetData.SectionSavingThrows = updatedSavingThrowsSection;
-                    this.#state.form!.SectionSavingThrows = this.mapperService.mapSheetSectionSavingThrowsToForm(updatedSavingThrowsSection);
                     break;
                 case Constants.Sections.SectionSkills:
                     let updatedSkillsSection = updatedSheetData.SectionSkills;
@@ -308,13 +276,11 @@ export class SimpleSheetService {
                     }
 
                     updatedSheetData.SectionSkills = updatedSkillsSection;
-                    this.#state.form!.SectionSkills = this.mapperService.mapSheetSectionSkillsToForm(updatedSkillsSection);
                     break;
-                default: return;
+                default: break;
             }
         }
-
-        this.#sheet = updatedSheetData;
+        return updatedSheetData;
     }
 
     // longRest() {
@@ -331,3 +297,7 @@ export class SimpleSheetService {
     //     Store.sheet.sectionHealth.hitDice -= hitDice;
     // }
 };
+export function initData(): any {
+    throw new Error('Function not implemented.');
+}
+
