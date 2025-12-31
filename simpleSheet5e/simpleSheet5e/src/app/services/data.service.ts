@@ -52,7 +52,7 @@ export class DataService {
                         name: key,
                         score: 10,
                         bonus: this.getDefaultAbilityModifier(10),
-                        customBonusModifiedBy: null
+                        customModifier: 0
                     } as Ability;
                 }
                 return initAbilitiesData as SectionAbilities;
@@ -96,30 +96,30 @@ export class DataService {
                         ability: key,
                         proficiency: null,
                         bonus: this.getDefaultAbilityModifier(10) ?? 0,
-                        customBonusModifiedBy: null
+                        customModifier: 0
                     }
                 }
                 return initSavingThrowsData as SectionSavingThrows;
             })(),
             SectionSkills: {
-                acrobatics: { name: 'acrobatics', ability: 'DEX', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                animalHandling: { name: 'animal handling', ability: 'WIS', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                arcana: { name: 'arcana', ability: 'INT', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                athletics: { name: 'athletics', ability: 'STR', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                deception: { name: 'deception', ability: 'CHA', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                history: { name: 'history', ability: 'INT', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                insight: { name: 'insight', ability: 'WIS', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                intimidation: { name: 'intimidation', ability: 'CHA', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                investigation: { name: 'investigation', ability: 'INT', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                medicine: { name: 'medicine', ability: 'WIS', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                nature: { name: 'nature', ability: 'INT', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                perception: { name: 'perception', ability: 'WIS', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                performance: { name: 'performance', ability: 'CHA', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                persuasion: { name: 'persuasion', ability: 'CHA', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                religion: { name: 'religion', ability: 'INT', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                sleightOfHand: { name: 'sleight of hand', ability: 'DEX', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                stealth: { name: 'stealth', ability: 'DEX', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-                survival: { name: 'survival', ability: 'WIS', proficiency: '', bonus: 0, customBonusModifiedBy: null}
+                acrobatics: { name: 'acrobatics', ability: 'DEX', proficiency: '', bonus: 0, customModifier: 0 },
+                animalHandling: { name: 'animal handling', ability: 'WIS', proficiency: '', bonus: 0, customModifier: 0 },
+                arcana: { name: 'arcana', ability: 'INT', proficiency: '', bonus: 0, customModifier: 0 },
+                athletics: { name: 'athletics', ability: 'STR', proficiency: '', bonus: 0, customModifier: 0 },
+                deception: { name: 'deception', ability: 'CHA', proficiency: '', bonus: 0, customModifier: 0 },
+                history: { name: 'history', ability: 'INT', proficiency: '', bonus: 0, customModifier: 0 },
+                insight: { name: 'insight', ability: 'WIS', proficiency: '', bonus: 0, customModifier: 0 },
+                intimidation: { name: 'intimidation', ability: 'CHA', proficiency: '', bonus: 0, customModifier: 0 },
+                investigation: { name: 'investigation', ability: 'INT', proficiency: '', bonus: 0, customModifier: 0 },
+                medicine: { name: 'medicine', ability: 'WIS', proficiency: '', bonus: 0, customModifier: 0 },
+                nature: { name: 'nature', ability: 'INT', proficiency: '', bonus: 0, customModifier: 0 },
+                perception: { name: 'perception', ability: 'WIS', proficiency: '', bonus: 0, customModifier: 0 },
+                performance: { name: 'performance', ability: 'CHA', proficiency: '', bonus: 0, customModifier: 0 },
+                persuasion: { name: 'persuasion', ability: 'CHA', proficiency: '', bonus: 0, customModifier: 0 },
+                religion: { name: 'religion', ability: 'INT', proficiency: '', bonus: 0, customModifier: 0 },
+                sleightOfHand: { name: 'sleight of hand', ability: 'DEX', proficiency: '', bonus: 0, customModifier: 0 },
+                stealth: { name: 'stealth', ability: 'DEX', proficiency: '', bonus: 0, customModifier: 0 },
+                survival: { name: 'survival', ability: 'WIS', proficiency: '', bonus: 0, customModifier: 0}
             }
         };
 
@@ -219,10 +219,10 @@ export class DataService {
         }
     }
 
-    getDataWithUpdatedBonuses(currentSheetData: SheetData): SheetData {
-        let updatedSheetData: SheetData = currentSheetData;
+    getDataWithUpdatedBonuses(sheetData: SheetData): SheetData {
+        let updatedSheetData: SheetData = sheetData;
         let defaultBonuses: {[key: string]: number} = {};
-        const newAbilities: SectionAbilities = currentSheetData.SectionAbilities;
+        const newAbilities: SectionAbilities = sheetData.SectionAbilities;
 
         for (let a in Constants.Abilities) {
             defaultBonuses[a] = this.getDefaultAbilityModifier(newAbilities[a]!.score)
@@ -234,11 +234,10 @@ export class DataService {
                     let updatedAbilitiesSection = updatedSheetData.SectionAbilities;
                     for (let ability in Constants.Abilities) {
                         let abilityData = updatedSheetData.SectionAbilities[ability];
-                        if (abilityData && this.isCustom(defaultBonuses[ability], abilityData.bonus)) {
+                        if (abilityData && !this.isCustom(defaultBonuses[ability], abilityData.bonus)) {
                             abilityData.bonus = defaultBonuses[ability];
                         }
                     }
-                    console.log('Updated Abilities Section: ', updatedAbilitiesSection);
                     updatedSheetData.SectionAbilities = updatedAbilitiesSection;
                     break;
                 case Constants.Sections.SectionDefenses:
@@ -256,7 +255,7 @@ export class DataService {
                     
                     for (let ability in Constants.Abilities) {
                         const savingThrowData = updatedSheetData.SectionSavingThrows[ability];
-                        if (savingThrowData.customBonusModifiedBy === null) {
+                        if (!this.isCustom(defaultBonuses[ability], savingThrowData.bonus)) {
                             savingThrowData.bonus = defaultBonuses[ability]!;
                         }
                     }

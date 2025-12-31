@@ -93,12 +93,12 @@ const testSheetData: Models.SheetData = {
         proficiencyBonus: 3
     },
     SectionAbilities: {
-        STR: { name: Abilities['STR'], score: 10, bonus: 0, customBonusModifiedBy: null },
-        DEX: { name: Abilities['DEX'], score: 14, bonus: 2, customBonusModifiedBy: null },
-        CON: { name: Abilities['CON'], score: 12, bonus: 1, customBonusModifiedBy: null },
-        INT: { name: Abilities['INT'], score: 16, bonus: 3, customBonusModifiedBy: null },
-        WIS: { name: Abilities['WIS'], score: 13, bonus: 1, customBonusModifiedBy: null },
-        CHA: { name: Abilities['CHA'], score: 11, bonus: 0, customBonusModifiedBy: null }
+        STR: { name: Abilities['STR'], score: 10, bonus: 0, customModifier: 0 },
+        DEX: { name: Abilities['DEX'], score: 14, bonus: 2, customModifier: 0 },
+        CON: { name: Abilities['CON'], score: 12, bonus: 1, customModifier: 0 },
+        INT: { name: Abilities['INT'], score: 16, bonus: 3, customModifier: 0 },
+        WIS: { name: Abilities['WIS'], score: 13, bonus: 1, customModifier: 0 },
+        CHA: { name: Abilities['CHA'], score: 11, bonus: 0, customModifier: 0 }
     },
     SectionDefenses: {
         ac: 15,
@@ -133,32 +133,32 @@ const testSheetData: Models.SheetData = {
         languages: 'Common, Elvish, Draconic'
     },
     SectionSavingThrows: {
-        STR: { ability: 'STR', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-        DEX: { ability: 'DEX', proficiency: 'proficient', bonus: 5, customBonusModifiedBy: null },
-        CON: { ability: 'CON', proficiency: '', bonus: 1, customBonusModifiedBy: null },
-        INT: { ability: 'INT', proficiency: 'proficient', bonus: 6, customBonusModifiedBy: null },
-        WIS: { ability: 'WIS', proficiency: 'half-Proficient', bonus: 2, customBonusModifiedBy: null },
-        CHA: { ability: 'CHA', proficiency: '', bonus: 0, customBonusModifiedBy: null }
+        STR: { ability: 'STR', proficiency: '', bonus: 0, customModifier: 0 },
+        DEX: { ability: 'DEX', proficiency: 'proficient', bonus: 5, customModifier: 0 },
+        CON: { ability: 'CON', proficiency: '', bonus: 1, customModifier: 0 },
+        INT: { ability: 'INT', proficiency: 'proficient', bonus: 6, customModifier: 0 },
+        WIS: { ability: 'WIS', proficiency: 'half-Proficient', bonus: 2, customModifier: 0 },
+        CHA: { ability: 'CHA', proficiency: '', bonus: 0, customModifier: 0 }
     },
     SectionSkills: {
-        acrobatics: { name: 'acrobatics', ability: 'DEX', proficiency: '', bonus: 2, customBonusModifiedBy: null },
-        animalHandling: { name: 'animal Handling', ability: 'WIS', proficiency: '', bonus: 1, customBonusModifiedBy: null },
-        arcana: { name: 'arcana', ability: 'INT', proficiency: 'proficient', bonus: 6, customBonusModifiedBy: null },
-        athletics: { name: 'athletics', ability: 'STR', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-        deception: { name: 'deception', ability: 'CHA', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-        history: { name: 'history', ability: 'INT', proficiency: 'proficient', bonus: 6, customBonusModifiedBy: null },
-        insight: { name: 'insight', ability: 'WIS', proficiency: '', bonus: 1, customBonusModifiedBy: null },
-        intimidation: { name: 'intimidation', ability: 'CHA', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-        investigation: { name: 'investigation', ability: 'INT', proficiency: '', bonus: 3, customBonusModifiedBy: null },
-        medicine: { name: 'medicine', ability: 'WIS', proficiency: '', bonus: 1, customBonusModifiedBy: null },
-        nature: { name: 'nature', ability: 'INT', proficiency: '', bonus: 3, customBonusModifiedBy: null },
-        perception: { name: 'perception', ability: 'WIS', proficiency: 'proficient', bonus: 4, customBonusModifiedBy: null },
-        performance: { name: 'performance', ability: 'CHA', proficiency: '', bonus: 0, customBonusModifiedBy: null },
-        persuasion: { name: 'persuasion', ability: 'CHA', proficiency: 'proficient', bonus: 3, customBonusModifiedBy: null },
-        religion: { name: 'religion', ability: 'INT', proficiency: '', bonus: 3, customBonusModifiedBy: null },
-        sleightOfHand: { name: 'sleight of Hand', ability: 'DEX', proficiency: '', bonus: 2, customBonusModifiedBy: null },
-        stealth: { name: 'stealth', ability: 'DEX', proficiency: '', bonus: 2, customBonusModifiedBy: null },
-        survival: { name: 'survival', ability: 'WIS', proficiency: '', bonus: 1, customBonusModifiedBy: null }
+        acrobatics: { name: 'acrobatics', ability: 'DEX', proficiency: '', bonus: 2, customModifier: 0 },
+        animalHandling: { name: 'animal Handling', ability: 'WIS', proficiency: '', bonus: 1, customModifier: 0 },
+        arcana: { name: 'arcana', ability: 'INT', proficiency: 'proficient', bonus: 6, customModifier: 0 },
+        athletics: { name: 'athletics', ability: 'STR', proficiency: '', bonus: 0, customModifier: 0 },
+        deception: { name: 'deception', ability: 'CHA', proficiency: '', bonus: 0, customModifier: 0 },
+        history: { name: 'history', ability: 'INT', proficiency: 'proficient', bonus: 6, customModifier: 0 },
+        insight: { name: 'insight', ability: 'WIS', proficiency: '', bonus: 1, customModifier: 0 },
+        intimidation: { name: 'intimidation', ability: 'CHA', proficiency: '', bonus: 0, customModifier: 0 },
+        investigation: { name: 'investigation', ability: 'INT', proficiency: '', bonus: 3, customModifier: 0 },
+        medicine: { name: 'medicine', ability: 'WIS', proficiency: '', bonus: 1, customModifier: 0 },
+        nature: { name: 'nature', ability: 'INT', proficiency: '', bonus: 3, customModifier: 0 },
+        perception: { name: 'perception', ability: 'WIS', proficiency: 'proficient', bonus: 4, customModifier: 0 },
+        performance: { name: 'performance', ability: 'CHA', proficiency: '', bonus: 0, customModifier: 0 },
+        persuasion: { name: 'persuasion', ability: 'CHA', proficiency: 'proficient', bonus: 3, customModifier: 0 },
+        religion: { name: 'religion', ability: 'INT', proficiency: '', bonus: 3, customModifier: 0 },
+        sleightOfHand: { name: 'sleight of Hand', ability: 'DEX', proficiency: '', bonus: 2, customModifier: 0 },
+        stealth: { name: 'stealth', ability: 'DEX', proficiency: '', bonus: 2, customModifier: 0 },
+        survival: { name: 'survival', ability: 'WIS', proficiency: '', bonus: 1, customModifier: 0 }
     }
 };
 

@@ -153,7 +153,7 @@ export type AbilityFormGroup = {
     name: FormControl<string | null>;
     score: FormControl<number | null>;
     bonus: FormControl<number | null>;
-    customBonusModifiedBy: FormControl<string | null>;
+    customModifier: FormControl<number | null>;
 }
 
 export type SectionDefensesFormFields = {
@@ -203,7 +203,7 @@ export type InventoryFormGroup = {
     attackBonus: FormControl<number | null>;
     isMagic: FormControl<boolean | null>;
     magicBonus: FormControl<number | null>;
-    customBonusModifiedBy: FormControl<string | null>,
+    customModifier: FormControl<number | null>,
     notes: FormControl<string | null>;
 }
 
@@ -249,7 +249,7 @@ export type SavingThrowFormGroup = {
     ability: FormControl<string | null>;
     proficiency: FormControl<string | null>;
     bonus: FormControl<number | null>;
-    customBonusModifiedBy: FormControl<string | null>;
+    customModifier: FormControl<number | null>;
 }
     
 export type SectionSkillsFormFields = {
@@ -278,7 +278,7 @@ export type SkillFormGroup = {
     ability: FormControl<string>;
     proficiency: FormControl<string | null | undefined>;
     bonus: FormControl<number | null | undefined>;
-    customBonusModifiedBy: FormControl<string | null>;
+    customModifier: FormControl<number | null>;
 }
     
 export interface Class {
@@ -290,14 +290,14 @@ export interface Ability {
     name: string;
     score: number;
     bonus: number;
-    customBonusModifiedBy: string | null;
+    customModifier: number | null;
 }
     
 export interface SavingThrow {
     ability: string;
     proficiency: string | null;
     bonus: number;
-    customBonusModifiedBy: string | null;
+    customModifier: number | null;
 }
     
 export interface Skill {
@@ -305,7 +305,7 @@ export interface Skill {
     ability: string;
     proficiency?: string | null;
     bonus: number;
-    customBonusModifiedBy?: string | null;
+    customModifier: number | null;
 }
     
 export interface Action {
@@ -327,7 +327,7 @@ export interface Item {
     attackBonus: number | null;
     isMagic: boolean | null;
     magicBonus: number | null;
-    customBonusModifiedBy: string | null,
+    customModifier: number | null,
     notes: string | null;
 }
     

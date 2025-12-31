@@ -44,7 +44,6 @@ export class AppComponent {
   }
 
   onAbilitiesUpdated() {
-    console.log('onAbilitiesUpdated() in AppComponent; form is dirty: ', this.form.SectionAbilities.dirty);
     if (this.isFormUpdated()) {
       this.updateData(this.dataService.getDataWithUpdatedBonuses(this.mapperService.mapFormToSheet(this.form)));
     }
@@ -62,7 +61,6 @@ export class AppComponent {
         sheetUpdated: true }
     };
     this.storeService.updateState(newState).subscribe((updatedData: StoreData) => {
-      console.log('Data updated from AppComponent: ', updatedData);
       this.sheet = updatedData.sheet;
       this.updateForm(this.mapperService.mapSheetToForm(updatedData.sheet));
       this.sheetUpdated = updatedData.state.sheetUpdated;
@@ -70,11 +68,9 @@ export class AppComponent {
   }
 
   updateForm(formData: SheetFormSections): void {
-    console.log('this.form before patch: ', this.form);
     for (let sectionKey of Object.keys(formData)) {
       (this.form as any)[sectionKey].patchValue((formData as any)[sectionKey].value);
     }
-    console.log('this.form after patch: ', this.form);
   }
 
   isFormUpdated(): boolean {

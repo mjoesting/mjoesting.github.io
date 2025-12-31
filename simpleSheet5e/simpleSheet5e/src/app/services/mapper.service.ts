@@ -54,7 +54,7 @@ export class MapperService {
             name: "",
             score: 0,
             bonus: 0,
-            customBonusModifiedBy: ""
+            customModifier: 0
         };
 
         return this.formBuilder.group({

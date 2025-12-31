@@ -6,6 +6,7 @@
         <h5>Ability</h5>
         <h5>Proficient</h5>
         <h5>Bonus</h5>
+        <h5>Custom Modifier</h5>
     </div>
     @for (save of savingThrowsGroupsArray; track save.controls.ability.value) {
         <div [formGroup]="save" class="row">
@@ -24,6 +25,11 @@
                 <div>
                     <div class="input-wrapper">
                         <input type="text" id="saves-{{save.controls.bonus.value}}-mod" formControlName="bonus" />
+                    </div>
+                </div>
+                <div>
+                    <div class="input-wrapper">
+                        <input type="text" id="saves-{{save.controls.customModifier.value}}-mod" formControlName="customModifier" />
                     </div>
                 </div>
             </div>

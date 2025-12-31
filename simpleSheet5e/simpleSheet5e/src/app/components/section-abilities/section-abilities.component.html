@@ -7,7 +7,7 @@
         <h5>Name</h5>
         <h5>Score</h5>
         <h5>Bonus</h5>
-        <h5>Custom Bonus</h5>
+        <h5>Custom Modifier</h5>
     </div>
     @for (ability of abilitiesGroupsArray; track ability.controls.name.value) {
         @let abilityName = ability.controls.name.value;
@@ -26,7 +26,7 @@
                 </div>
                 <div class="field-wrapper">
                     <div class="input-wrapper">
-                        <input type="text" id="abilities-{{ abilityName }}-custom" formControlName="customBonusModifiedBy" />
+                        <input type="text" id="abilities-{{ abilityName }}-custom" formControlName="customModifier" />
                     </div>
                 </div>
             </div>

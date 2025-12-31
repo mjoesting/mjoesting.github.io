@@ -7,7 +7,7 @@
         <h5 class="width-grow-2">Proficient</h5>
         <h5>Ability</h5>
         <h5>Bonus</h5>
-        <h6 class="width-grow-2">Custom Bonus Modified By</h6>
+        <h6 class="center">Custom Modifier</h6>
     </div>
     @for (skill of skillsGroupsArray; track skill.controls.name.value) {
         @let skillName = skill.controls.name.value;
@@ -22,14 +22,14 @@
                     }
                 </select>
             </div>
-            <h6>{{ skill.controls.ability.value }}</h6>
+            <h6 class="center">{{ skill.controls.ability.value }}</h6>
             <div class="field-wrapper add-margin-right">
                 <div class="input-wrapper">
                     <input id="skills-{{skillName}}-mod" type="text" formControlName="bonus" />
                 </div>
             </div>
-            <div class="input-wrapper width-grow-2">
-                <input id="skills-{{skillName}}-custom" type="text" formControlName="customBonusModifiedBy" />
+            <div class="input-wrapper">
+                <input id="skills-{{skillName}}-custom" type="text" formControlName="customModifier" />
             </div>
         </div>
     }
