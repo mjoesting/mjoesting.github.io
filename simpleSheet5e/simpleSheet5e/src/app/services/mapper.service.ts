@@ -11,11 +11,11 @@ export class MapperService {
         return {
             SectionGeneral: this.mapSheetSectionGeneralToForm(sheetData.SectionGeneral) as FormGroup<SectionGeneralFormFields>,
             SectionAbilities: this.mapSheetSectionAbilitiesToForm(sheetData.SectionAbilities) as FormGroup<SectionAbilitiesFormFields>,
-            SectionSavingThrows: this.mapSheetSectionSavingThrowsToForm(sheetData.SectionSavingThrows) as FormGroup<SectionSavingThrowsFormFields>,
+            SectionSavingThrows: this.mapSheetSectionSavingThrowsToForm(sheetData.SectionSavingThrows, sheetData.SectionAbilities) as FormGroup<SectionSavingThrowsFormFields>,
             SectionDefenses: this.mapSheetSectionDefensesToForm(sheetData.SectionDefenses) as FormGroup<SectionDefensesFormFields>,
             SectionHealth: this.mapSheetSectionHealthToForm(sheetData.SectionHealth) as FormGroup<SectionHealthFormFields>,
             SectionProficiencies: this.mapSheetSectionProficienciesToForm(sheetData.SectionProficiencies) as FormGroup<SectionProficienciesFormFields>,
-            SectionSkills: this.mapSheetSectionSkillsToForm(sheetData.SectionSkills) as FormGroup<SectionSkillsFormFields>,
+            SectionSkills: this.mapSheetSectionSkillsToForm(sheetData.SectionSkills, sheetData.SectionAbilities) as FormGroup<SectionSkillsFormFields>,
             SectionMain: this.mapSheetSectionMainToForm(sheetData.SectionMain) as FormGroup<SectionMainFormFields>
         };
     }
@@ -107,7 +107,7 @@ export class MapperService {
         return proficienciesForm.value as unknown as SectionProficiencies;
     }
 
-    mapSheetSectionSavingThrowsToForm(savingThrowsData: SectionSavingThrows): FormGroup<SectionSavingThrowsFormFields> {
+    mapSheetSectionSavingThrowsToForm(savingThrowsData: SectionSavingThrows, abilitiesData: SectionAbilities): FormGroup<SectionSavingThrowsFormFields> {
         return this.formBuilder.group({
             STR: this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["STR"]]!),
             DEX: this.mapSavingThrowDataToFormGroup(savingThrowsData[Constants.Abilities["DEX"]]!),
@@ -126,7 +126,7 @@ export class MapperService {
         return savingThrowsForm.value as unknown as SectionSavingThrows;
     }
 
-    mapSheetSectionSkillsToForm(sectionSkillsData: SectionSkills): FormGroup<SectionSkillsFormFields> {
+    mapSheetSectionSkillsToForm(sectionSkillsData: SectionSkills, abilitiesData: SectionAbilities): FormGroup<SectionSkillsFormFields> {
         return this.formBuilder.group({
             acrobatics: this.mapSkillDataToFormGroup(sectionSkillsData.acrobatics) as FormGroup<SkillFormGroup>,
             animalHandling: this.mapSkillDataToFormGroup(sectionSkillsData.animalHandling) as FormGroup<SkillFormGroup>,

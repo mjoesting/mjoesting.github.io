@@ -220,6 +220,8 @@ export class DataService {
     }
 
     getDataWithUpdatedBonuses(sheetData: SheetData): SheetData {
+        console.log('getDataWithUpdatedBonuses() called');
+
         let updatedSheetData: SheetData = sheetData;
         let defaultBonuses: {[key: string]: number} = {};
         const newAbilities: SectionAbilities = sheetData.SectionAbilities;
@@ -234,9 +236,9 @@ export class DataService {
                     let updatedAbilitiesSection = updatedSheetData.SectionAbilities;
                     for (let ability in Constants.Abilities) {
                         let abilityData = updatedSheetData.SectionAbilities[ability];
-                        if (abilityData && !this.isCustom(defaultBonuses[ability], abilityData.bonus)) {
-                            abilityData.bonus = defaultBonuses[ability];
-                        }
+                        abilityData!.bonus = defaultBonuses[ability] += abilityData!.customModifier!;
+
+                        console.log('abilityData after update:', abilityData);
                     }
                     updatedSheetData.SectionAbilities = updatedAbilitiesSection;
                     break;
@@ -255,9 +257,7 @@ export class DataService {
                     
                     for (let ability in Constants.Abilities) {
                         const savingThrowData = updatedSheetData.SectionSavingThrows[ability];
-                        if (!this.isCustom(defaultBonuses[ability], savingThrowData.bonus)) {
-                            savingThrowData.bonus = defaultBonuses[ability]!;
-                        }
+                        savingThrowData.bonus = defaultBonuses[ability]! += savingThrowData.customModifier!;
                     }
 
                     updatedSheetData.SectionSavingThrows = updatedSavingThrowsSection;
@@ -268,10 +268,8 @@ export class DataService {
                     for (let skill in Constants.Skills) {
                         let skillData: Skill = updatedSheetData.SectionSkills[skill as keyof SectionSkills];
                         const skillAbility: string = skillData.ability
-                        if (!this.isCustom(skillData.bonus, defaultBonuses[skillAbility])) {
-                            skillData.bonus = defaultBonuses[skillAbility];
-                            updatedSkillsSection[skill as keyof SectionSkills] = skillData;
-                        }
+                        skillData.bonus = defaultBonuses[skillAbility] += skillData.customModifier!;
+                        updatedSkillsSection[skill as keyof SectionSkills] = skillData;
                     }
 
                     updatedSheetData.SectionSkills = updatedSkillsSection;
@@ -279,6 +277,9 @@ export class DataService {
                 default: break;
             }
         }
+
+        console.log('updatedSheetData after bonus update:', updatedSheetData);
+
         return updatedSheetData;
     }
 

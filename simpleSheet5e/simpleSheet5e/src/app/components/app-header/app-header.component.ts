@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { ButtonComponent } from '../button/button.component';
+import { StoreService } from '../../state/store.service';
 
 @Component({
   selector: 'app-header',
@@ -11,9 +12,9 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class AppHeaderComponent {
   @Input() sheetUpdated!: boolean | null;
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private storeService: StoreService) {}
 
   handleSave() {
-    // this.dataService.saveToStorage();
+    this.dataService.saveToStorage(this.storeService.getCurrentStoreData());
   }
 }
