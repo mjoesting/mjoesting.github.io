@@ -1,0 +1,30 @@
+
+  <div id="wrapper">
+    <app-header [sheetUpdated]="sheetUpdated"></app-header>
+    <main role="form">
+        <section id="section-general" class="section-wrapper">
+          <section-general [data]="sheet.SectionGeneral" [generalForm]="form.SectionGeneral"></section-general>
+        </section>
+        <section id="section-health" class="section-wrapper">
+          <section-health [data]="sheet.SectionHealth" [healthForm]="form.SectionHealth"></section-health>
+        </section>
+        <section id="section-defenses" class="section-wrapper">
+          <section-defenses [data]="sheet.SectionDefenses" [defensesForm]="form.SectionDefenses"></section-defenses>
+        </section>
+        <section id="section-abilities" class="section-wrapper">
+          <section-abilities [data]="sheet.SectionAbilities" [abilitiesForm]="form.SectionAbilities" (abilitiesUpdated)="onAbilitiesUpdated()"></section-abilities>
+        </section>
+        <section id="section-saves" class="section-wrapper">
+          <section-saving-throws [data]="sheet.SectionSavingThrows" [savingThrowsForm]="form.SectionSavingThrows"></section-saving-throws>
+        </section>
+        <section id="section-proficiencies" class="section-wrapper">
+          <section-proficiencies [data]="sheet.SectionProficiencies" [proficienciesForm]="form.SectionProficiencies"></section-proficiencies>
+        </section>
+        <section id="section-skills" class="section-wrapper">
+          <section-skills [data]="sheet.SectionSkills" [skillsForm]="form.SectionSkills"></section-skills>
+        </section>
+        <section id="section-main" class="section-wrapper">
+          <section-main [data]="sheet.SectionMain" [mainForm]="form.SectionMain"></section-main>
+        </section>
+    </main>
+  </div>

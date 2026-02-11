@@ -1,0 +1,29 @@
+<div class="section-title">
+    <h2>Defenses</h2>
+</div>
+<div [formGroup]="defensesForm" class="section-content flex-space-between">
+    <div class="column add-margin-bottom grow">
+        <div class="field-wrapper column flex-start grow">
+            <h4 class="shrink add-margin-bottom">Armor Class</h4>
+            <div class="input-wrapper flex-grow-2">
+                <input type="text" id="health-ac" formControlName="ac" />
+            </div>
+        </div>
+    </div>
+    <div class="column add-margin-bottom grow">
+        <div class="field-wrapper column flex-start grow">
+            <h4 class="shrink add-margin-bottom">Immunities</h4>
+            <div class="input-wrapper flex-grow-2">
+                <textarea id="defenses-immunities" formControlName="immunities"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="column add-margin-bottom grow">
+        <div class="field-wrapper column flex-start grow">
+            <h4 class="shrink add-margin-bottom">Resistances</h4>
+            <div class="input-wrapper flex-grow-2">
+                <textarea id="defenses-resistances" formControlName="resistances"></textarea>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="section-title add-margin-bottom">
+    <h2>Skills</h2>
+</div>
+<div [formGroup]="skillsForm" class="section-content add-gap flex-space-between">
+    <div class="row border-bottom add-margin-bottom">
+        <h5 class="width-grow-2">Skill</h5>
+        <h5 class="width-grow-2">Proficient</h5>
+        <h5>Ability</h5>
+        <h5>Bonus</h5>
+        <h6 class="center">Custom Modifier</h6>
+    </div>
+    @for (skill of skillsGroupsArray; track skill.controls.name.value) {
+        @let skillName = skill.controls.name.value;
+        
+        <div id="{{skillName}}-group" [formGroup]="skill" class="row add-gap flex-end center">
+            <h5 id="skills-{{skillName}}-name" class="width-grow-2">{{ skillName }}</h5>
+            <div class="input-wrapper width-grow-2">
+                <select id="skills-{{skillName}}-prof" formControlName="proficiency">
+                    <option value="" [selected]="!skill.controls.proficiency.value"></option>
+                    @for (prof of proficiencies; track prof) {
+                        <option value="{{ prof }}" [selected]="prof == skill.controls.proficiency.value">{{ prof }}</option>
+                    }
+                </select>
+            </div>
+            <h6 class="center">{{ skill.controls.ability.value }}</h6>
+            <div class="field-wrapper add-margin-right">
+                <div class="input-wrapper">
+                    <input id="skills-{{skillName}}-mod" type="text" formControlName="bonus" />
+                </div>
+            </div>
+            <div class="input-wrapper">
+                <input id="skills-{{skillName}}-custom" type="text" formControlName="customModifier" />
+            </div>
+        </div>
+    }
+</div>

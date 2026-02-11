@@ -1,0 +1,50 @@
+<div class="section-title add-margin-bottom">
+    <h2>Health</h2>
+</div>
+<div [formGroup]="healthForm" class="section-content">
+    <div class="column">
+        <div class="row add-margin-bottom add-gap">
+            <div class="field-wrapper column">
+                <div class="input-wrapper">
+                    <app-button id="health-rest-long" [label]="'Long Rest'" [onClick]="handleLongRest"></app-button>
+                </div>
+            </div>
+            <div class="field-wrapper column">
+                <div class="input-wrapper">
+                    <app-button id="health-rest-short" [label]="'Short Rest'" [onClick]="handleShortRest"></app-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <h3>Hit Points</h3>
+        <div class="row add-margin-bottom add-gap">
+            <div class="field-wrapper column">
+                <h5>Max</h5>
+                <div class="input-wrapper">
+                    <input type="text" id="health-hp-max" formControlName="hpMax" />
+                </div>
+            </div>
+            <div class="field-wrapper column">
+                <h5>Current</h5>
+                <div class="input-wrapper">
+                    <input type="text" id="health-hp-current" formControlName="hpCurrent" />
+                </div>
+            </div>
+            <div class="field-wrapper column">
+                <h5>Temp</h5>
+                <div class="input-wrapper">
+                    <input type="text" id="health-hp-temp" formControlName="hpTemp" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="field-wrapper column">
+            <h3>Conditions</h3>
+            <div class="input-wrapper">
+                <textarea id="health-conditions" formControlName="conditions"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
